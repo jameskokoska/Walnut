@@ -1,0 +1,40 @@
+/* .App {
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+    font-family: Fredoka One, cursive;
+    font-style: normal;
+    font-weight: normal;
+    color: #1c3e6f;
+  } */
+  
+  .bg-myBlue {
+    background-color: #1c3e6f;
+  }
+  
+  .navbar {
+    align-items: "left";
+  }
+  
+  .myButton {
+    background-color: #1c3e6f;
+    border: none;
+    color: white;
+  }
+  
+  .resultsdiv {
+    color: #1c3e6f;
+    width: 100%;
+    margin-top: 5%;
+    padding: 5%;
+    border-color: white;
+  }
+  .table-bordered {
+    table-layout: fixed;
+    border: white;
+  }
+  .trow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+  }
+  

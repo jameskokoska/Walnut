@@ -1,0 +1,7 @@
+.minor-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 5%;
+    box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 5%;
+}

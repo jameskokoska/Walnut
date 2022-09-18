@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+*{
+  font-family: 'Fredoka One', cursive;
+  letter-spacing: 3px !important;
+  color: #1C3E6E;
+}
+
+p {
+  color: #8198B8;
+}
+
+.page-content {
+  background-color: #F2F4F8;
+}
+
+.course-template {
+  padding-bottom: 3%;
+}
+
+.course-template .course-title {
+  padding-top: 5%;;
+  padding-bottom: 3%;
+}
+
+.col-item {
+  background-color: white;
+  border-radius: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 2%;
+  padding-bottom: 2%;
+}
+
+.course-template .syllabus {
+  vertical-align: center;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.course-template .col-item h3 {
+  margin-top: 30px;
+  margin-left: 4%;
+}
+
+.course-template .col-item h4 {
+  margin-top: 5%;
+  margin-left: 4%;
+}
+
+.course-template .col-item p {
+  margin-top: 20px;
+  width: 90%;;
+  margin-left: 4%;
+  margin-bottom: 3%;
+  color: #5C779C;
+}
+
+.course-template .course-description, .course-requisite {
+  margin-left: 0;
+}
+
+.requisites-display {
+  height: 120px;
+  margin-top: 2%;
+  background-color: #EFF3FB;
+  margin-left: 3%;
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 4%;
+}
+
+.expand_button {
+  margin-top: -5%;
+}
+
+.syllabus-link {
+  margin-top: 2%;
+    border-radius: 15px;
+    background-color: #1C3E6E;
+    color: white;
+    width: 8em;
+    height: 3em;
+    border: none;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.req-graph {
+  border: none;
+  width: 60%;
+  margin-left: 5%;
+  justify-content: center;
+  margin-bottom: 2%;
+}
