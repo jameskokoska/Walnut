@@ -39,12 +39,14 @@ export default function CourseDescriptionPage() {
       code: code
     })
       .then(res => {
-        const courseStateCopy = {...courseState}
         console.log(res.data)
-        this.setState({course_code: res.data.course.code})
-        this.setState({course_name: res.data.course.name})
-        this.setState({course_description : res.data.course.description})
-        this.setState({graph: res.data.course.graph})
+
+        const courseStateCopy = {...courseState}
+        courseStateCopy["course_code"] = res.data.course.code
+        courseStateCopy["course_name"] = res.data.course.name
+        courseStateCopy["course_description"] = res.data.course.description
+        courseStateCopy["graph"] = res.data.course.graph
+        
         let prereq_len = res.data.course.prereq.length
         if (prereq_len > 1) {
           let prereq_str = ""
