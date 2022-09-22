@@ -85,7 +85,7 @@ class SearchResultDisplay extends Component{
   render(){
     return (
       <div className="SearchQuery">
-        <div style={{ marginTop: "10%" }}>
+        <div style={{ marginTop: "10%", textAlign:'center' }}>
             <h1> Education Pathways</h1>
             <br></br>
             {/* <div className = "body_text">
