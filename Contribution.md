@@ -1,4 +1,5 @@
-# Contributing to A Star
+# Contributing to Walnut
+
 We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
 
 - Reporting a bug
@@ -7,46 +8,51 @@ We love your input! We want to make contributing to this project as easy and tra
 - Proposing new features
 - Becoming a maintainer
 
-## We Develop with Github
-We use github to host code, to track issues and feature requests, as well as accept pull requests.
+## We Develop with GitHub
 
-## Pull Requests and A star
-Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
+We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
 
-1. Fork the repo and create your branch from `master`.
+## To Contribute to Walnut
+
+To contribute, first identify what is the issue:
+
+1. Bug report
+2. New feature
+
+Then open a new issue following the corresponding template given, document clearly following the guidelines.
+
+Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests. It is expected that the pull requests are linked to specific issues.
+
+1. Fork the repo and create your branch from `main`.
 2. If you've added code that should be tested, add tests.
 3. If you've changed APIs, update the documentation.
 4. Ensure the test suite passes.
 5. Make sure your code lints.
 6. Issue that pull request!
 
-## Any contributions you make will be under the MIT Software License
-In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
+## Tools & Code Style
 
-## Report bugs using Github's [issues](https://github.com/ECE444-2021Fall/project1-education-pathways-group-8-the-red-flags/issues)
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
+[Visual Studio Code](https://code.visualstudio.com/) is recommanded to be the default code editor. To ensure the consistency of code style, it is recommanded to use `Pylint` and `Black` as default formatters for Python development and `Prettier` VS Code plugin as the default formatter for JavaScript and JSX development.
 
-## Write bug reports with detail, background, and sample code
-Ensure that when you write a bug report that you include a [reprex](https://stackoverflow.com/help/minimal-reproducible-example). 
+Run the following command to install `Pylint` and `Black`:
 
-**Great Bug Reports** tend to have:
+```sh
+pip install black pylint
+```
 
-- A quick summary and/or background
-- Steps to reproduce
-  - Be specific!
-  - Give sample code if you can. [An example stackoverflow question](http://stackoverflow.com/q/12488905/180626) includes sample code that *anyone* with a base R setup can run to reproduce what I was seeing
-- What you expected would happen
-- What actually happens
-- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
+In general, if you are usng VS Code, add the following snippet into `settings.json`:
 
-People *love* thorough bug reports. I'm not even kidding.
-
-## Use a Consistent Coding Style
-For this Project, we will be using coding guidelines from Python's official standards the [PEP8 Standard](https://www.python.org/dev/peps/pep-0008/). You can easily check to see how close you are to the PEP8 Standard by using pylint!
-
-
-## License
-By contributing, you agree that your contributions will be licensed under its MIT License.
-
-## References
-This document was adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
+```json
+{
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
