@@ -1,16 +1,22 @@
-import React, { Component } from 'react';
-import './css/navbar.css'
-import 'bootstrap/dist/css/bootstrap.css';
-import logo from './img/logo.png'
+import React, { Component } from "react";
+import "./css/navbar.css";
+import "bootstrap/dist/css/bootstrap.css";
+import logo from "./img/logo.png";
 import { Navbar, Nav } from "react-bootstrap";
-import { BrowserRouter as Router, Route, Switch, Link, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  useLocation,
+} from "react-router-dom";
 // import LogIn from "./LogIn.jsx";
 import CourseDescriptionPage from "./CourseDescription";
 // import Wishlist from './Wishlist';
 // import SignUp from './SignUp'
-import SearchResultDisplay from './ResultDisplay'
+import SearchResultDisplay from "./ResultDisplay";
 
-function CourseDescription (props) {
+function CourseDescription(props) {
   let query = useQuery();
   return <CourseDescriptionPage code={query.get("code")} />;
 }
@@ -21,27 +27,25 @@ function useQuery() {
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
-
 export default class NavbarComp extends Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      username: localStorage.getItem('username'),
-      login: false
-    }
+      username: localStorage.getItem("username"),
+      login: false,
+    };
   }
 
   componentDidMount() {
-    if (localStorage.getItem('username') !== "") {
-      this.setState({username: localStorage.getItem('username')})
+    if (localStorage.getItem("username") !== "") {
+      this.setState({ username: localStorage.getItem("username") });
     }
   }
 
   logOut = () => {
-    localStorage.setItem('username', "");
-    this.setState({username: ""})
-  }
+    localStorage.setItem("username", "");
+    this.setState({ username: "" });
+  };
 
   render() {
     return (
@@ -61,9 +65,6 @@ export default class NavbarComp extends Component {
                 <Nav.Link as={Link} to="/search">
                   Search
                 </Nav.Link>
-
-                
-
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -73,18 +74,17 @@ export default class NavbarComp extends Component {
             <Route path="/search">
               <SearchResultDisplay />
             </Route>
-            <Route exact
+            <Route
+              exact
               path="/courseDetails/:code"
-              render={props =>(<CourseDescriptionPage {...props} />)}>
-            </Route>
-            
+              render={(props) => <CourseDescriptionPage {...props} />}
+            ></Route>
+
             <Route path="/">
               <SearchResultDisplay />
             </Route>
           </Switch>
         </div>
-        
-    
       </Router>
     );
   }

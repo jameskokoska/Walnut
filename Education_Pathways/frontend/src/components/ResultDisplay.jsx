@@ -27,7 +27,6 @@ class SearchResultDisplay extends Component {
 
   getData = (input) => {
     API.get(`/searchc?input=${input}`).then((res) => {
-      console.log(`it is ${res.status}`);
       if (res.status === 200) {
         this.setState({ results: [] });
 
@@ -38,6 +37,7 @@ class SearchResultDisplay extends Component {
           for (let i = 0; i < len; i++) {
             result_temp.push(
               <Result
+                key={res.data[i]._id}
                 course_code={res.data[i].code}
                 course_name={res.data[i].name}
               ></Result>
@@ -51,6 +51,7 @@ class SearchResultDisplay extends Component {
           result_temp.push(<Label></Label>);
           result_temp.push(
             <Result
+              key={res.data.course._id}
               course_code={res.data.course.code}
               course_name={res.data.course.name}
             ></Result>

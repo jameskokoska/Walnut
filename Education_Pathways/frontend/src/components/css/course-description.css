@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
-*{
+* {
   font-family: 'Fredoka One', cursive;
   letter-spacing: 3px !important;
   color: #1C3E6E;
@@ -19,7 +19,8 @@ p {
 }
 
 .course-template .course-title {
-  padding-top: 5%;;
+  padding-top: 5%;
+  ;
   padding-bottom: 3%;
 }
 
@@ -51,13 +52,15 @@ p {
 
 .course-template .col-item p {
   margin-top: 20px;
-  width: 90%;;
+  width: 90%;
+  ;
   margin-left: 4%;
   margin-bottom: 3%;
   color: #5C779C;
 }
 
-.course-template .course-description, .course-requisite {
+.course-template .course-description,
+.course-requisite {
   margin-left: 0;
 }
 
@@ -78,14 +81,14 @@ p {
 
 .syllabus-link {
   margin-top: 2%;
-    border-radius: 15px;
-    background-color: #1C3E6E;
-    color: white;
-    width: 8em;
-    height: 3em;
-    border: none;
-    font-size: 1.2em;
-    text-align: center;
+  border-radius: 15px;
+  background-color: #1C3E6E;
+  color: white;
+  width: 8em;
+  height: 3em;
+  border: none;
+  font-size: 1.2em;
+  text-align: center;
 }
 
 .req-graph {

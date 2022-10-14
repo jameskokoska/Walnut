@@ -32,10 +32,12 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 .footer img {
   /* make the footer appear in the centre of the page
   */
@@ -47,7 +49,7 @@
   margin-top: 150px;
   /* make the footer appear in the centre of the page
   */
-  
+
 }
 
 .page {
