@@ -1,6 +1,7 @@
 import CourseDescriptionPage from "../components/CourseDescription"
 import SearchResultDisplay from "../components/ResultDisplay"
 import AboutPage from "../pages/AboutPage"
+import HomePage from "../pages/HomePage/HomePage"
 import Page404 from "../pages/Page404"
 
 export const pages = {
@@ -11,7 +12,7 @@ export const pages = {
   main: [
     {
       label: 'Home',
-      component: <SearchResultDisplay />,
+      component: <HomePage />,
       path: '/',
     },
     {

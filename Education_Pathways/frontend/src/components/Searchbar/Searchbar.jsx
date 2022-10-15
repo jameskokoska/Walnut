@@ -1,0 +1,49 @@
+import React, { useState } from 'react';
+import './Searchbar.css';
+
+export default function Searchbar ({
+  placeholder,
+  onChange,
+  onEnterKey,
+  initialValue,
+  style,
+  className,
+  maxLength,
+  inputArgs,
+}) {
+
+  const [value, setValue] = useState(
+    initialValue ? initialValue : ""
+  );
+
+  const onKeyPress = (target) => {
+    if (target.charCode === 13) {
+      if (onEnterKey) onEnterKey(value);
+    }
+  };
+
+  const onInputChange = (event) => {
+    let value = event.target.value;
+    if (maxLength) {
+      if (value !== undefined && maxLength < value.length) {
+        value = value.substring(0, value.length - 1);
+      }
+    }
+    if(onChange) onChange(value) 
+    setValue(value);
+  };
+
+  return (
+    <div style={{ position: 'relative', display: 'flex', width: '100%', justifyContent:"center" }}>
+      <input
+        className={`text-input-search ${className}`}
+        style={style}
+        onKeyPress={onKeyPress}
+        value={value}
+        placeholder={placeholder}
+        onChange={onInputChange}
+        {...inputArgs}
+      />
+    </div>
+  );
+};

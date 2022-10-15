@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "../App.css";
-import NavbarComp from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import { pages } from "../util/pages";
 import ScrollToTop from "./ScrollToTop";
 
@@ -12,7 +12,7 @@ export default function TransitionRoutes() {
   return (
     <TransitionGroup>
       <div style={{ textAlign: "center" }}>
-        <NavbarComp />
+        <Navbar />
       </div>
       <ScrollToTop />
       <CSSTransition key={location.key} classNames="page" timeout={300}>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./css/course-description.css";
-import "bootstrap/dist/css/bootstrap.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";

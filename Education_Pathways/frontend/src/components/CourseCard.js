@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./css/coursecard.css";
-import "bootstrap/dist/css/bootstrap.css";
 import Col from "react-bootstrap/Col";
 
 // this function should:

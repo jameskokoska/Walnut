@@ -1,0 +1,35 @@
+.navbar {
+  width: 100vw;
+  background: #1c3e6f;
+  height: 80px;
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+}
+
+.navbar-left-container{
+  color: white;
+  font-size: 34px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.navbar-right-container{
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-img{
+  height:60px;
+  width:60px;
+  margin-right: 10px;
+}

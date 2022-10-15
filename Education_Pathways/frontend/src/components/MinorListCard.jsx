@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./css/minorcard.css";
-import "bootstrap/dist/css/bootstrap.css";
 
 class MinorListCard extends Component {
   constructor(props) {
