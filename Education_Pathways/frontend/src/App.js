@@ -1,26 +1,12 @@
-import React from 'react'
-import NavbarComp from "./components/Navbar.js";
-import ReactComp from "./components/Footer.js";
-import './App.css';
+import React from "react";
+import "./App.css";
+import TransitionRoutes from "./struct/TransitionRoutes.jsx";
+import { BrowserRouter } from "react-router-dom";
 
-
-function App() {
-
+export default function App() {
   return (
-    <div>
-    <div className="App">
-      <NavbarComp />
-    </div>
-
-    <div className="App">
-    <ReactComp />
-    </div>
-    </div>
+    <BrowserRouter>
+      <TransitionRoutes />
+    </BrowserRouter>
   );
-
- 
-
 }
-
-
-export default App;

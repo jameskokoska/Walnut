@@ -1,15 +1,17 @@
-.coursecard{
+.coursecard {
   color: red;
 }
+
 .tags {
-    color: black;
-    align-items: left;
-    font-size: 70%;
-  }
-  .card-subtext {
-    text-align: left;
-    font-size: 70%;
-  }
+  color: black;
+  align-items: left;
+  font-size: 70%;
+}
+
+.card-subtext {
+  text-align: left;
+  font-size: 70%;
+}
 
 .wishlist-card {
   width: 85%;
@@ -29,4 +31,3 @@
   display: flex;
   flex-direction: column;
 }
-  

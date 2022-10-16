@@ -1,0 +1,11 @@
+services:
+  flask:
+    build: .
+    ports:
+      - "5000:5000"
+  react:
+    build: ./Education_Pathways/frontend
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
