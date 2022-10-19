@@ -9,14 +9,15 @@
   font-weight: 700;
   cursor: pointer;
   transition: transform 200ms, background-color 200ms;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
-
 .button:hover {
   transform: scale(1.03);
   transition: transform 200ms;
 }
-
 .button:active {
   transform: scale(0.97);
   transition: transform 100ms;
@@ -25,4 +26,4 @@
 .secondary-button {
   color: white;
   background-color: #1c3e6f;
-}
+}/*# sourceMappingURL=Button.css.map */
