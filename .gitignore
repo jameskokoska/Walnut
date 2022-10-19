@@ -5,3 +5,4 @@ __pycache__
 test.db
 Education_Pathways/frontend/node_modules
 #track build 
+Education_Pathways/frontend/package-lock.json
