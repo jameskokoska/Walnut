@@ -13,21 +13,25 @@ export default function CourseInfoSidebar() {
       <CourseInfoTab
         icon={<Info active={false} />}
         text="Course Information"
+        active={false}
         secondary={false}
       />
       <CourseInfoTab
         icon={<Review active={false} />}
         text="Reviews and Ratings"
+        active={false}
         secondary={false}
       />
       <CourseInfoTab
         icon={<Prof active={false} />}
         text="Professor's Information"
+        active={false}
         secondary={false}
       />
       <CourseInfoTab
         icon={<Exam active={false} />}
         text="Past Exams"
+        active={false}
         secondary={false}
       />
     </>
