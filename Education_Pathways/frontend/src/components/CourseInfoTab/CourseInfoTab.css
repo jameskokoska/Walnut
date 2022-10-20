@@ -1,8 +1,19 @@
 .courseInfo-tab {
   display: flex;
-  width: 250px;
-  background-color: white;
+  align-items: center;
+  width: 270px;
+  margin: 10px;
   padding: 10px 10px 10px 20px;
   border-radius: 10px;
-  margin: 10px;
-}/*# sourceMappingURL=CourseInfoTab.css.map */
+}
+
+svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.icon-container {
+  width: 50px;
+}
+
+/*# sourceMappingURL=CourseInfoTab.css.map */
