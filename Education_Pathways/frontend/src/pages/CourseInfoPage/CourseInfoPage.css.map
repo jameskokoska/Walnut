@@ -1,1 +1,10 @@
-{"version":3,"sources":["CourseInfoPage.scss","CourseInfoPage.css"],"names":[],"mappings":"AAAA;EACE,aAAA;EACA,YAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,iBAAA;EACA,yBAAA;ACCF","file":"CourseInfoPage.css"}
+{
+  "version": 3,
+  "sources": [
+    "CourseInfoPage.scss",
+    "CourseInfoPage.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACE,aAAA;EACA,mBAAA;EACA,aAAA;EACA,YAAA;EACA,iBAAA;EACA,yBAAA;ACCF;;ADEA;EACE,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,YAAA;ACCF;;ADEA;EAEE,UAAA;EACA,kBAAA;ACAF;;ADGA;EAEE,mBAAA;EACA,UAAA;ACDF",
+  "file": "CourseInfoPage.css"
+}

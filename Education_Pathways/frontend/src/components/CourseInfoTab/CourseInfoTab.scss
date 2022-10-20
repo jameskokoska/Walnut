@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   border-radius: 10px;
-  margin: 10px;
   height: 50px;
   padding-left: 20px;
+  margin-top: 10px;
 
   &:hover {
     cursor: pointer;
@@ -12,10 +12,12 @@
 }
 
 .primary-tab {
+  @extend .courseInfo-tab;
   width: 270px;
 }
 
 .secondary-tab {
+  @extend .courseInfo-tab;
   width: 57px;
 }
 
@@ -26,4 +28,12 @@ svg {
 
 .icon-container {
   width: 50px;
+}
+
+.active-text {
+  color: white;
+}
+
+.inactive-text {
+  color: #243e6b;
 }
