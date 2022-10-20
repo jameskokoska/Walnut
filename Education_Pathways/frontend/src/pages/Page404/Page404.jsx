@@ -10,7 +10,7 @@ export default function Page404() {
   return (
     <div className="page-404">
       <div className="image-404">
-        <img src={Image404} />
+        <img src={Image404} alt="404 Image" />
       </div>
       <h1>Page not found</h1>
       <Link to="/" className="link">
