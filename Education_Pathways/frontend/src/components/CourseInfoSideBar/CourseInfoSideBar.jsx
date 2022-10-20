@@ -6,10 +6,11 @@ import Info from "../icons/Info";
 import Review from "../icons/Review";
 import Prof from "../icons/Prof";
 import Exam from "../icons/Exam";
+import Arrow from "../icons/Arrow";
 
 export default function CourseInfoSidebar() {
   return (
-    <>
+    <div>
       <CourseInfoTab
         icon={<Info active={false} />}
         text="Course Information"
@@ -34,6 +35,7 @@ export default function CourseInfoSidebar() {
         active={false}
         secondary={false}
       />
-    </>
+      <CourseInfoTab icon={<Arrow />} secondary={true} />
+    </div>
   );
 }
