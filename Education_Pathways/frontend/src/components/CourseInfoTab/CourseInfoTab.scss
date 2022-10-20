@@ -1,10 +1,21 @@
 .courseInfo-tab {
   display: flex;
   align-items: center;
-  width: 270px;
+  border-radius: 10px;
   margin: 10px;
   padding: 10px 10px 10px 20px;
-  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.primary-tab {
+  width: 270px;
+}
+
+.secondary-tab {
+  width: 57px;
 }
 
 svg {
