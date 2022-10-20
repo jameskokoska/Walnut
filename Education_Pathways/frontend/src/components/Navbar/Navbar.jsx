@@ -8,7 +8,7 @@ import Searchbar from "../Searchbar/Searchbar";
 export default function Navbar({}) {
   return (
     <div className="navbar">
-      <Link to="/">
+      <Link to="/" className="link">
         <div className="navbar-left-container">
           <img src={logo} alt="" className="navbar-img" />
           Walnut

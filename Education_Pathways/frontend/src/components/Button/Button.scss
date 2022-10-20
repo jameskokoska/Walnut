@@ -1,28 +1,28 @@
 .button {
-    background-color: white;
-    color: #1c3e6f;
-    display: inline-block;
-    border-radius: 14px;
-    padding: 14px 30px;
-    text-align: center;
-    font-size: 17px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 200ms, background-color 200ms;
-    user-select: none;
-  
-    &:hover {
-      transform: scale(1.03);
-      transition: transform 200ms;
-    }
-  
-    &:active {
-      transform: scale(0.97);
-      transition: transform 100ms;
-    }
+  background-color: white;
+  color: #1c3e6f;
+  display: inline-block;
+  border-radius: 14px;
+  padding: 14px 30px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 200ms, background-color 200ms;
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.03);
+    transition: transform 200ms;
   }
-  
-  .secondary-button {
-    color: white;
-    background-color: #1c3e6f;
+
+  &:active {
+    transform: scale(0.97);
+    transition: transform 100ms;
   }
+}
+
+.secondary-button {
+  color: white;
+  background-color: #1c3e6f;
+}
