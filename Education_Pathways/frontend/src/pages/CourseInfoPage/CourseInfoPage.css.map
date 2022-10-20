@@ -1,7 +1,10 @@
 {
   "version": 3,
-  "sources": [],
+  "sources": [
+    "CourseInfoPage.scss",
+    "CourseInfoPage.css"
+  ],
   "names": [],
-  "mappings": "",
+  "mappings": "AAAA;EACE,aAAA;EACA,YAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,iBAAA;ACCF",
   "file": "CourseInfoPage.css"
 }
