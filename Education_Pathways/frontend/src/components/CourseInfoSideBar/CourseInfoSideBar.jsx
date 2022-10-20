@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import CourseInfoTab from "../CourseInfoTab/CourseInfoTab";
 import "./CourseInfoSidebar.css";
 
@@ -8,32 +9,40 @@ import Prof from "../icons/Prof";
 import Exam from "../icons/Exam";
 import Arrow from "../icons/Arrow";
 
-export default function CourseInfoSidebar() {
+export default function CourseInfoSidebar({ section, onClick }) {
   return (
     <div>
       <CourseInfoTab
-        icon={<Info active={false} />}
+        id={0}
+        icon={<Info active={section[0]} />}
         text="Course Information"
-        active={false}
+        active={section[0]}
         secondary={false}
+        onClick={onClick}
       />
       <CourseInfoTab
-        icon={<Review active={false} />}
+        id={1}
+        icon={<Review active={section[1]} />}
         text="Reviews and Ratings"
-        active={false}
+        active={section[1]}
         secondary={false}
+        onClick={onClick}
       />
       <CourseInfoTab
-        icon={<Prof active={false} />}
+        id={2}
+        icon={<Prof active={section[2]} />}
         text="Professor's Information"
-        active={false}
+        active={section[2]}
         secondary={false}
+        onClick={onClick}
       />
       <CourseInfoTab
-        icon={<Exam active={false} />}
+        id={3}
+        icon={<Exam active={section[3]} />}
         text="Past Exams"
-        active={false}
+        active={section[3]}
         secondary={false}
+        onClick={onClick}
       />
       <CourseInfoTab icon={<Arrow />} secondary={true} />
     </div>

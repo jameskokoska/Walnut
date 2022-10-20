@@ -1,10 +1,27 @@
 .courseInfo-page {
+  display: flex;
+  flex-direction: row;
   height: 100vh;
   width: 100vw;
+  min-height: 500px;
+  background-color: #dbe8f4;
+}
+
+.courseInfo-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
+}
+
+.courseInfo-sidebar {
+  @extend .courseInfo-section;
+  width: 33%;
+  padding-left: 70px;
+}
+
+.courseInfo-main {
+  @extend .courseInfo-section;
   align-items: center;
-  min-height: 500px;
-  background-color: #dbe8f4;
+  width: 66%;
 }
