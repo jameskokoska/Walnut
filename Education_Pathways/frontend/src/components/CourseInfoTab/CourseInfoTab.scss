@@ -3,7 +3,7 @@
   align-items: center;
   border-radius: 10px;
   height: 50px;
-  padding-left: 20px;
+  padding-left: 13px;
   margin-top: 10px;
 
   &:hover {
@@ -16,18 +16,22 @@
   width: 270px;
 }
 
+.tab-collapse {
+  width: 58px;
+
+  .tab-text {
+    display: none;
+  }
+}
+
 .secondary-tab {
   @extend .courseInfo-tab;
   width: 57px;
-}
-
-svg {
-  max-width: 100%;
-  max-height: 100%;
+  padding-left: 21px;
 }
 
 .icon-container {
-  width: 50px;
+  width: 55px;
 }
 
 .active-text {
