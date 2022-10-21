@@ -39,13 +39,14 @@ def search_course_by_code(s):
             "_id": i,
             "code": d["Code"],
             "name": d["Name"],
-            "description": "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+            "description": d["Course Description"],
             "syllabus": "Course syllabus here.",
-            "prereq": ["APS101H1, ECE101H1"],
-            "coreq": ["APS102H1, ECE102H1"],
-            "exclusion": ["APS102H1, ECE102H1"],
+            "prereq": d["Pre-requisites"],
+            "coreq": d["Corequisite"],
+            "exclusion": d["Exclusion"],
         }
         res.append(res_d)
+
     return res
 
 

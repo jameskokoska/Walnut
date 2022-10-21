@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Searchbar from "../Searchbar/Searchbar";
 
-export default function Navbar({}) {
+export default function Navbar() {
   return (
     <div className="navbar">
       <Link to="/" className="link">
