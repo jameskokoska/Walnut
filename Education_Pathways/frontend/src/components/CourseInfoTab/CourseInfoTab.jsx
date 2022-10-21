@@ -11,6 +11,7 @@ export default function CourseInfoTab({
   collapse,
 }) {
   const bgColor = { backgroundColor: active ? "#243E6B" : "white" };
+
   return (
     <div
       className={`${
@@ -23,13 +24,7 @@ export default function CourseInfoTab({
       style={bgColor}
       onClick={() => (secondary ? onClick() : onClick(id))}
     >
-      <div
-        className={`icon-container ${
-          secondary && collapse ? "rotateArrow" : ""
-        }`}
-      >
-        {icon}
-      </div>
+      <div className="icon-container">{icon}</div>
       <div className={`tab-text ${active ? `active-text` : `inactive-text`}`}>
         {text}
       </div>
