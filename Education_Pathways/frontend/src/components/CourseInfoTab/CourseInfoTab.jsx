@@ -8,16 +8,31 @@ export default function CourseInfoTab({
   active,
   secondary,
   onClick,
+  collapse,
 }) {
   const bgColor = { backgroundColor: active ? "#243E6B" : "white" };
   return (
     <div
-      className={`${secondary ? "secondary-tab" : "primary-tab"}`}
+      className={`${
+        secondary
+          ? "secondary-tab"
+          : collapse
+          ? "tab-collapse primary-tab"
+          : "primary-tab"
+      }`}
       style={bgColor}
-      onClick={() => !secondary && onClick(id)}
+      onClick={() => (secondary ? onClick() : onClick(id))}
     >
-      <div className="icon-container">{icon}</div>
-      <div className={active ? `active-text` : `inactive-text`}>{text}</div>
+      <div
+        className={`icon-container ${
+          secondary && collapse ? "rotateArrow" : ""
+        }`}
+      >
+        {icon}
+      </div>
+      <div className={`tab-text ${active ? `active-text` : `inactive-text`}`}>
+        {text}
+      </div>
     </div>
   );
 }

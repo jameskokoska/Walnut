@@ -10,6 +10,8 @@ import Exam from "../icons/Exam";
 import Arrow from "../icons/Arrow";
 
 export default function CourseInfoSidebar({ section, onClick }) {
+  const [collapse, setCollapse] = useState(false);
+
   return (
     <div>
       <CourseInfoTab
@@ -17,34 +19,38 @@ export default function CourseInfoSidebar({ section, onClick }) {
         icon={<Info active={section[0]} />}
         text="Course Information"
         active={section[0]}
-        secondary={false}
         onClick={onClick}
+        collapse={collapse}
       />
       <CourseInfoTab
         id={1}
         icon={<Review active={section[1]} />}
         text="Reviews and Ratings"
         active={section[1]}
-        secondary={false}
         onClick={onClick}
+        collapse={collapse}
       />
       <CourseInfoTab
         id={2}
         icon={<Prof active={section[2]} />}
         text="Professor's Information"
         active={section[2]}
-        secondary={false}
         onClick={onClick}
+        collapse={collapse}
       />
       <CourseInfoTab
         id={3}
         icon={<Exam active={section[3]} />}
         text="Past Exams"
         active={section[3]}
-        secondary={false}
         onClick={onClick}
+        collapse={collapse}
       />
-      <CourseInfoTab icon={<Arrow />} secondary={true} />
+      <CourseInfoTab
+        icon={<Arrow collapse={collapse} />}
+        secondary={true}
+        onClick={() => setCollapse((prev) => !prev)}
+      />
     </div>
   );
 }
