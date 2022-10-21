@@ -35,14 +35,30 @@ def search_course_by_code(s):
     res = []
     for i, course_id in enumerate(course_ids):
         d = df.iloc[course_id].to_dict()
+        print(d["Arts and Science Breadth"])
         res_d = {
             "_id": i,
             "code": d["Code"],
             "name": d["Name"],
+            "division": d["Division"],
+            "department": d["Department"],
             "description": d["Course Description"],
-            "syllabus": "Course syllabus here.",
             "prereq": d["Pre-requisites"],
+            "level": d["Course Level"],
+            "campus": d["Campus"],
+            "term": d["Term"],
             "coreq": d["Corequisite"],
+            "prep": d["Recommended Preparation"],
+            "br": (
+                ""
+                if pd.isna(d["Arts and Science Breadth"])
+                else ["Arts and Science Breadth"]
+            ),
+            "dist": (
+                ""
+                if pd.isna(d["Arts and Science Distribution"])
+                else d["Arts and Science Distribution"]
+            ),
             "exclusion": d["Exclusion"],
         }
         res.append(res_d)

@@ -12,18 +12,22 @@
 .courseInfo-sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100%;
 }
 
 .courseInfo-sidebar {
   width: 33%;
   padding-left: 70px;
+  justify-content: center;
 }
 
 .courseInfo-main {
-  align-items: center;
   width: 66%;
+  margin-top: 200px;
+}
+
+.courseInfo-main p {
+  color: #1c3e6e;
 }
 
 /*# sourceMappingURL=CourseInfoPage.css.map */
