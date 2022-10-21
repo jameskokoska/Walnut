@@ -42,6 +42,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 10px;
+
+  &:hover {
+    transform: scale(1.03);
+    transition: transform 200ms;
+  }
+
+  &:active {
+    transform: scale(0.97);
+    transition: transform 100ms;
+  }
 }
 
 .about-btn-inner {
