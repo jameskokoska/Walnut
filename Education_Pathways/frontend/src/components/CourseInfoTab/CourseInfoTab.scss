@@ -7,7 +7,14 @@
   margin-top: 10px;
 
   &:hover {
+    transform: scale(1.03);
+    transition: transform 200ms;
     cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(0.97);
+    transition: transform 100ms;
   }
 }
 
