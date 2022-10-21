@@ -4,6 +4,8 @@ import Searchbar from "../../components/Searchbar/Searchbar";
 import { HomePageStyles } from "../../util/styles";
 import "./HomePage.css";
 
+import UofT from "../../components/img/UofT.png";
+
 export default function HomePage() {
   return (
     <div style={HomePageStyles.bg}>
@@ -14,6 +16,9 @@ export default function HomePage() {
         <SearchbarHome />
         <div style={{ height: "15px" }} />
         <Button label={"Search"} isSecondary style={HomePageStyles.btn} />
+        <div className="footer-logo">
+          <img src={UofT} alt="UofT Logo" />
+        </div>
       </div>
     </div>
   );

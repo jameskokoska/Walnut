@@ -20,4 +20,10 @@
   font-weight: 800;
 }
 
+.home-page .footer-logo {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
 /*# sourceMappingURL=HomePage.css.map */
