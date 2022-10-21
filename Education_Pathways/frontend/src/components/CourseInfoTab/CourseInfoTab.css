@@ -12,7 +12,16 @@
 .courseInfo-tab:hover,
 .secondary-tab:hover,
 .primary-tab:hover {
+  transform: scale(1.03);
+  transition: transform 200ms;
   cursor: pointer;
+}
+
+.courseInfo-tab:active,
+.secondary-tab:active,
+.primary-tab:active {
+  transform: scale(0.97);
+  transition: transform 100ms;
 }
 
 .primary-tab {
