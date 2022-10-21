@@ -18,7 +18,9 @@ export default function Navbar({}) {
         <Searchbar placeholder={"Search..."} />
         <div style={{ width: "10px" }} />
         <Link to="/about">
-          <Button label={"About"} />
+          <div className="about-btn-outer">
+            <div className="about-btn-inner">i</div>
+          </div>
         </Link>
       </div>
     </div>
