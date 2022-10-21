@@ -9,13 +9,11 @@ export default function HomePage() {
     <div style={HomePageStyles.bg}>
       <div className="home-page" style={HomePageStyles.content}>
         <h1>Walnut</h1>
-        <h2>
-          University of Toronto’s Detailed Course Database and Comparison Tool
-        </h2>
-        <div style={{ height: "20px" }} />
+        <h2>University of Toronto’s Course Database and Comparison Tool</h2>
+        <div style={{ height: "25px" }} />
         <SearchbarHome />
         <div style={{ height: "15px" }} />
-        <Button label={"Search"} isSecondary />
+        <Button label={"Search"} isSecondary style={HomePageStyles.btn} />
       </div>
     </div>
   );
