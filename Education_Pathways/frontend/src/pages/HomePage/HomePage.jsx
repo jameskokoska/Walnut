@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import Searchbar from "../../components/Searchbar/Searchbar";
+import { HomePageStyles } from "../../util/styles";
 import "./HomePage.css";
 
 export default function HomePage() {
   return (
-    <div className="home-page">
-      <h1>Walnut</h1>
-      <h2>
-        University of Toronto’s Detailed Course Database and Comparison Tool
-      </h2>
-      <div style={{ height: "20px" }} />
-      <SearchbarHome />
-      <div style={{ height: "10px" }} />
-      <Button label={"Search"} isSecondary />
+    <div style={HomePageStyles.bg}>
+      <div className="home-page" style={HomePageStyles.content}>
+        <h1>Walnut</h1>
+        <h2>
+          University of Toronto’s Detailed Course Database and Comparison Tool
+        </h2>
+        <div style={{ height: "20px" }} />
+        <SearchbarHome />
+        <div style={{ height: "15px" }} />
+        <Button label={"Search"} isSecondary />
+      </div>
     </div>
   );
 }

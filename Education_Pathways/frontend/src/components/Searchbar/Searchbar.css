@@ -5,28 +5,34 @@
   margin: 4px;
   padding: 12px 40px;
   width: 100%;
-  box-shadow: 0px 0px 6px 1px rgba(101, 101, 101, 0.2784313725);
+  box-shadow: 0px 3px 6px 3px rgba(46, 46, 46, 0.4156862745);
   outline: none;
   border: none;
   transition: box-shadow 300ms, padding 300ms;
 }
+
 .text-input-search::-moz-placeholder {
   -moz-transition: opacity 300ms, transform 700ms;
   transition: opacity 300ms, transform 700ms;
 }
+
 .text-input-search:-ms-input-placeholder {
   -ms-transition: opacity 300ms, transform 700ms;
   transition: opacity 300ms, transform 700ms;
 }
+
 .text-input-search::placeholder {
   transition: opacity 300ms, transform 700ms;
 }
+
 .text-input-search:focus::-moz-placeholder {
   opacity: 0;
 }
+
 .text-input-search:focus:-ms-input-placeholder {
   opacity: 0;
 }
+
 .text-input-search:focus::placeholder {
   opacity: 0;
 }
@@ -47,12 +53,15 @@
 }
 
 .text-input-search:hover {
-  box-shadow: 0px 0px 6px 1px rgba(46, 46, 46, 0.4156862745);
+  box-shadow: 0px 1px 4px 2px rgba(46, 46, 46, 0.4156862745);
   padding: 12px 40px;
   transition: box-shadow 500ms, padding 500ms;
 }
+
 .text-input-search:focus {
-  box-shadow: 0px 0px 6px 1px rgba(101, 101, 101, 0.2784313725);
+  box-shadow: 0px 0px 6px 4px rgba(101, 101, 101, 0.2784313725);
   padding: 12px 30px;
   transition: box-shadow 500ms, padding 500ms;
-}/*# sourceMappingURL=Searchbar.css.map */
+}
+
+/*# sourceMappingURL=Searchbar.css.map */
