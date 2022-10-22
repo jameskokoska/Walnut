@@ -36,7 +36,6 @@ export default function CourseInfoPage() {
     API.get(`/course/details?code=${code}`)
       .then((res) => {
         const data = res.data.course;
-        console.log(data);
         setCourseState({
           course_code: data.code,
           course_name: data.name,
@@ -54,9 +53,8 @@ export default function CourseInfoPage() {
           exclusions: data.exclusion,
         });
       })
-      .catch((err) => {
-        console.log(err);
-        navigate("/course-not-found");
+      .catch(() => {
+        navigate("course-not-found");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

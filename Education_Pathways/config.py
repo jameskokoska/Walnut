@@ -1,5 +1,3 @@
-# This is to prevent circular imports
-
 from flask_mongoengine import MongoEngine
 from flask_cors import CORS
 
