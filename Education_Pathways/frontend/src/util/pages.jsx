@@ -22,7 +22,7 @@ export const pages = {
     {
       label: "Course Information",
       component: <CourseInfoPage />,
-      path: "/CourseInfo/:code",
+      path: "/courseinfo/:code",
     },
   ],
 };
