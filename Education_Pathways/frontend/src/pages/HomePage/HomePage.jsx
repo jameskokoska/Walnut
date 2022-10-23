@@ -3,17 +3,26 @@ import Button from "../../components/Button/Button";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import "./HomePage.css";
 
+import UofT from "../../components/img/UofT.png";
+
 export default function HomePage() {
   return (
-    <div className="home-page">
-      <h1>Walnut</h1>
-      <h2>
-        University of Toronto’s Detailed Course Database and Comparison Tool
-      </h2>
-      <div style={{ height: "20px" }} />
-      <SearchbarHome />
-      <div style={{ height: "10px" }} />
-      <Button label={"Search"} isSecondary />
+    <div className="home-page-bg">
+      <div className="home-page">
+        <h1>Walnut</h1>
+        <h2>University of Toronto’s Course Database and Comparison Tool</h2>
+        <div style={{ height: "25px" }} />
+        <SearchbarHome />
+        <div style={{ height: "15px" }} />
+        <Button
+          label={"Search"}
+          isSecondary
+          style={{ boxShadow: "0px 0px 6px 2px #2e2e2e6a" }}
+        />
+        <div className="footer-logo">
+          <img src={UofT} alt="UofT Logo" />
+        </div>
+      </div>
     </div>
   );
 }

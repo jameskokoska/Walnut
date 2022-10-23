@@ -8,7 +8,7 @@ import Searchbar from "../Searchbar/Searchbar";
 export default function Navbar({}) {
   return (
     <div className="navbar">
-      <Link to="/">
+      <Link to="/" className="link">
         <div className="navbar-left-container">
           <img src={logo} alt="" className="navbar-img" />
           Walnut
@@ -17,8 +17,10 @@ export default function Navbar({}) {
       <div className="navbar-right-container">
         <Searchbar placeholder={"Search..."} />
         <div style={{ width: "10px" }} />
-        <Link to="/about">
-          <Button label={"About"} />
+        <Link to="/about" className="link">
+          <div className="about-btn-outer">
+            <div className="about-btn-inner">i</div>
+          </div>
         </Link>
       </div>
     </div>

@@ -57,6 +57,21 @@ In general, if you are usng VS Code, add the following snippet into `settings.js
 }
 ```
 
+## Local Development
+
+To run the Flask backend, go into `Education_Pathways` directory and run the following command
+
+```sh
+flask --app index --debug run
+```
+
+To start the frontend, go into `Education_Pathways/frontend` directory and run the following command:
+
+```
+npm install
+npm start
+```
+
 ## Docker Build
 
 This project uses [Docker](https://www.docker.com/) to build and test the application. Install docker and use the following command to build:
@@ -68,8 +83,14 @@ docker compose up --build
 
 If you are using macbook, turn off airplay as it occupies the port 5000.
 
-# Jest Testing
-To run tests ensure you are in the frontend folder and run
+## Jest Testing
+
+To run tests ensure you are in the `Education_Pathways/frontend` folder and run
+
 ```sh
 npm test
 ```
+
+## Other Assets Used
+
+- [Convocation Hall Image](https://unsplash.com/photos/dGsEismPga4)
