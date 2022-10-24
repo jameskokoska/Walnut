@@ -5,6 +5,8 @@ export default function AboutPage() {
     <div style={{ textAlign: "center" }}>
       <div className="body_text">
         <p>
+          Added by sam test.
+          
           Welcome to CARTE's in-development tool for course selection at UofT.
           Education Pathways allows for more intelligent course searching, by
           matching not just the terms you search, but ones relevant to them. The
