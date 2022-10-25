@@ -6,18 +6,25 @@ export default function Favorites() {
   const getFavorites = () => {
     const favoritesRaw = localStorage.getItem("favorites");
     const favorites = JSON.parse(favoritesRaw === null ? "{}" : favoritesRaw);
-    return Object.keys(favorites);
+    const output = [];
+    for (let favorite of Object.keys(favorites)) {
+      if (favorites[favorite] === true) {
+        output.push(favorite);
+      }
+    }
+    return output;
   };
+  const favorites = getFavorites();
   return (
     <div className="favorites-page">
       <h2>Favorites</h2>
       <h3>
-        {getFavorites().length === 1
-          ? `There is ${getFavorites().length} course saved.`
-          : `There are ${getFavorites().length} courses saved.`}
+        {favorites.length === 1
+          ? `There is ${favorites.length} course saved.`
+          : `There are ${favorites.length} courses saved.`}
       </h3>
       <div className="favorites-list">
-        {getFavorites().map((favorite) => {
+        {favorites.map((favorite) => {
           return <FavoriteContainer courseCode={favorite} />;
         })}
       </div>
