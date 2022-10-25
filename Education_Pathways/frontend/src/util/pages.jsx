@@ -1,8 +1,10 @@
 import CourseDescriptionPage from "../components/CourseDescription";
 import SearchResultDisplay from "../components/ResultDisplay";
 import AboutPage from "../pages/AboutPage";
+import Favorites from "../pages/Favorites/Favorites";
 import HomePage from "../pages/HomePage/HomePage";
 import Page404 from "../pages/Page404";
+import SearchResults from "../pages/SearchResults/SearchResults";
 
 export const pages = {
   404: {
@@ -22,8 +24,13 @@ export const pages = {
     },
     {
       label: "Search",
-      component: <SearchResultDisplay />,
+      component: <SearchResults />,
       path: "/search",
+    },
+    {
+      label: "Favorites",
+      component: <Favorites />,
+      path: "/favorites",
     },
     {
       label: "Course Details",
