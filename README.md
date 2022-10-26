@@ -94,3 +94,4 @@ npm test
 ## Other Assets Used
 
 - [Convocation Hall Image](https://unsplash.com/photos/dGsEismPga4)
+- [Icons](https://fontawesome.com/)
