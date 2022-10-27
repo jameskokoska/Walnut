@@ -1,27 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.9ded14dd.chunk.css",
-    "main.js": "/static/js/main.d09df137.chunk.js",
-    "main.js.map": "/static/js/main.d09df137.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.dd927c1f.js",
-    "runtime-main.js.map": "/static/js/runtime-main.dd927c1f.js.map",
+    "main.css": "/static/css/main.eda81440.chunk.css",
+    "main.js": "/static/js/main.7b639eb6.chunk.js",
+    "main.js.map": "/static/js/main.7b639eb6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.60ef40cc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.60ef40cc.js.map",
     "static/css/2.383c0125.chunk.css": "/static/css/2.383c0125.chunk.css",
-    "static/js/2.e1913883.chunk.js": "/static/js/2.e1913883.chunk.js",
-    "static/js/2.e1913883.chunk.js.map": "/static/js/2.e1913883.chunk.js.map",
+    "static/js/2.b96cf6cc.chunk.js": "/static/js/2.b96cf6cc.chunk.js",
+    "static/js/2.b96cf6cc.chunk.js.map": "/static/js/2.b96cf6cc.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.383c0125.chunk.css.map": "/static/css/2.383c0125.chunk.css.map",
-    "static/css/main.9ded14dd.chunk.css.map": "/static/css/main.9ded14dd.chunk.css.map",
-    "static/js/2.e1913883.chunk.js.LICENSE.txt": "/static/js/2.e1913883.chunk.js.LICENSE.txt",
-    "static/media/ConHall.35de1f13.png": "/static/media/ConHall.35de1f13.png",
+    "static/css/main.eda81440.chunk.css.map": "/static/css/main.eda81440.chunk.css.map",
+    "static/js/2.b96cf6cc.chunk.js.LICENSE.txt": "/static/js/2.b96cf6cc.chunk.js.LICENSE.txt",
+    "static/media/HomePage.css": "/static/media/ConHall.35de1f13.png",
     "static/media/UofT.45567bd6.png": "/static/media/UofT.45567bd6.png",
-    "static/media/logo.5aff8b5f.png": "/static/media/logo.5aff8b5f.png",
-    "static/media/requisite-label.488f48a1.png": "/static/media/requisite-label.488f48a1.png"
+    "static/media/heart-fill-blue.586b56f9.svg": "/static/media/heart-fill-blue.586b56f9.svg",
+    "static/media/heart-fill-red.662278ab.svg": "/static/media/heart-fill-red.662278ab.svg",
+    "static/media/heart-regular.9a082843.svg": "/static/media/heart-regular.9a082843.svg",
+    "static/media/info.90580652.svg": "/static/media/info.90580652.svg",
+    "static/media/logo.5aff8b5f.png": "/static/media/logo.5aff8b5f.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.dd927c1f.js",
+    "static/js/runtime-main.60ef40cc.js",
     "static/css/2.383c0125.chunk.css",
-    "static/js/2.e1913883.chunk.js",
-    "static/css/main.9ded14dd.chunk.css",
-    "static/js/main.d09df137.chunk.js"
+    "static/js/2.b96cf6cc.chunk.js",
+    "static/css/main.eda81440.chunk.css",
+    "static/js/main.7b639eb6.chunk.js"
   ]
 }

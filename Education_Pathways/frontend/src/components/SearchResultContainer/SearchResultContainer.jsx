@@ -1,6 +1,6 @@
 import React from "react";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
-import "./SearchResultContainer.scss";
+import "./SearchResultContainer.css";
 
 export default function SearchResultContainer({
   course,

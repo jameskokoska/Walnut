@@ -1,6 +1,6 @@
 import React from "react";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
-import "./FavoriteContainer.scss";
+import "./FavoriteContainer.css";
 
 export default function FavoriteContainer({ courseCode }) {
   return (

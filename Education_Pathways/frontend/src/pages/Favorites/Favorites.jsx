@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FavoriteContainer from "../../components/FavoriteContainer/FavoriteContainer";
-import "./Favorites.scss";
+import "./Favorites.css";
 
 export default function Favorites() {
   const getFavorites = () => {

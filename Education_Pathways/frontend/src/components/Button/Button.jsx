@@ -6,7 +6,9 @@ export default function Button({ label, onClick, isSecondary, style, icon }) {
     <div
       onClick={onClick}
       style={style}
-      className={`button ${isSecondary ? "secondary-button" : ""}`}
+      className={`${isSecondary ? "secondary-button" : "primary-button"} ${
+        icon ? "icon-button" : ""
+      }`}
     >
       {label !== undefined ? <>{label}</> : <></>}
       {icon !== undefined ? <img src={icon} className="button-icon" /> : <></>}

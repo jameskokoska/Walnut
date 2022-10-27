@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import Button from "../../components/Button/Button";
-import Searchbar from "../../components/Searchbar/Searchbar";
+import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
-import "./SearchResults.scss";
+import "./SearchResults.css";
 
 const sampleCourse = {
   id: 0,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./FavoriteButton.scss";
 import HeartEmpty from "../../components/img/heart-regular.svg";
-import HeartFilled from "../../components/img/heart-solid.svg";
+import HeartFilled from "../../components/img/heart-fill-red.svg";
+import "./FavoriteButton.css";
 
 export default function FavoriteButton({ courseCode }) {
   const [favoriteStatus, setFavoriteStatus] = useState(false);

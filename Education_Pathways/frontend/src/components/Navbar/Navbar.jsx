@@ -4,8 +4,8 @@ import logo from "../img/logo.png";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Searchbar from "../Searchbar/Searchbar";
-import Info from "../../components/img/info-solid.svg";
-import Favorites from "../../components/img/heart-regular.svg";
+import Info from "../../components/img/info.svg";
+import Favorites from "../../components/img/heart-fill-blue.svg";
 
 export default function Navbar({}) {
   return (
