@@ -8,9 +8,9 @@
   cursor: pointer;
   transition: transform 200ms, background-color 200ms;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .button:hover, .secondary-button:hover, .primary-button:hover {
   transform: scale(1.03);

@@ -7,9 +7,7 @@
   background-color: #dbe8f4;
 }
 
-.courseInfo-section,
-.courseInfo-main,
-.courseInfo-sidebar {
+.courseInfo-section, .courseInfo-main, .courseInfo-sidebar {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -25,9 +23,6 @@
   width: 66%;
   margin-top: 200px;
 }
-
 .courseInfo-main p {
   color: #1c3e6e;
-}
-
-/*# sourceMappingURL=CourseInfoPage.css.map */
+}/*# sourceMappingURL=CourseInfoPage.css.map */
