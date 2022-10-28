@@ -1,6 +1,4 @@
-.button {
-  background-color: white;
-  color: #1c3e6f;
+.button, .secondary-button, .primary-button {
   display: inline-block;
   border-radius: 14px;
   padding: 14px 30px;
@@ -10,19 +8,22 @@
   cursor: pointer;
   transition: transform 200ms, background-color 200ms;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
-
-.button:hover {
+.button:hover, .secondary-button:hover, .primary-button:hover {
   transform: scale(1.03);
   transition: transform 200ms;
 }
-
-.button:active {
+.button:active, .secondary-button:active, .primary-button:active {
   transform: scale(0.97);
   transition: transform 100ms;
+}
+
+.primary-button {
+  background-color: white;
+  color: #1c3e6f;
 }
 
 .secondary-button {
@@ -30,4 +31,15 @@
   background-color: #1c3e6f;
 }
 
-/*# sourceMappingURL=Button.css.map */
+.icon-button {
+  width: 57px;
+  height: 57px;
+  margin-left: 5px;
+}
+
+.button-icon {
+  width: 28px;
+  height: 28px;
+  margin: 0 -16px;
+  padding: 0;
+}/*# sourceMappingURL=Button.css.map */

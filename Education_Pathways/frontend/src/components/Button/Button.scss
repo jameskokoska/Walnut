@@ -1,6 +1,4 @@
 .button {
-  background-color: white;
-  color: #1c3e6f;
   display: inline-block;
   border-radius: 14px;
   padding: 14px 30px;
@@ -22,7 +20,27 @@
   }
 }
 
+.primary-button {
+  @extend .button;
+  background-color: white;
+  color: #1c3e6f;
+}
+
 .secondary-button {
+  @extend .button;
   color: white;
   background-color: #1c3e6f;
+}
+
+.icon-button {
+  width: 57px;
+  height: 57px;
+  margin-left: 5px;
+}
+
+.button-icon {
+  width: 28px;
+  height: 28px;
+  margin: 0 -16px;
+  padding: 0;
 }

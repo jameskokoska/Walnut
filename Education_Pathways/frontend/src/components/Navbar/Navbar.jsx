@@ -4,6 +4,8 @@ import logo from "../img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import Searchbar from "../Searchbar/Searchbar";
+import Info from "../../components/img/info.svg";
+import Favorites from "../../components/img/heart-fill-blue.svg";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -23,9 +25,11 @@ export default function Navbar() {
         />
         <div style={{ width: "10px" }} />
         <Link to="/about" className="link">
-          <div className="about-btn-outer">
-            <div className="about-btn-inner">i</div>
-          </div>
+          <Button icon={Info} />
+        </Link>
+        <div style={{ width: "10px" }} />
+        <Link to="/favorites" className="link">
+          <Button icon={Favorites} />
         </Link>
       </div>
     </div>

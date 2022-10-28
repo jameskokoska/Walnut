@@ -1,0 +1,19 @@
+.search-results-page {
+  margin: 50px auto;
+  padding: 0px 20px;
+  max-width: 1400px;
+  margin-top: 150px;
+}
+.search-results-page h2 {
+  font-weight: 600;
+  font-size: 40px;
+}
+.search-results-page h3 {
+  font-size: 20px;
+}
+.search-results-page .search-results-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}/*# sourceMappingURL=SearchResults.css.map */

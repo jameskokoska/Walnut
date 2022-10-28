@@ -8,26 +8,35 @@ import UofT from "../../components/img/UofT.png";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [value, setValue] = useState("");
-  const onValueChange = (value) => {
-    setValue(value);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const onChange = (text) => {
+    setSearchTerm(text);
+  };
+
+  const goSearch = () => {
+    if (searchTerm === "") {
+      return;
+    }
+    navigate({
+      pathname: "/search",
+      search: `?term=${searchTerm}&order=none`,
+    });
   };
 
   return (
     <div className="home-page-bg">
       <div className="home-page">
         <h1>Walnut</h1>
-        <h2>
-          University of Toronto’s Detailed Course Database and Comparison Tool
-        </h2>
-        <div style={{ height: "20px" }} />
-        <SearchbarHome onChange={onValueChange} />
-        <div style={{ height: "10px" }} />
+        <h2>University of Toronto’s Course Database and Comparison Tool</h2>
+        <div style={{ height: "25px" }} />
+        <SearchbarHome onChange={onChange} onEnter={goSearch} />
+        <div style={{ height: "15px" }} />
         <Button
           label={"Search"}
           isSecondary
           style={{ boxShadow: "0px 0px 6px 2px #2e2e2e6a" }}
-          onClick={() => navigate(`/courseinfo/${value}`)}
+          onClick={goSearch}
         />
         <div className="footer-logo">
           <img src={UofT} alt="" />
@@ -37,7 +46,7 @@ export default function HomePage() {
   );
 }
 
-const SearchbarHome = ({ onChange }) => {
+const SearchbarHome = ({ onChange, onEnter }) => {
   const placeholders = ["course code", "course name", "description", "keyword"];
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [placeholderSwitch, setPlaceholderSwitch] = useState(false);
@@ -63,7 +72,7 @@ const SearchbarHome = ({ onChange }) => {
         placeholderSwitch ? "text-input-search-placeholder-transition" : ""
       }
       onChange={onChange}
-      onEnterKey={(value) => navigate(`/courseinfo/${value}`)}
+      onEnterKey={onEnter}
     ></Searchbar>
   );
 };

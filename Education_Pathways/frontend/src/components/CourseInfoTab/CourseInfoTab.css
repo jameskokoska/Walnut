@@ -1,6 +1,4 @@
-.courseInfo-tab,
-.secondary-tab,
-.primary-tab {
+.courseInfo-tab, .secondary-tab, .primary-tab {
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -8,18 +6,12 @@
   padding-left: 13px;
   margin-top: 10px;
 }
-
-.courseInfo-tab:hover,
-.secondary-tab:hover,
-.primary-tab:hover {
+.courseInfo-tab:hover, .secondary-tab:hover, .primary-tab:hover {
   transform: scale(1.03);
   transition: transform 200ms;
   cursor: pointer;
 }
-
-.courseInfo-tab:active,
-.secondary-tab:active,
-.primary-tab:active {
+.courseInfo-tab:active, .secondary-tab:active, .primary-tab:active {
   transform: scale(0.97);
   transition: transform 100ms;
 }
@@ -31,7 +23,6 @@
 .tab-collapse {
   width: 58px;
 }
-
 .tab-collapse .tab-text {
   display: none;
 }
@@ -51,6 +42,4 @@
 
 .inactive-text {
   color: #243e6b;
-}
-
-/*# sourceMappingURL=CourseInfoTab.css.map */
+}/*# sourceMappingURL=CourseInfoTab.css.map */
