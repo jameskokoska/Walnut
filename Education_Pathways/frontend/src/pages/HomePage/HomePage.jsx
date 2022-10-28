@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +40,7 @@ export default function HomePage() {
           onClick={goSearch}
         />
         <div className="footer-logo">
-          <img src={UofT} alt="UofT Logo" />
+          <img src={UofT} alt="" />
         </div>
       </div>
     </div>
@@ -50,6 +51,8 @@ const SearchbarHome = ({ onChange, onEnter }) => {
   const placeholders = ["course code", "course name", "description", "keyword"];
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [placeholderSwitch, setPlaceholderSwitch] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const interval = setInterval(() => {
       setPlaceholderSwitch(true);
