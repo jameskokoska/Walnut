@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import CourseConnections from "../../components/CourseConnections/CourseConnections";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
 import "./SearchResults.css";
 
@@ -63,6 +64,7 @@ export default function SearchResults() {
           );
         })}
       </div>
+      <CourseConnections />
     </div>
   );
 }
