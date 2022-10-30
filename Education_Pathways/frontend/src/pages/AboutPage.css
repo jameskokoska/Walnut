@@ -1,0 +1,122 @@
+.intro {
+    width: 750px; 
+    display: flex; 
+    position: absolute; 
+    left: 20px; 
+    top: 270px; 
+    justify-content: flex-start;
+    text-align: left;
+    margin: 0; 
+    box-sizing: border-box; 
+    font-size: 20px;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: black; 
+    letter-spacing: 0;
+    line-height: 35px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.underline {
+    width: 154px;
+    height: 30px;
+    display: flex;
+    position: absolute;
+    left: 222px;
+    top: 203px;
+    box-sizing: border-box;
+}
+
+.img1 {
+    width: 655px;
+    height: 384px;
+    display: flex;
+    position: absolute;
+    left: 838px;
+    top: 150px;
+    box-sizing: border-box;
+}
+
+.meettheteam {
+    display: flex;
+    position: absolute;
+    left: 20px;
+    top: 675px;
+    justify-content: flex-start;
+    text-align: left;
+    margin: 0; 
+    box-sizing: border-box;
+    font-size: 36px;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: black;
+    letter-spacing: 0;
+    line-height: 36px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.member-name {
+    display: flex;
+    position: relative;
+    left: 20px;
+    top: 750px;
+    justify-content: flex-start;
+    text-align: left;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 32px;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: 'black';
+    letter-spacing: 0;
+    line-height: 32px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
+.member-intro {
+    display: flex;
+    position: relative;
+    left: 20px;
+    top: 800px;
+    justify-content: flex-start;
+    text-align: left;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: black;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.slogan {
+    /* Course Selection Made Easy */
+
+    width: 657px;
+    height: 169px; 
+    display: flex; 
+    position: absolute; 
+    left: 20px; 
+    top: 50px; 
+    justify-content: flex-start;
+    text-align: left;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 70px;
+    font-family: Helvetica; 
+    font-weight: 700;
+    color: #8419b7;
+    letter-spacing: 0;
+    line-height: 120%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+

@@ -14,6 +14,7 @@ export default function TransitionRoutes() {
       <div style={{ textAlign: "center" }}>
         <Navbar />
       </div>
+
       <ScrollToTop />
       <CSSTransition key={location.key} classNames="page" timeout={300}>
         <Routes location={location}>
@@ -29,7 +30,7 @@ export default function TransitionRoutes() {
                       right: 0,
                       left: 0,
                       bottom: 0,
-                      top: 0,
+                      inset: "80px",
                     }}
                   >
                     <div style={{ minHeight: "100vh" }}>{page.component}</div>
