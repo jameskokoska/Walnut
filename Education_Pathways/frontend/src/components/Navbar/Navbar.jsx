@@ -21,7 +21,7 @@ export default function Navbar() {
       <div className="navbar-right-container">
         <Searchbar
           placeholder={"Search..."}
-          onEnterKey={(value) => navigate(`/courseinfo/${value}`)}
+          onEnterKey={(value) => navigate(`/search?term=${value}`)}
         />
         <div style={{ width: "10px" }} />
         <Link to="/about" className="link">
