@@ -4,16 +4,14 @@ import SearchResultContainer from "../../components/SearchResultContainer/Search
 import "./SearchResults.css";
 import API from "../../api";
 
-
 export default function SearchResults() {
   const [searchParams] = useSearchParams();
 
   const searchTerm = searchParams.get("term");
   const [results, setResults] = useState(null);
   useEffect(() => {
-    API.get(`/searchc?input=${searchTerm}`)
-    .then((res) => {
-      const data = res.data
+    API.get(`/searchc?input=${searchTerm}`).then((res) => {
+      const data = res.data;
       setResults(data);
     });
   }, []);
@@ -25,7 +23,7 @@ export default function SearchResults() {
         <h2>Search Results</h2>
         <h3>Searching...</h3>
       </div>
-    ); 
+    );
   }
   // results have been fetched, display them
   else {
@@ -36,7 +34,7 @@ export default function SearchResults() {
         <div className="search-results-list">
           {results.map((result) => {
             return (
-              <Link to={`/courseinfo/${result['code']}`} className="link">
+              <Link to={`/courseinfo/${result["code"]}`} className="link">
                 <SearchResultContainer
                   course={result}
                   searchTerm={searchTerm}

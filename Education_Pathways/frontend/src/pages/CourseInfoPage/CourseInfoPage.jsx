@@ -24,7 +24,7 @@ export default function CourseInfoPage() {
     distribution: "",
     exclusions: "",
     meeting_sections: "",
-    last_updated: ""
+    last_updated: "",
   });
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ export default function CourseInfoPage() {
           distribution: data.utm_distribution,
           exclusions: data.exclusions,
           meeting_sections: data.meeting_sections,
-          last_updated: data.last_updated
+          last_updated: data.last_updated,
         });
       })
       .catch(() => {
@@ -76,9 +76,15 @@ export default function CourseInfoPage() {
           <h4>{`Department: ${courseState.department}`}</h4>
           <h4>{`Campus: ${courseState.campus}`}</h4>
           <h4>{`Term: ${courseState.terms}`}</h4>
-          <h4>{`Prerequisites: ${courseState.prerequisites ? courseState.prerequisites : "None"}`}</h4>
-          <h4>{`Corequisites: ${courseState.corequisites ? courseState.corequisites : "None"}`}</h4>
-          <h4>{`Exclusions: ${courseState.exclusions ? courseState.exclusions : "None"}`}</h4>
+          <h4>{`Prerequisites: ${
+            courseState.prerequisites ? courseState.prerequisites : "None"
+          }`}</h4>
+          <h4>{`Corequisites: ${
+            courseState.corequisites ? courseState.corequisites : "None"
+          }`}</h4>
+          <h4>{`Exclusions: ${
+            courseState.exclusions ? courseState.exclusions : "None"
+          }`}</h4>
           <p>{courseState.course_description}</p>
         </div>
         <div style={{ display: section[1] ? "block" : "none" }}>Review</div>

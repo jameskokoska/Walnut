@@ -6,7 +6,7 @@ from nikel_py import Courses
 class SearchCourse(Resource):
     def get(self):
         input = request.args.get("input")
-        courses = Courses.get({'code' : input}, limit=100)
+        courses = Courses.get({"code": input}, limit=100)
         # convert from Course objects to json
         courses_data = []
         for course in courses:
@@ -27,7 +27,7 @@ class SearchCourse(Resource):
         parser.add_argument("input", required=True)
         data = parser.parse_args()
         input = data["input"]
-        courses = Courses.get({'code' : input})
+        courses = Courses.get({"code": input})
         if len(courses) > 0:
             try:
                 resp = jsonify(courses)
@@ -42,7 +42,7 @@ class SearchCourse(Resource):
 class ShowCourse(Resource):
     def get(self):
         code = request.args.get("code")
-        courses = Courses.get({'code' : code})
+        courses = Courses.get({"code": code})
         if len(courses) == 0:
             resp = jsonify({"message": f"Course {code} doesn't exist"})
             resp.status_code = 404
@@ -61,7 +61,7 @@ class ShowCourse(Resource):
         parser.add_argument("code", required=True)
         data = parser.parse_args()
         code = data["code"]
-        courses = Courses.get({'code' : code})
+        courses = Courses.get({"code": code})
         if len(courses) == 0:
             resp = jsonify({"message": f"Course {code} doesn't exist"})
             resp.status_code = 404

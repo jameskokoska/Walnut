@@ -9,8 +9,8 @@ export default function SearchResultContainer({
 }) {
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
-  const foundDescription = course['description'].indexOf(searchTerm);
-  let displayDescription = course['description'];
+  const foundDescription = course["description"].indexOf(searchTerm);
+  let displayDescription = course["description"];
   let showDescription = true;
   if (displayDescription === undefined || displayDescription === "") {
     showDescription = false;
