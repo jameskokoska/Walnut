@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
 import "./SearchResults.scss";
 import API from "../../api";
