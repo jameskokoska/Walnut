@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
-import "./SearchResults.css";
+import "./SearchResults.scss";
 import API from "../../api";
 
 export default function SearchResults() {
@@ -36,13 +36,11 @@ export default function SearchResults() {
         <div className="search-results-list">
           {results.map((result) => {
             return (
-              <Link to={`/courseinfo/${result["code"]}`} className="link">
-                <SearchResultContainer
-                  course={result}
-                  searchTerm={searchTerm}
-                  numberResults={results.length}
-                />
-              </Link>
+              <SearchResultContainer
+                course={result}
+                searchTerm={searchTerm}
+                numberResults={results.length}
+              />
             );
           })}
         </div>

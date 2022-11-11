@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
-import "./SearchResultContainer.css";
+import "./SearchResultContainer.scss";
 
 export default function SearchResultContainer({
   course,
@@ -33,10 +34,14 @@ export default function SearchResultContainer({
     );
   }
   return (
-    <div
-      className={`search-result-container`}
+    <Link
+      to={`/courseinfo/${course["code"]}`}
+      className="search-result-container link"
       style={{
-        width: manyResults ? "600px" : "1210px",
+        width: manyResults ? "unset" : "100%",
+        maxWidth: manyResults ? "800px" : "unset",
+        minWidth: manyResults ? "400px" : "unset",
+        flex: manyResults ? 1 : "unset",
       }}
     >
       <div
@@ -57,6 +62,6 @@ export default function SearchResultContainer({
 
       <h4>{course["division"]}</h4>
       {showDescription ? <p>{displayDescription}</p> : <></>}
-    </div>
+    </Link>
   );
 }
