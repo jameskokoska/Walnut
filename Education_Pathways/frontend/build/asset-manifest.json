@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5cbb31f1.css",
-    "main.js": "/static/js/main.33c5e75c.js",
+    "main.css": "/static/css/main.6db72408.css",
+    "main.js": "/static/js/main.c11c5663.js",
     "static/media/ConHall.png": "/static/media/ConHall.35de1f13d39f0a8916e8.png",
     "static/media/404.png": "/static/media/404.fa7ac9cba9a4de7b89db.png",
     "static/media/logo.png": "/static/media/logo.5aff8b5f017aeb976242.png",
@@ -11,11 +11,11 @@
     "static/media/heart-fill-blue.svg": "/static/media/heart-fill-blue.586b56f91ab447cacb22000605305179.svg",
     "static/media/heart-fill-red.svg": "/static/media/heart-fill-red.662278ab49c3bc2ec9d70bfea36ac2e7.svg",
     "static/media/info.svg": "/static/media/info.90580652d09224d652efaf8e3fdd996f.svg",
-    "main.5cbb31f1.css.map": "/static/css/main.5cbb31f1.css.map",
-    "main.33c5e75c.js.map": "/static/js/main.33c5e75c.js.map"
+    "main.6db72408.css.map": "/static/css/main.6db72408.css.map",
+    "main.c11c5663.js.map": "/static/js/main.c11c5663.js.map"
   },
   "entrypoints": [
-    "static/css/main.5cbb31f1.css",
-    "static/js/main.33c5e75c.js"
+    "static/css/main.6db72408.css",
+    "static/js/main.c11c5663.js"
   ]
 }

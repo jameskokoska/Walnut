@@ -4,4 +4,5 @@ venv
 __pycache__
 test.db
 Education_Pathways/frontend/node_modules
+.pytest_cache
 #track build 
