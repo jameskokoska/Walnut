@@ -28,7 +28,10 @@ export default function FavoriteButton({ courseCode }) {
     <img
       src={favoriteStatus ? HeartFilled : HeartEmpty}
       className="favorite-button"
-      onClick={() => setLiked(!favoriteStatus)}
+      onClick={(e) => {
+        e.preventDefault();
+        setLiked(!favoriteStatus);
+      }}
     ></img>
   );
 }
