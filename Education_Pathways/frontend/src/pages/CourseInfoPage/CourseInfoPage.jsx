@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import API from "../../api";
-import "./CourseInfoPage.css";
+import "./CourseInfoPage.scss";
 
 export default function CourseInfoPage() {
   const { code } = useParams();

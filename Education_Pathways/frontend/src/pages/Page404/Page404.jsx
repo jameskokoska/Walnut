@@ -1,7 +1,7 @@
 import React from "react";
 import Image404 from "../../components/img/404.png";
 import { Link } from "react-router-dom";
-import "./Page404.css";
+import "./Page404.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
