@@ -36,10 +36,7 @@ export default function SearchResultContainer({
     <div
       className={`search-result-container`}
       style={{
-        width: manyResults ? "unset" : "100%",
-        maxWidth: manyResults ? "800px" : "unset",
-        minWidth: manyResults ? "400px" : "unset",
-        flex: manyResults ? 1 : "unset",
+        width: manyResults ? "600px" : "1210px",
       }}
     >
       <div

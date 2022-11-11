@@ -1,8 +1,8 @@
 .search-results-page {
-  margin: 50px auto;
+  margin: auto;
   padding: 0px 20px;
   max-width: 1400px;
-  margin-top: 150px;
+  margin-top: 110px;
 }
 .search-results-page h2 {
   font-weight: 600;
@@ -11,9 +11,14 @@
 .search-results-page h3 {
   font-size: 20px;
 }
+.search-results-page .search-results-title {
+  margin-left: 70px;
+}
 .search-results-page .search-results-list {
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
 }/*# sourceMappingURL=SearchResults.css.map */

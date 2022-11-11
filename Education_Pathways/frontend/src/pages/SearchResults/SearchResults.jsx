@@ -29,8 +29,10 @@ export default function SearchResults() {
   else {
     return (
       <div className="search-results-page">
-        <h2>Search Results</h2>
-        <h3>{`${results.length} results for "${searchTerm}"`}</h3>
+        <div className="search-results-title">
+          <h2>Search Results</h2>
+          <h3>{`${results.length} results for "${searchTerm}"`}</h3>
+        </div>
         <div className="search-results-list">
           {results.map((result) => {
             return (

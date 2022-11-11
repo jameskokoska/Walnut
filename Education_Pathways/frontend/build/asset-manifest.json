@@ -1,31 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.26c9a9c2.chunk.css",
-    "main.js": "/static/js/main.b723de10.chunk.js",
-    "main.js.map": "/static/js/main.b723de10.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.60ef40cc.js",
-    "runtime-main.js.map": "/static/js/runtime-main.60ef40cc.js.map",
-    "static/css/2.383c0125.chunk.css": "/static/css/2.383c0125.chunk.css",
-    "static/js/2.faa22f93.chunk.js": "/static/js/2.faa22f93.chunk.js",
-    "static/js/2.faa22f93.chunk.js.map": "/static/js/2.faa22f93.chunk.js.map",
+    "main.css": "/static/css/main.5cbb31f1.css",
+    "main.js": "/static/js/main.e3807f4d.js",
+    "static/media/ConHall.png": "/static/media/ConHall.35de1f13d39f0a8916e8.png",
+    "static/media/404.png": "/static/media/404.fa7ac9cba9a4de7b89db.png",
+    "static/media/logo.png": "/static/media/logo.5aff8b5f017aeb976242.png",
+    "static/media/UofT.png": "/static/media/UofT.45567bd6354307304f89.png",
+    "static/media/heart-regular.svg": "/static/media/heart-regular.9a0828439c3363efbfbebcd8927668fe.svg",
     "index.html": "/index.html",
-    "static/css/2.383c0125.chunk.css.map": "/static/css/2.383c0125.chunk.css.map",
-    "static/css/main.26c9a9c2.chunk.css.map": "/static/css/main.26c9a9c2.chunk.css.map",
-    "static/js/2.faa22f93.chunk.js.LICENSE.txt": "/static/js/2.faa22f93.chunk.js.LICENSE.txt",
-    "static/media/404.fa7ac9cb.png": "/static/media/404.fa7ac9cb.png",
-    "static/media/HomePage.css": "/static/media/ConHall.35de1f13.png",
-    "static/media/UofT.45567bd6.png": "/static/media/UofT.45567bd6.png",
-    "static/media/heart-fill-blue.586b56f9.svg": "/static/media/heart-fill-blue.586b56f9.svg",
-    "static/media/heart-fill-red.662278ab.svg": "/static/media/heart-fill-red.662278ab.svg",
-    "static/media/heart-regular.9a082843.svg": "/static/media/heart-regular.9a082843.svg",
-    "static/media/info.90580652.svg": "/static/media/info.90580652.svg",
-    "static/media/logo.5aff8b5f.png": "/static/media/logo.5aff8b5f.png"
+    "static/media/heart-fill-blue.svg": "/static/media/heart-fill-blue.586b56f91ab447cacb22000605305179.svg",
+    "static/media/heart-fill-red.svg": "/static/media/heart-fill-red.662278ab49c3bc2ec9d70bfea36ac2e7.svg",
+    "static/media/info.svg": "/static/media/info.90580652d09224d652efaf8e3fdd996f.svg",
+    "main.5cbb31f1.css.map": "/static/css/main.5cbb31f1.css.map",
+    "main.e3807f4d.js.map": "/static/js/main.e3807f4d.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.60ef40cc.js",
-    "static/css/2.383c0125.chunk.css",
-    "static/js/2.faa22f93.chunk.js",
-    "static/css/main.26c9a9c2.chunk.css",
-    "static/js/main.b723de10.chunk.js"
+    "static/css/main.5cbb31f1.css",
+    "static/js/main.e3807f4d.js"
   ]
 }
