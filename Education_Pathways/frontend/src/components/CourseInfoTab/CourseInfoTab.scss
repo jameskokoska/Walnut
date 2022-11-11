@@ -1,0 +1,50 @@
+.courseInfo-tab {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  height: 50px;
+  padding-left: 13px;
+  margin-top: 10px;
+
+  &:hover {
+    transform: scale(1.03);
+    transition: transform 200ms;
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(0.97);
+    transition: transform 100ms;
+  }
+}
+
+.primary-tab {
+  @extend .courseInfo-tab;
+  width: 270px;
+}
+
+.tab-collapse {
+  width: 58px;
+
+  .tab-text {
+    display: none;
+  }
+}
+
+.secondary-tab {
+  @extend .courseInfo-tab;
+  width: 58px;
+  padding-left: 22px;
+}
+
+.icon-container {
+  width: 55px;
+}
+
+.active-text {
+  color: white;
+}
+
+.inactive-text {
+  color: #243e6b;
+}
