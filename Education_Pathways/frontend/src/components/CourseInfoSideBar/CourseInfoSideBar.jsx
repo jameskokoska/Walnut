@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import CourseInfoTab from "../CourseInfoTab/CourseInfoTab";
-import "./CourseInfoSidebar.css";
+import "./CourseInfoSidebar.scss";
 
 import Info from "../icons/Info";
 import Review from "../icons/Review";

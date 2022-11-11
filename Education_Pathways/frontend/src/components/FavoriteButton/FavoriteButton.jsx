@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HeartEmpty from "../../components/img/heart-regular.svg";
 import HeartFilled from "../../components/img/heart-fill-red.svg";
-import "./FavoriteButton.css";
+import "./FavoriteButton.scss";
 
 export default function FavoriteButton({ courseCode }) {
   const [favoriteStatus, setFavoriteStatus] = useState(false);
@@ -28,7 +28,10 @@ export default function FavoriteButton({ courseCode }) {
     <img
       src={favoriteStatus ? HeartFilled : HeartEmpty}
       className="favorite-button"
-      onClick={() => setLiked(!favoriteStatus)}
+      onClick={(e) => {
+        e.preventDefault();
+        setLiked(!favoriteStatus);
+      }}
     ></img>
   );
 }

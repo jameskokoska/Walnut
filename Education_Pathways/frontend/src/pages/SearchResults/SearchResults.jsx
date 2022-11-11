@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
-import "./SearchResults.css";
+import "./SearchResults.scss";
 import API from "../../api";
 
 export default function SearchResults() {
@@ -29,18 +29,18 @@ export default function SearchResults() {
   else {
     return (
       <div className="search-results-page">
-        <h2>Search Results</h2>
-        <h3>{`${results.length} results for "${searchTerm}"`}</h3>
+        <div className="search-results-title">
+          <h2>Search Results</h2>
+          <h3>{`${results.length} results for "${searchTerm}"`}</h3>
+        </div>
         <div className="search-results-list">
           {results.map((result) => {
             return (
-              <Link to={`/courseinfo/${result["code"]}`} className="link">
-                <SearchResultContainer
-                  course={result}
-                  searchTerm={searchTerm}
-                  numberResults={results.length}
-                />
-              </Link>
+              <SearchResultContainer
+                course={result}
+                searchTerm={searchTerm}
+                numberResults={results.length}
+              />
             );
           })}
         </div>

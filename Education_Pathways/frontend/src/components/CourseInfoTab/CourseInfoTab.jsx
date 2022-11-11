@@ -1,5 +1,5 @@
 import React from "react";
-import "./CourseInfoTab.css";
+import "./CourseInfoTab.scss";
 
 export default function CourseInfoTab({
   id,

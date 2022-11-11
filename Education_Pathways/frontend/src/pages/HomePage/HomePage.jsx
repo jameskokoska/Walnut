@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Searchbar from "../../components/Searchbar/Searchbar";
-import "./HomePage.css";
+import "./HomePage.scss";
 
 export default function HomePage() {
   const navigate = useNavigate();
