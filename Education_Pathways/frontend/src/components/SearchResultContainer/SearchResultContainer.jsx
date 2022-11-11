@@ -9,8 +9,8 @@ export default function SearchResultContainer({
 }) {
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
-  const foundDescription = course["Course Description"].indexOf(searchTerm);
-  let displayDescription = course["Course Description"];
+  const foundDescription = course["description"].indexOf(searchTerm);
+  let displayDescription = course["description"];
   let showDescription = true;
   if (displayDescription === undefined || displayDescription === "") {
     showDescription = false;
@@ -50,15 +50,15 @@ export default function SearchResultContainer({
         }}
       >
         <div>
-          <h2>{course["Code"]}</h2>
-          <h3>{course["Name"]}</h3>
+          <h2>{course["code"]}</h2>
+          <h3>{course["name"]}</h3>
         </div>
         <div>
-          <FavoriteButton courseCode={course["Code"]} />
+          <FavoriteButton courseCode={course["code"]} />
         </div>
       </div>
 
-      <h4>{course["Division"]}</h4>
+      <h4>{course["division"]}</h4>
       {showDescription ? <p>{displayDescription}</p> : <></>}
     </div>
   );
