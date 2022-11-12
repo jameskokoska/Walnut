@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
-import CourseConnections from "../../components/CourseConnections/CourseConnections";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
 import "./SearchResults.css";
 import API from "../../api";
@@ -45,7 +44,6 @@ export default function SearchResults() {
             );
           })}
         </div>
-        <CourseConnections />
       </div>
     );
   }

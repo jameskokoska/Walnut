@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import API from "../../api";
-import "./CourseInfoPage.css";
+import "./CourseInfoPage.scss";
+import CourseConnections from "../../components/CourseConnections/CourseConnections";
 
 export default function CourseInfoPage() {
   const { code } = useParams();
@@ -38,6 +39,7 @@ export default function CourseInfoPage() {
     API.get(`/course/details?code=${code}`)
       .then((res) => {
         const data = res.data;
+        console.log(data);
         setCourseState({
           course_code: data.code,
           course_name: data.name,
@@ -72,6 +74,7 @@ export default function CourseInfoPage() {
       </div>
       <div className="courseInfo-main">
         <div style={{ display: section[0] ? "block" : "none" }}>
+          <div style={{ height: "120px" }} />
           <h1>Overview</h1>
           <h4>{`Department: ${courseState.department}`}</h4>
           <h4>{`Campus: ${courseState.campus}`}</h4>
@@ -86,6 +89,7 @@ export default function CourseInfoPage() {
             courseState.exclusions ? courseState.exclusions : "None"
           }`}</h4>
           <p>{courseState.course_description}</p>
+          <CourseConnections course={courseState} />
         </div>
         <div style={{ display: section[1] ? "block" : "none" }}>Review</div>
         <div style={{ display: section[2] ? "block" : "none" }}>Prof</div>
