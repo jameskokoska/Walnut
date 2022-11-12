@@ -16,8 +16,10 @@ Walnut, a name which fits in the theme of “tree nuts” often used by the Univ
 - [Asset Acknowledgements](/docs/Acknowledgement.md)
 
 ## Flask TDD
+Run tests using `python -m pytest -rP`
 
 - Kevin (Tian Li): Education_Pathways/tests/app_test.py/test_index()
+- James Kokoska: Education_Pathways/tests/app_test.py/test_course_details()
 
 ## Team Members
 
