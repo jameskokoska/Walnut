@@ -25,6 +25,19 @@ export default function SearchResults() {
       </div>
     );
   }
+
+  // No course found
+  else if (results.length == 0) {
+    return (
+      <div className="search-results-page">
+        <div className="search-results-title">
+          <h2>Search Results</h2>
+          <h3>{`No results found for "${searchTerm}"`}</h3>
+        </div>
+      </div>
+    );
+  }
+
   // results have been fetched, display them
   else {
     return (

@@ -6,21 +6,24 @@ from nikel_py import Courses
 class SearchCourse(Resource):
     def get(self):
         input = request.args.get("input")
-        courses = Courses.get({"code": input}, limit=100)
+        try:
+            courses = Courses.get({"code": input}, limit=100)
+        except:
+            courses = []
+
         # convert from Course objects to json
         courses_data = []
         for course in courses:
             courses_data.append(course.all_data)
 
-        if len(courses) > 0:
-            try:
-                resp = jsonify(courses_data)
-                resp.status_code = 200
-                return resp
-            except Exception as e:
-                resp = jsonify({"error": str(e)})
-                resp.status_code = 400
-                return resp
+        try:
+            resp = jsonify(courses_data)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({"error": str(e)})
+            resp.status_code = 400
+            return resp
 
     def post(self):
         parser = reqparse.RequestParser()
