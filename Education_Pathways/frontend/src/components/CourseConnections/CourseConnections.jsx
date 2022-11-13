@@ -51,7 +51,6 @@ export default function CourseConnections({ course }) {
       }
 
       if (pre && pre.length > 0) {
-        console.log(pre);
         for (let i = 0; i < pre.length; i++) {
           stateObject[pre[i]] = {
             pos: { x: 200 * i, y: 85 * currentLevel },
