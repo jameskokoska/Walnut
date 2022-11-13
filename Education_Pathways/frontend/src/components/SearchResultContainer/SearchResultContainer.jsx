@@ -8,25 +8,36 @@ export default function SearchResultContainer({
   searchTerm,
   numberResults,
 }) {
+  // Config based on number of results
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
 
-  // find in name
-  let searchName = searchTerm.toString();
-  const foundName = course["name"]
-    .toLowerCase()
-    .indexOf(searchTerm.toLowerCase());
-  let displayName = course["name"].toString();
+  /* Bold matching course name and description */
+  // Bold in names
   let showName = true;
-  const nameLength = displayName.length;
-  // in case there is no name term
+  let displayName = course["name"];
   if (displayName === undefined || displayName === "") {
     showName = false;
-  } else if (foundName) {
-    displayName.replace(new RegExp(searchName, "gi"), "<b>$1</b>");
+  } else {
+    const foundName = course["name"]
+      .toUpperCase()
+      .indexOf(searchTerm.toUpperCase().trim());
+
+    if (foundName !== -1) {
+      console.log(displayName);
+      displayName = (
+        <>
+          {displayName.slice(0, foundName)}
+          <span className="result-bold-heading">
+            {displayName.slice(foundName, foundName + searchTerm.length)}
+          </span>
+          {displayName.slice(foundName + searchTerm.length)}
+        </>
+      );
+    }
   }
-  
-  // find in description
+
+  // Bold in description
   let showDescription = true;
   let displayDescription = course["description"];
   if (displayDescription == undefined || displayDescription === "") {
@@ -35,7 +46,7 @@ export default function SearchResultContainer({
     // make upper case so the check is not case-sensitive
     const foundDescription = course["description"]
       .toUpperCase()
-      .indexOf(searchTerm.toUpperCase());
+      .indexOf(searchTerm.toUpperCase().trim());
 
     if (foundDescription === -1) {
       displayDescription =

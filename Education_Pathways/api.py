@@ -22,7 +22,7 @@ class SearchCourse(Resource):
             courses_data.append(course.all_data)
 
         try:
-            resp = {"courses_data": courses_data, "tokens": [categories, term]}
+            resp = {"courses_data": courses_data, "term": term}
             resp = jsonify(resp)
             resp.status_code = 200
             return resp

@@ -9,11 +9,11 @@ export default function SearchResults() {
 
   const searchTerm = searchParams.get("term");
   const [results, setResults] = useState(null);
-  let tokens;
+  const [term, setTerm] = useState(null);
   useEffect(() => {
     API.get(`/searchc?input=${searchTerm}`).then((res) => {
       const data = res.data;
-      tokens = data["tokens"];
+      setTerm(data["term"]);
       setResults(data["courses_data"]);
     });
   }, []);
@@ -54,7 +54,7 @@ export default function SearchResults() {
               <SearchResultContainer
                 key={result["code"]}
                 course={result}
-                searchTerm={searchTerm}
+                searchTerm={term}
                 numberResults={results.length}
               />
             );
