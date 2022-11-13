@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import "./SearchResultContainer.scss";
 
@@ -8,12 +8,16 @@ export default function SearchResultContainer({
   searchTerm,
   numberResults,
 }) {
+  const navigate = useNavigate();
+
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
 
   // find in name
   let searchName = searchTerm.toString();
-  const foundName = course["name"].toLowerCase().indexOf(searchTerm.toLowerCase());
+  const foundName = course["name"]
+    .toLowerCase()
+    .indexOf(searchTerm.toLowerCase());
   let displayName = course["name"].toString();
   let showName = true;
   const nameLength = displayName.length;
@@ -21,9 +25,9 @@ export default function SearchResultContainer({
   if (displayName === undefined || displayName === "") {
     showName = false;
   } else if (foundName) {
-    displayName.replace(new RegExp(searchName, "gi"), '<b>$1</b>');
+    displayName.replace(new RegExp(searchName, "gi"), "<b>$1</b>");
   }
-  
+
   // find in description
   let showDescription = true;
   let displayDescription = course["description"];
@@ -31,10 +35,13 @@ export default function SearchResultContainer({
     showDescription = false;
   } else {
     // make upper case so the check is not case-sensitive
-    const foundDescription = course["description"].toUpperCase().indexOf(searchTerm.toUpperCase());
+    const foundDescription = course["description"]
+      .toUpperCase()
+      .indexOf(searchTerm.toUpperCase());
 
     if (foundDescription === -1) {
-      displayDescription = displayDescription.slice(0, descriptionLength) + "...";
+      displayDescription =
+        displayDescription.slice(0, descriptionLength) + "...";
     } else {
       displayDescription = (
         <p>
@@ -44,9 +51,9 @@ export default function SearchResultContainer({
           )}
           <b>
             {displayDescription.slice(
-            foundDescription,
-            foundDescription + searchTerm.length
-          )}
+              foundDescription,
+              foundDescription + searchTerm.length
+            )}
           </b>
           {displayDescription.slice(
             foundDescription + searchTerm.length,
@@ -59,8 +66,12 @@ export default function SearchResultContainer({
   }
 
   return (
-    <Link
-      to={`/courseinfo/${course["code"]}`}
+    <div
+      onClick={() => {
+        navigate(`/courseinfo/${course["code"]}`, {
+          state: { course: course },
+        });
+      }}
       className="search-result-container link"
       style={{
         width: manyResults ? "unset" : "100%",
@@ -87,6 +98,6 @@ export default function SearchResultContainer({
 
       <h4>{course["division"]}</h4>
       {showDescription ? <p>{displayDescription}</p> : <></>}
-    </Link>
+    </div>
   );
 }
