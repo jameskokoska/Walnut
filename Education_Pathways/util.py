@@ -4,6 +4,17 @@ from keywords import KEYWORDS
 from keywords import SHORTCUT
 
 
+def deduplicate(course_list):
+    deduplicate = []
+    seen_course_codes = []
+    for course in course_list:
+        if course.code not in seen_course_codes:
+            deduplicate.append(course)
+            seen_course_codes.append(course.code)
+
+    return deduplicate
+
+
 def getCategories(input):
     """Process user input and get categories based on KEYWORDS"""
     code = set()
@@ -94,4 +105,4 @@ def requestCourses(code, categories, default, term):
             except:
                 print(f"No course found for {categories}")
 
-    return courses
+    return deduplicate(courses)
