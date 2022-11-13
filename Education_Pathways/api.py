@@ -2,19 +2,40 @@ from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
 
-from util import getCategories, requestCourses
+from util import getCourseCode, getCategories, requestCourses, deduplicate
 
 
 class SearchCourse(Resource):
     def get(self):
         # Get input and tokenize based on spaces
-        # KEYWORDS has lowercase elements, hence input.lower()
         input = request.args.get("input")
-        input = input.lower().split(" ")
+        tokens = input.lower().split(" ")
 
-        # Find matching courses
-        code, categories, default, term = getCategories(input)
-        courses = requestCourses(code, categories, default, term)
+        # Course code gets priority
+        code = getCourseCode(tokens)
+        tokens = [token for token in tokens if token not in code]
+
+        # No code, search for course name first
+        if len(code) == 0:
+            try:
+                courses = Courses.get({"name": input}, limit=10)
+                courses = deduplicate(courses)
+            except:
+                courses = []
+
+            # There is course found and only a few specific ones
+            if len(courses) != 0 and len(courses) != 10:
+                term = input
+
+            # Fall back to general search
+            else:
+                categories, default, term = getCategories(tokens)
+                courses = requestCourses(code, categories, default, term)
+
+        # General search
+        else:
+            categories, default, term = getCategories(tokens)
+            courses = requestCourses(code, categories, default, term)
 
         # convert from Course objects to json
         courses_data = []

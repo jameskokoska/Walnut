@@ -5,6 +5,7 @@ from keywords import SHORTCUT
 
 
 def deduplicate(course_list):
+    """Remove duplicate based on course code"""
     deduplicate = []
     seen_course_codes = []
     for course in course_list:
@@ -15,22 +16,25 @@ def deduplicate(course_list):
     return deduplicate
 
 
-def getCategories(input):
-    """Process user input and get categories based on KEYWORDS"""
+def getCourseCode(tokens):
+    """Return list of course codes"""
     code = set()
-    categories = {}
-
-    # Check each token
-    default = True
-    for token in input:
-
-        # Coures Code
+    for token in tokens:
         if (len(token) == 3 and token in KEYWORDS["code"]) or (
             len(token) > 3 and token[:3] in KEYWORDS["code"] and token[3].isnumeric()
         ):
             code.add(token)
-            continue
 
+    return list(code)
+
+
+def getCategories(tokens):
+    """Process user input and get categories based on KEYWORDS"""
+    categories = {}
+
+    # Check each token
+    default = True
+    for token in tokens:
         for key in list(KEYWORDS.keys())[1:]:
             next_token = False
             for entry in KEYWORDS[key]:
@@ -52,14 +56,14 @@ def getCategories(input):
     term = ""
     if default:
         # no keyword matches, will search by name and description by default
-        for token in input:
-            if token not in code:
-                term += f"{token} "
+        for token in tokens:
+            term += f"{token} "
 
-    return code, categories, default, term
+    return categories, default, term
 
 
 def requestCourses(code, categories, default, term):
+    """Request course based on given query"""
     courses = []
     if len(code) != 0:
         for course_code in code:
