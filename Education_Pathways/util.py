@@ -30,6 +30,7 @@ def getCourseCode(tokens):
 
 def getCategories(tokens):
     """Process user input and get categories based on KEYWORDS"""
+    tokens_ = tokens
     categories = {}
 
     # Check each token
@@ -39,6 +40,8 @@ def getCategories(tokens):
             next_token = False
             for entry in KEYWORDS[key]:
                 if token in entry:
+                    tokens_.remove(token)
+
                     val = entry
                     if token in SHORTCUT:
                         val = SHORTCUT[token]
@@ -59,17 +62,21 @@ def getCategories(tokens):
         for token in tokens:
             term += f"{token} "
 
-    return categories, default, term
+    else:
+        for token in tokens_:
+            term += f"{token} "
+
+    return categories, term
 
 
-def requestCourses(code, categories, default, term):
+def requestCourses(code, categories, term):
     """Request course based on given query"""
     courses = []
     if len(code) != 0:
         for course_code in code:
             query = categories
             query["code"] = course_code
-            if default and term:
+            if term:
                 for category in ("name", "description"):
                     default_query = query.copy()
                     default_query[category] = term
@@ -92,7 +99,7 @@ def requestCourses(code, categories, default, term):
                     print(f"No course found for {query}")
 
     else:
-        if default:
+        if term:
             for category in ("name", "description"):
                 default_query = {}
                 default_query[category] = term

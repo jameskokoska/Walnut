@@ -29,13 +29,13 @@ class SearchCourse(Resource):
 
             # Fall back to general search
             else:
-                categories, default, term = getCategories(tokens)
-                courses = requestCourses(code, categories, default, term)
+                categories, term = getCategories(tokens)
+                courses = requestCourses(code, categories, term)
 
         # General search
         else:
-            categories, default, term = getCategories(tokens)
-            courses = requestCourses(code, categories, default, term)
+            categories, term = getCategories(tokens)
+            courses = requestCourses(code, categories, term)
 
         # convert from Course objects to json
         courses_data = []
