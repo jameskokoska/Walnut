@@ -54,10 +54,10 @@ export default function SearchResultContainer({
     } else {
       displayDescription = (
         <>
-          {displayDescription.slice(
-            foundDescription - 30 < 0 ? 0 : foundDescription - 30,
-            foundDescription
-          )}
+          {foundDescription - 30 < 0
+            ? displayDescription.slice(0, foundDescription)
+            : "..." +
+              displayDescription.slice(foundDescription - 30, foundDescription)}
           <b>
             {displayDescription.slice(
               foundDescription,
