@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
 import "./SearchResults.scss";
 import API from "../../api";
+import Loading from "../../components/Loading/Loading";
 
 export default function SearchResults() {
   const [searchParams] = useSearchParams();
@@ -23,7 +24,18 @@ export default function SearchResults() {
     return (
       <div className="search-results-page">
         <h2>Search Results</h2>
-        <h3>Searching...</h3>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "500px",
+            flexDirection: "column",
+          }}
+        >
+          <Loading />
+          <p style={{ marginTop: "20px" }}>Loading...</p>
+        </div>
       </div>
     );
   }

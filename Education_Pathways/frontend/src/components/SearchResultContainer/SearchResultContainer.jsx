@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import "./SearchResultContainer.scss";
 
@@ -8,6 +8,8 @@ export default function SearchResultContainer({
   searchTerm,
   numberResults,
 }) {
+  const navigate = useNavigate();
+
   // Config based on number of results
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
@@ -75,8 +77,12 @@ export default function SearchResultContainer({
   }
 
   return (
-    <Link
-      to={`/courseinfo/${course["code"]}`}
+    <div
+      onClick={() => {
+        navigate(`/courseinfo/${course["code"]}`, {
+          state: { course: course },
+        });
+      }}
       className="search-result-container link"
       style={{
         width: manyResults ? "unset" : "100%",
@@ -103,6 +109,6 @@ export default function SearchResultContainer({
 
       <h4>{course["division"]}</h4>
       {showDescription ? <p>{displayDescription}</p> : <></>}
-    </Link>
+    </div>
   );
 }

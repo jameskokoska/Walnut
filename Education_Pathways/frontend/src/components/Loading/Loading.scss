@@ -1,0 +1,11 @@
+.loading-spinner{
+  width:65px;
+  height:65px;
+  border-radius: 15px;
+  border: #1c3e6f solid 7px;
+  animation: loading-spinner-animation ease 600ms infinite forwards;
+}
+
+@keyframes loading-spinner-animation {
+  100% {transform: rotate(90deg);}
+}
