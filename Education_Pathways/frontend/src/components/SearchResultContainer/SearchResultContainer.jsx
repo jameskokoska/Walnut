@@ -10,6 +10,7 @@ export default function SearchResultContainer({
 }) {
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
+
   // find in name
   let searchName = searchTerm.toString();
   const foundName = course["name"].toLowerCase().indexOf(searchTerm.toLowerCase());
@@ -22,6 +23,7 @@ export default function SearchResultContainer({
   } else if (foundName) {
     displayName.replace(new RegExp(searchName, "gi"), '<b>$1</b>');
   }
+  
   // find in description
   let showDescription = true;
   let displayDescription = course["description"];

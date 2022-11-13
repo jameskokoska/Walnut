@@ -5,6 +5,7 @@
   width: 100vw;
   min-height: 500px;
   background-color: #dbe8f4;
+  overflow: hidden;
 }
 
 .courseInfo-section {
@@ -23,7 +24,9 @@
 .courseInfo-main {
   @extend .courseInfo-section;
   width: 66%;
-  padding-top: 200px;
+  margin-top: 80px;
+  max-height: 90vh;
+  overflow-y: scroll;
 
   p {
     color: #1c3e6e;
