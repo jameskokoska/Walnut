@@ -180,7 +180,9 @@ export default function CourseConnections({ course }) {
                   dragY={false}
                   selected={false}
                   onTouch={() => {
-                    if (point.type === "current") return;
+                    navigate(`/courseinfo/${key}`);
+                  }}
+                  onClick={() => {
                     navigate(`/courseinfo/${key}`);
                   }}
                   theme="black"
