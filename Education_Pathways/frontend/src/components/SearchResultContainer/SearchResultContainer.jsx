@@ -10,29 +10,52 @@ export default function SearchResultContainer({
 }) {
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
-  const foundDescription = course["description"].indexOf(searchTerm);
-  let displayDescription = course["description"];
-  let showDescription = true;
-  if (displayDescription === undefined || displayDescription === "") {
-    showDescription = false;
-  } else if (foundDescription === -1) {
-    displayDescription = displayDescription.slice(0, descriptionLength) + "...";
-  } else {
-    displayDescription = (
-      <p>
-        {displayDescription.slice(
-          foundDescription - 30 < 0 ? 0 : foundDescription - 30,
-          foundDescription
-        )}
-        <b>{searchTerm}</b>
-        {displayDescription.slice(
-          foundDescription + searchTerm.length,
-          foundDescription + descriptionLength
-        )}
-        ...
-      </p>
-    );
+  // find in name
+  let searchName = searchTerm.toString();
+  const foundName = course["name"].toLowerCase().indexOf(searchTerm.toLowerCase());
+  let displayName = course["name"].toString();
+  let showName = true;
+  const nameLength = displayName.length;
+  // in case there is no name term
+  if (displayName === undefined || displayName === "") {
+    showName = false;
+  } else if (foundName) {
+    displayName.replace(new RegExp(searchName, "gi"), '<b>$1</b>');
   }
+  // find in description
+  let showDescription = true;
+  let displayDescription = course["description"];
+  if (displayDescription == undefined || displayDescription === "") {
+    showDescription = false;
+  } else {
+    // make upper case so the check is not case-sensitive
+    const foundDescription = course["description"].toUpperCase().indexOf(searchTerm.toUpperCase());
+
+    if (foundDescription === -1) {
+      displayDescription = displayDescription.slice(0, descriptionLength) + "...";
+    } else {
+      displayDescription = (
+        <p>
+          {displayDescription.slice(
+            foundDescription - 30 < 0 ? 0 : foundDescription - 30,
+            foundDescription
+          )}
+          <b>
+            {displayDescription.slice(
+            foundDescription,
+            foundDescription + searchTerm.length
+          )}
+          </b>
+          {displayDescription.slice(
+            foundDescription + searchTerm.length,
+            foundDescription + descriptionLength
+          )}
+          ...
+        </p>
+      );
+    }
+  }
+
   return (
     <Link
       to={`/courseinfo/${course["code"]}`}
@@ -53,7 +76,7 @@ export default function SearchResultContainer({
       >
         <div>
           <h2>{course["code"]}</h2>
-          <h3>{course["name"]}</h3>
+          {showName ? <h3>{displayName}</h3> : <></>}
         </div>
         <div>
           <FavoriteButton courseCode={course["code"]} />
