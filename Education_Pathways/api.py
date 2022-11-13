@@ -2,85 +2,25 @@ from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
 
+def getCategories(input):
+        categories = []
+        # check first three letters to see if it's a course code
+        if len(input) > 3 and input[:3] in courseKeyWords['code']:
+            # code search gets priority, no need to check other categories
+            return ["code"]
+        
+        # start after code category, check if input is in keyword dictionary
+        for k in list(courseKeyWords.keys())[1:]:
+            if input in courseKeyWords[k]:
+                categories.append(k)
 
-class SearchCourse(Resource):
-    def get(self):
-        input = request.args.get("input")
-        try:
-            courses = Courses.get({"code": input}, limit=100)
-        except:
-            courses = []
+        if categories == []:
+            # no keyword matches, will search by name and description by default
+            categories.extend(["name", "description"])
 
-        # convert from Course objects to json
-        courses_data = []
-        for course in courses:
-            courses_data.append(course.all_data)
+        return categories
 
-        try:
-            resp = jsonify(courses_data)
-            resp.status_code = 200
-            return resp
-        except Exception as e:
-            resp = jsonify({"error": str(e)})
-            resp.status_code = 400
-            return resp
-
-    def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument("input", required=True)
-        data = parser.parse_args()
-        input = data["input"]
-        courses = Courses.get({"code": input})
-        if len(courses) > 0:
-            try:
-                resp = jsonify(courses)
-                resp.status_code = 200
-                return resp
-            except Exception as e:
-                resp = jsonify({"error": "something went wrong"})
-                resp.status_code = 400
-                return resp
-
-
-class ShowCourse(Resource):
-    def get(self):
-        code = request.args.get("code")
-        courses = Courses.get({"code": code})
-        if len(courses) == 0:
-            resp = jsonify({"message": f"Course {code} doesn't exist"})
-            resp.status_code = 404
-            return resp
-        try:
-            resp = jsonify(courses[0].all_data)
-            resp.status_code = 200
-            return resp
-        except Exception:
-            resp = jsonify({"error": "something went wrong"})
-            resp.status_code = 400
-            return resp
-
-    def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument("code", required=True)
-        data = parser.parse_args()
-        code = data["code"]
-        courses = Courses.get({"code": code})
-        if len(courses) == 0:
-            resp = jsonify({"message": f"Course {code} doesn't exist"})
-            resp.status_code = 404
-            return resp
-        try:
-            resp = jsonify({"course": courses[0]})
-            resp.status_code = 200
-            return resp
-        except Exception:
-            resp = jsonify({"error": "something went wrong"})
-            resp.status_code = 400
-            return resp
-
-
-## KEYWORD SETS TO DETERMINE SEARCH TERM CATEGORY ##
-{
+courseKeyWords = {
     "code": {
         "jhe",
         "cdp",
@@ -444,7 +384,7 @@ class ShowCourse(Resource):
         "sociology",
         "geography, geomatics and environment",
     },
-    "level": {"600", "100/a", "300/c", "000", "700", "400/d", "500", "200/b"},
+    "level": {"600", "100", "300", "000", "700", "400", "500", "200"},
     "campus": {"st. george", "scarborough", "mississauga"},
     "term": {
         "2022 summer f",
@@ -471,19 +411,13 @@ class ShowCourse(Resource):
     },
     "arts_and_science_distribution": {
         "social science",
-        "humanities or social science",
         "humanities",
         "science",
-        "humanities or science or social science",
-        "science or social science",
-        "humanities or science",
     },
     "utm_distribution": {
-        "science or humanities",
         "social science",
         "humanities",
         "science",
-        "social science or humanities",
     },
     "utsc_breadth": {
         "history, philosophy & cultural studies",
@@ -494,7 +428,99 @@ class ShowCourse(Resource):
     },
     "apsc_electives": {
         "complementary studies",
-        "complementary studies or humanities & social sciences",
+        "humanities & social sciences",
         "apsc-natural science",
     },
 }
+
+class SearchCourse(Resource):
+    def get(self):
+        input = request.args.get("input")
+        # keywordDict has lowercase elements, hence input.lower()
+        categories = getCategories(input.lower())
+        print(categories)
+        courses = set()
+        for category in categories:
+            # update set with search results
+            try:
+                courses.update(Courses.get({category: input}, limit=50))
+                print(courses)
+            except:
+                continue
+
+        # convert from Course objects to json
+        courses_data = []
+        for course in list(courses):
+            courses_data.append(course.all_data)
+
+        try:
+            resp = jsonify(courses_data)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({"error": str(e)})
+            resp.status_code = 400
+            return resp
+
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("input", required=True)
+        data = parser.parse_args()
+        input = data["input"]
+        categories = getCategories(input.lower())
+        courses = set()
+        for category in categories:
+            # update set with search results
+            try:
+                courses.update(Courses.get({category: input}, limit=100))
+            except:
+                continue
+        
+        coursesL = list(courses)
+        if len(coursesL) > 0:
+            try:
+                resp = jsonify(coursesL)
+                resp.status_code = 200
+                return resp
+            except Exception as e:
+                resp = jsonify({"error": "something went wrong"})
+                resp.status_code = 400
+                return resp
+    
+
+class ShowCourse(Resource):
+    def get(self):
+        code = request.args.get("code")
+        courses = Courses.get({"code": code})
+        if len(courses) == 0:
+            resp = jsonify({"message": f"Course {code} doesn't exist"})
+            resp.status_code = 404
+            return resp
+        try:
+            resp = jsonify(courses[0].all_data)
+            resp.status_code = 200
+            return resp
+        except Exception:
+            resp = jsonify({"error": "something went wrong"})
+            resp.status_code = 400
+            return resp
+
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("code", required=True)
+        data = parser.parse_args()
+        code = data["code"]
+        courses = Courses.get({"code": code})
+        if len(courses) == 0:
+            resp = jsonify({"message": f"Course {code} doesn't exist"})
+            resp.status_code = 404
+            return resp
+        try:
+            resp = jsonify({"course": courses[0]})
+            resp.status_code = 200
+            return resp
+        except Exception:
+            resp = jsonify({"error": "something went wrong"})
+            resp.status_code = 400
+            return resp
+
