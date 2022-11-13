@@ -29,7 +29,6 @@ def getCategories(input):
             len(token) > 3 and token[:3] in KEYWORDS["code"] and token[3].isnumeric()
         ):
             code.add(token)
-            default = False
             continue
 
         for key in list(KEYWORDS.keys())[1:]:
@@ -66,7 +65,7 @@ def requestCourses(code, categories, default, term):
         for course_code in code:
             query = categories
             query["code"] = course_code
-            if default:
+            if default and term:
                 for category in ("name", "description"):
                     default_query = query.copy()
                     default_query[category] = term
@@ -81,7 +80,7 @@ def requestCourses(code, categories, default, term):
                         Courses.get(
                             query=query,
                             limit=(
-                                90 if len(categories) == 1 else 60 * len(categories)
+                                120 if len(categories) == 1 else 60 * len(categories)
                             ),
                         )
                     )

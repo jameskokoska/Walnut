@@ -47,7 +47,6 @@ export default function CourseInfoPage() {
     API.get(`/course/details?code=${code}`)
       .then((res) => {
         const data = res.data;
-        console.log(data);
         setCourseState({
           course_code: data.code,
           course_name: data.name,

@@ -22,7 +22,8 @@ class SearchCourse(Resource):
             courses_data.append(course.all_data)
 
         try:
-            resp = jsonify(courses_data)
+            resp = {"courses_data": courses_data, "term": term}
+            resp = jsonify(resp)
             resp.status_code = 200
             return resp
         except Exception as e:

@@ -10,10 +10,12 @@ export default function SearchResults() {
 
   const searchTerm = searchParams.get("term");
   const [results, setResults] = useState(null);
+  const [term, setTerm] = useState(null);
   useEffect(() => {
     API.get(`/searchc?input=${searchTerm}`).then((res) => {
       const data = res.data;
-      setResults(data);
+      setTerm(data["term"]);
+      setResults(data["courses_data"]);
     });
   }, []);
 
@@ -62,8 +64,9 @@ export default function SearchResults() {
           {results.map((result) => {
             return (
               <SearchResultContainer
+                key={result["code"]}
                 course={result}
-                searchTerm={searchTerm}
+                searchTerm={term}
                 numberResults={results.length}
               />
             );
