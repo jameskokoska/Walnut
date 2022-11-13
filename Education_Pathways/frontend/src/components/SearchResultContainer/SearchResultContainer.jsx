@@ -13,7 +13,9 @@ export default function SearchResultContainer({
 
   // find in name
   let searchName = searchTerm.toString();
-  const foundName = course["name"].toLowerCase().indexOf(searchTerm.toLowerCase());
+  const foundName = course["name"]
+    .toLowerCase()
+    .indexOf(searchTerm.toLowerCase());
   let displayName = course["name"].toString();
   let showName = true;
   const nameLength = displayName.length;
@@ -21,7 +23,7 @@ export default function SearchResultContainer({
   if (displayName === undefined || displayName === "") {
     showName = false;
   } else if (foundName) {
-    displayName.replace(new RegExp(searchName, "gi"), '<b>$1</b>');
+    displayName.replace(new RegExp(searchName, "gi"), "<b>$1</b>");
   }
   
   // find in description
@@ -31,29 +33,32 @@ export default function SearchResultContainer({
     showDescription = false;
   } else {
     // make upper case so the check is not case-sensitive
-    const foundDescription = course["description"].toUpperCase().indexOf(searchTerm.toUpperCase());
+    const foundDescription = course["description"]
+      .toUpperCase()
+      .indexOf(searchTerm.toUpperCase());
 
     if (foundDescription === -1) {
-      displayDescription = displayDescription.slice(0, descriptionLength) + "...";
+      displayDescription =
+        displayDescription.slice(0, descriptionLength) + "...";
     } else {
       displayDescription = (
-        <p>
+        <>
           {displayDescription.slice(
             foundDescription - 30 < 0 ? 0 : foundDescription - 30,
             foundDescription
           )}
           <b>
             {displayDescription.slice(
-            foundDescription,
-            foundDescription + searchTerm.length
-          )}
+              foundDescription,
+              foundDescription + searchTerm.length
+            )}
           </b>
           {displayDescription.slice(
             foundDescription + searchTerm.length,
             foundDescription + descriptionLength
           )}
           ...
-        </p>
+        </>
       );
     }
   }
