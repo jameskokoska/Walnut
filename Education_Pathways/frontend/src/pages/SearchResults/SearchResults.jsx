@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
-import "./SearchResults.css";
+import "./SearchResults.scss";
 import API from "../../api";
 
 export default function SearchResults() {
@@ -25,22 +25,35 @@ export default function SearchResults() {
       </div>
     );
   }
+
+  // No course found
+  else if (results.length == 0) {
+    return (
+      <div className="search-results-page">
+        <div className="search-results-title">
+          <h2>Search Results</h2>
+          <h3>{`No results found for "${searchTerm}"`}</h3>
+        </div>
+      </div>
+    );
+  }
+
   // results have been fetched, display them
   else {
     return (
       <div className="search-results-page">
-        <h2>Search Results</h2>
-        <h3>{`${results.length} results for "${searchTerm}"`}</h3>
+        <div className="search-results-title">
+          <h2>Search Results</h2>
+          <h3>{`${results.length} results for "${searchTerm}"`}</h3>
+        </div>
         <div className="search-results-list">
           {results.map((result) => {
             return (
-              <Link to={`/courseinfo/${result["code"]}`} className="link">
-                <SearchResultContainer
-                  course={result}
-                  searchTerm={searchTerm}
-                  numberResults={results.length}
-                />
-              </Link>
+              <SearchResultContainer
+                course={result}
+                searchTerm={searchTerm}
+                numberResults={results.length}
+              />
             );
           })}
         </div>

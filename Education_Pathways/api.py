@@ -2,35 +2,52 @@ from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
 
+from util import getCategories, requestCourses
+
 
 class SearchCourse(Resource):
     def get(self):
+        # Get input and tokenize based on spaces
+        # KEYWORDS has lowercase elements, hence input.lower()
         input = request.args.get("input")
-        courses = Courses.get({"code": input}, limit=100)
+        input = input.lower().split(" ")
+
+        # Find matching courses
+        code, categories, default, term = getCategories(input)
+        courses = requestCourses(code, categories, default, term)
+
         # convert from Course objects to json
         courses_data = []
-        for course in courses:
+        for course in list(courses):
             courses_data.append(course.all_data)
 
-        if len(courses) > 0:
-            try:
-                resp = jsonify(courses_data)
-                resp.status_code = 200
-                return resp
-            except Exception as e:
-                resp = jsonify({"error": str(e)})
-                resp.status_code = 400
-                return resp
+        try:
+            resp = jsonify(courses_data)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({"error": str(e)})
+            resp.status_code = 400
+            return resp
 
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("input", required=True)
         data = parser.parse_args()
         input = data["input"]
-        courses = Courses.get({"code": input})
-        if len(courses) > 0:
+        categories = getCategories(input.lower())
+        courses = set()
+        for category in categories:
+            # update set with search results
             try:
-                resp = jsonify(courses)
+                courses.update(Courses.get({category: input}, limit=100))
+            except:
+                continue
+
+        coursesL = list(courses)
+        if len(coursesL) > 0:
+            try:
+                resp = jsonify(coursesL)
                 resp.status_code = 200
                 return resp
             except Exception as e:

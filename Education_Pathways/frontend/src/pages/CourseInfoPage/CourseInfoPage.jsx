@@ -6,6 +6,7 @@ import API from "../../api";
 import "./CourseInfoPage.scss";
 import CourseConnections from "../../components/CourseConnections/CourseConnections";
 
+
 export default function CourseInfoPage() {
   const { code } = useParams();
   const [section, setSection] = useState([true, false, false, false]);
