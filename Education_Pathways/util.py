@@ -29,6 +29,7 @@ def getCategories(input):
             len(token) > 3 and token[:3] in KEYWORDS["code"] and token[3].isnumeric()
         ):
             code.add(token)
+            default = False
             continue
 
         for key in list(KEYWORDS.keys())[1:]:
@@ -70,7 +71,7 @@ def requestCourses(code, categories, default, term):
                     default_query = query.copy()
                     default_query[category] = term
                     try:
-                        courses.extend(Courses.get(query=default_query, limit=30))
+                        courses.extend(Courses.get(query=default_query, limit=60))
                     except:
                         print(f"No course found for {default_query}")
 
@@ -80,7 +81,7 @@ def requestCourses(code, categories, default, term):
                         Courses.get(
                             query=query,
                             limit=(
-                                90 if len(categories) == 0 else 45 * len(categories)
+                                90 if len(categories) == 1 else 60 * len(categories)
                             ),
                         )
                     )
@@ -93,14 +94,14 @@ def requestCourses(code, categories, default, term):
                 default_query = {}
                 default_query[category] = term
                 try:
-                    courses.extend(Courses.get(query=default_query, limit=30))
+                    courses.extend(Courses.get(query=default_query, limit=60))
                 except:
                     print(f"No course found for {default_query}")
 
         else:
             try:
                 courses.extend(
-                    Courses.get(query=categories, limit=30 * len(categories))
+                    Courses.get(query=categories, limit=120 * len(categories))
                 )
             except:
                 print(f"No course found for {categories}")
