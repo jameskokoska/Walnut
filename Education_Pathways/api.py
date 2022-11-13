@@ -2,39 +2,7 @@ from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
 
-from keywords import KEYWORDS
-
-
-def getCategories(input):
-    """Process user input and get categories based on KEYWORDS"""
-
-    # Course code should not repeat, hence set()
-    categories = {"code": set()}
-
-    # Check each token
-    for token in input:
-        # check first three letters and if fourth is number to see if it's a course code
-        if (len(token) == 3 and token in KEYWORDS["code"]) or (
-            len(token) > 3 and token[:3] in KEYWORDS["code"] and token[3].isnumeric()
-        ):
-            categories["code"].add(token)
-
-        # start after code category, check if input is in keyword dictionary
-        for key in list(KEYWORDS.keys())[1:]:
-            for entry in KEYWORDS[key]:
-                if token in entry:
-                    if key in categories:
-                        categories[key].append(token)
-                    else:
-                        categories[key] = [token]
-
-    if len(categories) == 1 and len(categories["code"]) == 0:
-        # no keyword matches, will search by name and description by default
-        term = "".join(token for token in input)
-        categories["name"] = [term]
-        categories["description"] = [term]
-
-    return categories
+from util import getCategories, requestCourses
 
 
 class SearchCourse(Resource):
@@ -44,18 +12,9 @@ class SearchCourse(Resource):
         input = request.args.get("input")
         input = input.lower().split(" ")
 
-        # Generate categories
-        categories = getCategories(input)
-        print(categories)
-
-        courses = []
-        for category in categories:
-            for token in categories[category]:
-                # update set with search results
-                try:
-                    courses.extend(Courses.get({category: token}, limit=45))
-                except:
-                    continue
+        # Find matching courses
+        code, categories, default, term = getCategories(input)
+        courses = requestCourses(code, categories, default, term)
 
         # convert from Course objects to json
         courses_data = []

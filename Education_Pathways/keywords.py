@@ -1,5 +1,19 @@
 """ Search Keywords """
 
+SHORTCUT = {
+    "br1": "creative and cultural representation",
+    "br2": "thought, belief and behaviour",
+    "br3": "society and its institutions",
+    "br4": "living things and their environment",
+    "br5": "the physical and mathematical universes",
+    "cs": "complementary studies",
+    "hss": "humanities & social sciences",
+    "ns": "apsc-natural science",
+    "utsg": "st. george",
+    "utsc": "scarborough",
+    "utm": "mississauga",
+}
+
 KEYWORDS = {
     "code": {
         "jhe",
@@ -241,6 +255,11 @@ KEYWORDS = {
         "che",
         "abp",
     },
+    "arts_and_science_distribution": {
+        "social science",
+        "humanities",
+        "science",
+    },
     "division": {
         "faculty of applied science & engineering",
         "faculty of music",
@@ -248,6 +267,46 @@ KEYWORDS = {
         "university of toronto mississauga",
         "university of toronto scarborough",
         "john h. daniels faculty of architecture, landscape, & design",
+    },
+    "arts_and_science_breadth": {
+        "br1",
+        "br2",
+        "br3",
+        "br4",
+        "br5",
+        "(1) creative and cultural representation",
+        "(4) living things and their environment",
+        "(2) thought, belief and behaviour + (1) creative and cultural representation",
+        "(3) society and its institutions + (1) creative and cultural representation",
+        "(5) the physical and mathematical universes",
+        "(3) society and its institutions",
+        "(4) living things and their environment + (3) society and its institutions",
+        "(4) living things and their environment + (5) the physical and mathematical universes",
+        "(3) society and its institutions + (2) thought, belief and behaviour",
+        "(5) the physical and mathematical universes + (3) society and its institutions",
+        "(2) thought, belief and behaviour",
+    },
+    "apsc_electives": {
+        "cs",
+        "hss",
+        "ns",
+        "complementary studies",
+        "humanities & social sciences",
+        "apsc-natural science",
+    },
+    "level": {"600", "100", "300", "000", "700", "400", "500", "200"},
+    "campus": {"st. george", "scarborough", "mississauga", "utsg", "utsc", "utm"},
+    "utm_distribution": {
+        "social science",
+        "humanities",
+        "science",
+    },
+    "utsc_breadth": {
+        "history, philosophy & cultural studies",
+        "natural sciences",
+        "quantitative reasoning",
+        "arts, literature & language",
+        "social & behavioural sciences",
     },
     "department": {
         "indigenous studies arts & science",
@@ -364,8 +423,6 @@ KEYWORDS = {
         "sociology",
         "geography, geomatics and environment",
     },
-    "level": {"600", "100", "300", "000", "700", "400", "500", "200"},
-    "campus": {"st. george", "scarborough", "mississauga"},
     "term": {
         "2022 summer f",
         "2021 winter",
@@ -375,40 +432,5 @@ KEYWORDS = {
         "2020 fall",
         "2022 summer s",
         "2022 winter",
-    },
-    "arts_and_science_breadth": {
-        "(1) creative and cultural representation",
-        "(4) living things and their environment",
-        "(2) thought, belief and behaviour + (1) creative and cultural representation",
-        "(3) society and its institutions + (1) creative and cultural representation",
-        "(5) the physical and mathematical universes",
-        "(3) society and its institutions",
-        "(4) living things and their environment + (3) society and its institutions",
-        "(4) living things and their environment + (5) the physical and mathematical universes",
-        "(3) society and its institutions + (2) thought, belief and behaviour",
-        "(5) the physical and mathematical universes + (3) society and its institutions",
-        "(2) thought, belief and behaviour",
-    },
-    "arts_and_science_distribution": {
-        "social science",
-        "humanities",
-        "science",
-    },
-    "utm_distribution": {
-        "social science",
-        "humanities",
-        "science",
-    },
-    "utsc_breadth": {
-        "history, philosophy & cultural studies",
-        "natural sciences",
-        "quantitative reasoning",
-        "arts, literature & language",
-        "social & behavioural sciences",
-    },
-    "apsc_electives": {
-        "complementary studies",
-        "humanities & social sciences",
-        "apsc-natural science",
     },
 }
