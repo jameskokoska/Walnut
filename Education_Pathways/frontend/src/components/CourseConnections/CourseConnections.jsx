@@ -107,7 +107,7 @@ export default function CourseConnections({ course }) {
         <></>
       ) : (
         <div
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "start" }}
           className="nodrag"
         >
           <Flowspace
