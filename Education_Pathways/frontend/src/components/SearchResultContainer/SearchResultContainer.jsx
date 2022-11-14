@@ -7,13 +7,16 @@ export default function SearchResultContainer({
   course,
   searchTerm,
   numberResults,
+  setCourse,
 }) {
   const manyResults = numberResults > 5;
   const descriptionLength = manyResults ? 90 : 250;
 
   // find in name
   let searchName = searchTerm.toString();
-  const foundName = course["name"].toLowerCase().indexOf(searchTerm.toLowerCase());
+  const foundName = course["name"]
+    .toLowerCase()
+    .indexOf(searchTerm.toLowerCase());
   let displayName = course["name"].toString();
   let showName = true;
   const nameLength = displayName.length;
@@ -21,9 +24,9 @@ export default function SearchResultContainer({
   if (displayName === undefined || displayName === "") {
     showName = false;
   } else if (foundName) {
-    displayName.replace(new RegExp(searchName, "gi"), '<b>$1</b>');
+    displayName.replace(new RegExp(searchName, "gi"), "<b>$1</b>");
   }
-  
+
   // find in description
   let showDescription = true;
   let displayDescription = course["description"];
@@ -31,10 +34,13 @@ export default function SearchResultContainer({
     showDescription = false;
   } else {
     // make upper case so the check is not case-sensitive
-    const foundDescription = course["description"].toUpperCase().indexOf(searchTerm.toUpperCase());
+    const foundDescription = course["description"]
+      .toUpperCase()
+      .indexOf(searchTerm.toUpperCase());
 
     if (foundDescription === -1) {
-      displayDescription = displayDescription.slice(0, descriptionLength) + "...";
+      displayDescription =
+        displayDescription.slice(0, descriptionLength) + "...";
     } else {
       displayDescription = (
         <p>
@@ -44,9 +50,9 @@ export default function SearchResultContainer({
           )}
           <b>
             {displayDescription.slice(
-            foundDescription,
-            foundDescription + searchTerm.length
-          )}
+              foundDescription,
+              foundDescription + searchTerm.length
+            )}
           </b>
           {displayDescription.slice(
             foundDescription + searchTerm.length,
@@ -58,17 +64,8 @@ export default function SearchResultContainer({
     }
   }
 
-  return (
-    <Link
-      to={`/courseinfo/${course["code"]}`}
-      className="search-result-container link"
-      style={{
-        width: manyResults ? "unset" : "100%",
-        maxWidth: manyResults ? "800px" : "unset",
-        minWidth: manyResults ? "400px" : "unset",
-        flex: manyResults ? 1 : "unset",
-      }}
-    >
+  const content = (
+    <>
       <div
         style={{
           display: "flex",
@@ -87,6 +84,32 @@ export default function SearchResultContainer({
 
       <h4>{course["division"]}</h4>
       {showDescription ? <p>{displayDescription}</p> : <></>}
-    </Link>
+    </>
+  );
+  if(setCourse){
+      return <div className="search-result-container link"
+      style={{
+        width: manyResults ? "unset" : "100%",
+        maxWidth: manyResults ? "800px" : "unset",
+        minWidth: manyResults ? "400px" : "unset",
+        flex: manyResults ? 1 : "unset",
+      }}
+      onClick={()=>{setCourse(course);}}
+      >
+        {content}
+      </div>
+  }
+  return (
+    
+    <Link
+      to={`/courseinfo/${course["code"]}`}
+      className="search-result-container link"
+      style={{
+        width: manyResults ? "unset" : "100%",
+        maxWidth: manyResults ? "800px" : "unset",
+        minWidth: manyResults ? "400px" : "unset",
+        flex: manyResults ? 1 : "unset",
+      }}
+    >{content}</Link>
   );
 }

@@ -4,16 +4,27 @@ import SearchResultContainer from "../../components/SearchResultContainer/Search
 import "./SearchResults.scss";
 import API from "../../api";
 
-export default function SearchResults() {
+export default function SearchResults(props) {
   const [searchParams] = useSearchParams();
 
-  const searchTerm = searchParams.get("term");
+  const [searchTerm, setSearchTerm] = useState("")
   const [results, setResults] = useState(null);
   useEffect(() => {
-    API.get(`/searchc?input=${searchTerm}`).then((res) => {
-      const data = res.data;
-      setResults(data);
-    });
+    if(props.searchTerm){
+      setSearchTerm(props.searchTerm)
+      API.get(`/searchc?input=${props.searchTerm}`).then((res) => {
+        const data = res.data;
+        setResults(data);
+      });
+    } else {
+      const searchTerm = searchParams.get("term")
+      setSearchTerm(searchTerm);
+      API.get(`/searchc?input=${searchTerm}`).then((res) => {
+        const data = res.data;
+        setResults(data);
+      });
+    }
+    
   }, []);
 
   // first time loading page there will be no results, display "Searching..."
@@ -53,6 +64,7 @@ export default function SearchResults() {
                 course={result}
                 searchTerm={searchTerm}
                 numberResults={results.length}
+                setCourse={props.setCourse}
               />
             );
           })}
