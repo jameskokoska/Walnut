@@ -1,4 +1,5 @@
 import json
+import os
 from nikel_py import Courses
 from pathlib import Path
 
@@ -124,16 +125,20 @@ def getCourseReviews(courseCode):
     all_reviews = {}
 
     # make sure file exists
-    if not Path('./resources/reviews.json').is_file():
+    #if not Path(os.path.join(os.getcwd(), './resources/reviews.json')).is_file():
+    if not os.path.isfile(os.path.join(os.getcwd(), './resources/reviews.json')):
+        print('reviews.json does not exist')
         return []
+    print('reviews.json exists')
     
-    with open('./resources/reviews.json', 'r') as f:
+    with open(os.path.join(os.getcwd(), './resources/reviews.json'), 'r') as f:
         all_reviews = json.load(f)
 
     if courseCode in all_reviews:
         return all_reviews[courseCode]
     else:
         # no reviews yet for course
+        print('no reviews yet for course')
         return []
 
 def addReview(courseCode, rating, text):
