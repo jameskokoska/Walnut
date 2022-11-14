@@ -21,20 +21,22 @@ export default function SearchResultContainer({
   if (displayName === undefined || displayName === "") {
     showName = false;
   } else {
-    const foundName = course["name"]
-      .toUpperCase()
-      .indexOf(searchTerm.toUpperCase().trim());
+    if (searchTerm != "") {
+      const foundName = course["name"]
+        .toUpperCase()
+        .indexOf(searchTerm.toUpperCase().trim());
 
-    if (foundName !== -1) {
-      displayName = (
-        <>
-          {displayName.slice(0, foundName)}
-          <span className="result-bold-heading">
-            {displayName.slice(foundName, foundName + searchTerm.length)}
-          </span>
-          {displayName.slice(foundName + searchTerm.length - 1)}
-        </>
-      );
+      if (foundName !== -1) {
+        displayName = (
+          <>
+            {displayName.slice(0, foundName)}
+            <span className="result-bold-heading">
+              {displayName.slice(foundName, foundName + searchTerm.length)}
+            </span>
+            {displayName.slice(foundName + searchTerm.length - 1)}
+          </>
+        );
+      }
     }
   }
 
