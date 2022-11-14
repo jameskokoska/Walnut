@@ -107,7 +107,7 @@ export default function CourseConnections({ course }) {
         <></>
       ) : (
         <div
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "start" }}
           className="nodrag"
         >
           <Flowspace
@@ -129,7 +129,6 @@ export default function CourseConnections({ course }) {
               const point = flows[key];
               const totalOutputs = {};
               for (const output of point.outputs) {
-                console.log(point);
                 totalOutputs[output] = {
                   input: "top",
                   inputColor: rec.includes(output)

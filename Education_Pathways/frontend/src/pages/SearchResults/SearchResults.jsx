@@ -23,13 +23,12 @@ export default function SearchResults() {
   if (results == null) {
     return (
       <div className="search-results-page">
-        <h2>Search Results</h2>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "500px",
+            height: "90%",
             flexDirection: "column",
           }}
         >
@@ -56,21 +55,23 @@ export default function SearchResults() {
   else {
     return (
       <div className="search-results-page">
-        <div className="search-results-title">
-          <h2>Search Results</h2>
-          <h3>{`${results.length} results for "${searchTerm}"`}</h3>
-        </div>
-        <div className="search-results-list">
-          {results.map((result) => {
-            return (
-              <SearchResultContainer
-                key={result["code"]}
-                course={result}
-                searchTerm={term}
-                numberResults={results.length}
-              />
-            );
-          })}
+        <div className="search-results-container">
+          <div className="search-results-title">
+            <h2>Search Results</h2>
+            <h3>{`${results.length} results for "${searchTerm}"`}</h3>
+          </div>
+          <div className="search-results-list">
+            {results.map((result) => {
+              return (
+                <SearchResultContainer
+                  key={result["code"]}
+                  course={result}
+                  searchTerm={term}
+                  numberResults={results.length}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     );
