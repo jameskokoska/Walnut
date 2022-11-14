@@ -18,13 +18,14 @@ class SearchCourse(Resource):
         # No code, search for course name first
         if len(code) == 0:
             try:
-                courses = Courses.get({"name": input}, limit=10)
+                courses = Courses.get({"name": input})
+                courses.extend(Courses.get({"description": input}))
                 courses = deduplicate(courses)
             except:
                 courses = []
 
             # There is course found and only a few specific ones
-            if len(courses) != 0 and len(courses) != 10:
+            if len(courses) != 0 and len(courses) < 10:
                 term = input
 
             # Fall back to general search
