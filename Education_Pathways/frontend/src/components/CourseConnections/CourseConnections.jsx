@@ -129,7 +129,6 @@ export default function CourseConnections({ course }) {
               const point = flows[key];
               const totalOutputs = {};
               for (const output of point.outputs) {
-                console.log(point);
                 totalOutputs[output] = {
                   input: "top",
                   inputColor: rec.includes(output)

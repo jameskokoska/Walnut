@@ -100,7 +100,7 @@ p {
   transition: opacity 300ms, transform 300ms;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 12px;
   height: 10px;
 }
@@ -116,4 +116,4 @@ p {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #2a63b3; 
-}
+} */

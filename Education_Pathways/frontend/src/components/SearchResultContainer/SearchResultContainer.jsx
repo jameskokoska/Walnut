@@ -26,7 +26,6 @@ export default function SearchResultContainer({
       .indexOf(searchTerm.toUpperCase().trim());
 
     if (foundName !== -1) {
-      console.log(displayName);
       displayName = (
         <>
           {displayName.slice(0, foundName)}
@@ -78,10 +77,12 @@ export default function SearchResultContainer({
 
   return (
     <div
-      onClick={() => {
-        navigate(`/courseinfo/${course["code"]}`, {
-          state: { course: course },
-        });
+      onClick={(e) => {
+        if (!e.target.classList.contains("favorite-button")) {
+          navigate(`/courseinfo/${course["code"]}`, {
+            state: { course: course },
+          });
+        }
       }}
       className="search-result-container link"
       style={{
