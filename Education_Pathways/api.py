@@ -2,7 +2,7 @@ from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
 
-from util import getCourseCode, getCategories, requestCourses, deduplicate
+from util import getCourseCode, getCategories, requestCourses, deduplicate, getCourseReviews, addReview
 
 
 class SearchCourse(Resource):
@@ -82,12 +82,17 @@ class SearchCourse(Resource):
 class ShowCourse(Resource):
     def get(self):
         code = request.args.get("code")
+        print(code)
         courses = Courses.get({"code": code})
+        reviews = getCourseReviews(code)
+        print(reviews)
         if len(courses) == 0:
             resp = jsonify({"message": f"Course {code} doesn't exist"})
             resp.status_code = 404
             return resp
         try:
+            #add list of reviews to course data
+            courses[0].all_data['reviews'] = reviews
             resp = jsonify(courses[0].all_data)
             resp.status_code = 200
             return resp
@@ -102,11 +107,14 @@ class ShowCourse(Resource):
         data = parser.parse_args()
         code = data["code"]
         courses = Courses.get({"code": code})
+        reviews = getCourseReviews(code)
+        print(reviews)
         if len(courses) == 0:
             resp = jsonify({"message": f"Course {code} doesn't exist"})
             resp.status_code = 404
             return resp
         try:
+            courses[0]['reviews'] = reviews
             resp = jsonify({"course": courses[0]})
             resp.status_code = 200
             return resp
@@ -114,3 +122,25 @@ class ShowCourse(Resource):
             resp = jsonify({"error": "something went wrong"})
             resp.status_code = 400
             return resp
+
+
+class AddReview(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("code", required=True)
+        data = parser.parse_args()
+        courseCode = data["code"]
+
+        rating = request.form['rating']
+        text = request.form['text']
+
+        try:
+            addReview(courseCode, rating, text)
+            resp = jsonify({"messege": "Review Added!"})
+            resp.status_code = 200
+            return resp
+        except Exception:
+            resp = jsonify({"error": "something went wrong"})
+            resp.status_code = 400
+            return resp
+

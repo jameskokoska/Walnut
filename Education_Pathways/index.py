@@ -3,7 +3,7 @@ from flask import Flask, send_from_directory
 from flask_restful import Api
 
 import config
-from api import SearchCourse, ShowCourse
+from api import SearchCourse, ShowCourse, AddReview
 
 app = Flask(__name__, static_folder="frontend/build")
 app.config["ENV"] = "development"
@@ -18,6 +18,7 @@ config.init_cors(app)
 rest_api = Api(app)
 rest_api.add_resource(SearchCourse, "/searchc")
 rest_api.add_resource(ShowCourse, "/course/details")
+rest_api.add_resource(AddReview, "/course/addreview")
 
 
 @app.route("/", defaults={"path": ""})

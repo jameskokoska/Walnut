@@ -1,4 +1,6 @@
+import json
 from nikel_py import Courses
+from pathlib import Path
 
 from keywords import KEYWORDS
 from keywords import SHORTCUT
@@ -117,3 +119,39 @@ def requestCourses(code, categories, term):
                 print(f"No course found for {categories}")
 
     return deduplicate(courses)
+
+def getCourseReviews(courseCode):
+    all_reviews = {}
+
+    # make sure file exists
+    if not Path('./resources/reviews.json').is_file():
+        return []
+    
+    with open('./resources/reviews.json', 'r') as f:
+        all_reviews = json.load(f)
+
+    if courseCode in all_reviews:
+        return all_reviews[courseCode]
+    else:
+        # no reviews yet for course
+        return []
+
+def addReview(courseCode, rating, text):
+    all_reviews = {}
+    review_to_add = {'rating': rating, 'text': text}
+    # get existing reviews if file exists
+    if Path('./resources/reviews.json').is_file():
+        with open('./resources/reviews.json', 'r') as f:
+            all_reviews = json.load(f)
+
+    #see if the are any reviews for this course    
+    if courseCode in all_reviews:
+        all_reviews[courseCode].append(review_to_add)
+    else:
+        # no reviews yet for this course, create new list for course code
+        all_reviews[courseCode] = [review_to_add]
+
+    #write to json file
+    with open('./resources/reviews.json', 'w') as fw:
+        json.dump(all_reviews, fw)
+

@@ -41,6 +41,7 @@ export default function CourseInfoPage() {
         exclusions: coursePassed.exclusions,
         meeting_sections: coursePassed.meeting_sections,
         last_updated: coursePassed.last_updated,
+        reviews: coursePassed.reviews
       });
       return;
     }
@@ -64,6 +65,7 @@ export default function CourseInfoPage() {
           exclusions: data.exclusions,
           meeting_sections: data.meeting_sections,
           last_updated: data.last_updated,
+          reviews: data.reviews
         });
       })
       .catch(() => {
@@ -72,6 +74,7 @@ export default function CourseInfoPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(courseState.reviews);
   return courseState ? (
     <div className="courseInfo-page">
       <div className="courseInfo-sidebar">
