@@ -1,7 +1,8 @@
 import React from "react";
-import "./Navbar.css";
-import logo from "../img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import "./Navbar.scss";
+
+import logo from "../img/logo.png";
 import Button from "../Button/Button";
 import Searchbar from "../Searchbar/Searchbar";
 import Info from "../../components/img/info.svg";

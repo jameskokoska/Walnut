@@ -7,6 +7,10 @@
   color: #1C3E6E;
 }
 
+body {
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
 }
@@ -102,17 +106,18 @@ p {
 
 ::-webkit-scrollbar {
   width: 12px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
   border-radius: 16px;
 }
- 
+
 ::-webkit-scrollbar-thumb {
-  background: #1C3E6E; 
+  background: #1C3E6E;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2a63b3; 
+  background: #2a63b3;
 }

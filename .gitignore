@@ -4,4 +4,8 @@ venv
 __pycache__
 test.db
 Education_Pathways/frontend/node_modules
+.pytest_cache
+Education_Pathways/frontend/build
+package-lock.json
+Education_Pathways/frontend/package-lock.json
 #track build 

@@ -2,35 +2,75 @@ from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
 
+from util import getCourseCode, getCategories, requestCourses, deduplicate
+
 
 class SearchCourse(Resource):
     def get(self):
+        # Get input and tokenize based on spaces
         input = request.args.get("input")
-        courses = Courses.get({"code": input}, limit=100)
+        tokens = input.lower().split(" ")
+
+        # Course code gets priority
+        code = getCourseCode(tokens)
+        tokens = [token for token in tokens if token not in code]
+
+        # No code, search for course name first
+        if len(code) == 0:
+            try:
+                courses = Courses.get({"name": input})
+                courses.extend(Courses.get({"description": input}))
+                courses = deduplicate(courses)
+            except:
+                courses = []
+
+            # There is course found and only a few specific ones
+            if len(courses) != 0 and len(courses) < 10:
+                term = input
+
+            # Fall back to general search
+            else:
+                categories, term = getCategories(tokens)
+                courses = requestCourses(code, categories, term)
+
+        # General search
+        else:
+            categories, term = getCategories(tokens)
+            courses = requestCourses(code, categories, term)
+
         # convert from Course objects to json
         courses_data = []
-        for course in courses:
+        for course in list(courses):
             courses_data.append(course.all_data)
 
-        if len(courses) > 0:
-            try:
-                resp = jsonify(courses_data)
-                resp.status_code = 200
-                return resp
-            except Exception as e:
-                resp = jsonify({"error": str(e)})
-                resp.status_code = 400
-                return resp
+        try:
+            resp = {"courses_data": courses_data, "term": term}
+            resp = jsonify(resp)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({"error": str(e)})
+            resp.status_code = 400
+            return resp
 
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("input", required=True)
         data = parser.parse_args()
         input = data["input"]
-        courses = Courses.get({"code": input})
-        if len(courses) > 0:
+        categories = getCategories(input.lower())
+        courses = set()
+        for category in categories:
+            # update set with search results
             try:
-                resp = jsonify(courses)
+                courses.update(Courses.get({category: input}, limit=100))
+            except:
+                continue
+
+        coursesL = list(courses)
+        if len(coursesL) > 0:
+            try:
+                resp = jsonify(coursesL)
                 resp.status_code = 200
                 return resp
             except Exception as e:
