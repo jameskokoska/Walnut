@@ -7,6 +7,7 @@ import Info from "../icons/Info";
 import Review from "../icons/Review";
 import Prof from "../icons/Prof";
 import Exam from "../icons/Exam";
+import Comparison from "../icons/Comparison"
 import Arrow from "../icons/Arrow";
 
 export default function CourseInfoSidebar({ section, onClick }) {
@@ -43,6 +44,14 @@ export default function CourseInfoSidebar({ section, onClick }) {
         icon={<Exam active={section[3]} />}
         text="Past Exams"
         active={section[3]}
+        onClick={onClick}
+        collapse={collapse}
+      />
+      <CourseInfoTab
+        id={4}
+        icon={<Comparison active={section[4]} />}
+        text="Course Comparison"
+        active={section[4]}
         onClick={onClick}
         collapse={collapse}
       />

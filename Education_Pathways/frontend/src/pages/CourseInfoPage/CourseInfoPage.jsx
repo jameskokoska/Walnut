@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import API from "../../api";
 import "./CourseInfoPage.scss";
+import "./comparison.scss";
 import CourseConnections from "../../components/CourseConnections/CourseConnections";
 
 
@@ -67,6 +68,7 @@ export default function CourseInfoPage() {
   }, []);
 
   return (
+    
     <div className="courseInfo-page">
       <div className="courseInfo-sidebar">
         <h1>{courseState.course_code}</h1>
@@ -95,7 +97,37 @@ export default function CourseInfoPage() {
         <div style={{ display: section[1] ? "block" : "none" }}>Review</div>
         <div style={{ display: section[2] ? "block" : "none" }}>Prof</div>
         <div style={{ display: section[3] ? "block" : "none" }}>Exam</div>
+        
+        <div className="comparison-test">
+        
+          <div style={{ display: section[4] ? "block" : "none" }}>
+            <div style={{ height: "120px" }} />
+            <h1 id="compareOne">Overview</h1>
+            <h4 id="compareOne">{`Department: ${courseState.department}`}</h4>
+            <h4 id="compareOne">{`Campus: ${courseState.campus}`}</h4>
+            <h4 id="compareOne">{`Term: ${courseState.terms}`}</h4>
+            <h4 id="compareOne">{`Prerequisites: ${
+              courseState.prerequisites ? courseState.prerequisites : "None"
+            }`}</h4>
+            <h4 id="compareOne">{`Corequisites: ${
+              courseState.corequisites ? courseState.corequisites : "None"
+            }`}</h4>
+            <h4 id="compareOne">{`Exclusions: ${
+              courseState.exclusions ? courseState.exclusions : "None"
+            }`}</h4>
+            <p id="compareOne">{courseState.course_description}</p>
+            <CourseConnections course={courseState} />
+          </div>
+        
+        </div>
+        
+
+
       </div>
     </div>
+    
   );
+
+
+
 }
