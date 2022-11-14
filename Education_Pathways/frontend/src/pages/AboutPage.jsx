@@ -1,7 +1,6 @@
 import React from "react";
 
 import './AboutPage.css';
-import Footer from '../components/Footer.js';
 
 const teamintro = [
   {
@@ -54,9 +53,6 @@ export default function AboutPage() {
           );
         })}
       </div>
-
-      <Footer />
-      
     </div>
   );
 }
