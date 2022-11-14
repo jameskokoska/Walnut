@@ -32,7 +32,7 @@ export default function SearchResultContainer({
           <span className="result-bold-heading">
             {displayName.slice(foundName, foundName + searchTerm.length)}
           </span>
-          {displayName.slice(foundName + searchTerm.length)}
+          {displayName.slice(foundName + searchTerm.length - 1)}
         </>
       );
     }
