@@ -26,7 +26,12 @@ export default function Favorites(props) {
       </div>
       <div className="favorites-list">
         {favorites.map((favorite) => {
-          return <FavoriteContainer courseCode={favorite} setCourseCode={props.setCourseCode}/>;
+          return (
+            <FavoriteContainer
+              courseCode={favorite}
+              setCourseCode={props.setCourseCode}
+            />
+          );
         })}
       </div>
     </div>

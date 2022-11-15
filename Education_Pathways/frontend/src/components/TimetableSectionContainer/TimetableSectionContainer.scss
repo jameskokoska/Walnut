@@ -1,4 +1,4 @@
-.timetable-container{
+.timetable-container {
   padding: 20px;
   background-color: #eef6ff;
   border-radius: 20px;
@@ -9,7 +9,7 @@
   flex: 1;
 
   transition: transform 200ms;
-  &:hover{
+  &:hover {
     transform: scale(1.05);
   }
 }

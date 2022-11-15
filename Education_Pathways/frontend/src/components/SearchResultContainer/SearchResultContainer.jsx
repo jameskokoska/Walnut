@@ -100,21 +100,25 @@ export default function SearchResultContainer({
       {showDescription ? <p>{displayDescription}</p> : <></>}
     </>
   );
-  if(setCourse){
-      return <div className="search-result-container link"
-      style={{
-        width: manyResults ? "unset" : "100%",
-        maxWidth: manyResults ? "800px" : "unset",
-        minWidth: manyResults ? "400px" : "unset",
-        flex: manyResults ? 1 : "unset",
-      }}
-      onClick={()=>{setCourse(course);}}
+  if (setCourse) {
+    return (
+      <div
+        className="search-result-container link"
+        style={{
+          width: manyResults ? "unset" : "100%",
+          maxWidth: manyResults ? "800px" : "unset",
+          minWidth: manyResults ? "400px" : "unset",
+          flex: manyResults ? 1 : "unset",
+        }}
+        onClick={() => {
+          setCourse(course);
+        }}
       >
         {content}
       </div>
+    );
   }
   return (
-    
     <div
       onClick={(e) => {
         if (!e.target.classList.contains("favorite-button")) {
@@ -130,6 +134,8 @@ export default function SearchResultContainer({
         minWidth: manyResults ? "400px" : "unset",
         flex: manyResults ? 1 : "unset",
       }}
-    >{content}</div>
+    >
+      {content}
+    </div>
   );
 }

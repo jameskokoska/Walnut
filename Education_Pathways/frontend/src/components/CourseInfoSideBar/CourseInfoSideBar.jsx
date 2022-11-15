@@ -7,16 +7,20 @@ import Info from "../icons/Info";
 import Review from "../icons/Review";
 import Schedule from "../icons/Schedule";
 import Exam from "../icons/Exam";
-import Comparison from "../icons/Comparison"
+import Comparison from "../icons/Comparison";
 import Arrow from "../icons/Arrow";
 import { useEffect } from "react";
 
-export default function CourseInfoSidebar({ section, onClick, toggleCollapse }) {
+export default function CourseInfoSidebar({
+  section,
+  onClick,
+  toggleCollapse,
+}) {
   const [collapse, setCollapse] = useState(false);
 
-  useEffect(()=>{
-    setCollapse(toggleCollapse)
-  }, [toggleCollapse])
+  useEffect(() => {
+    setCollapse(toggleCollapse);
+  }, [toggleCollapse]);
 
   return (
     <div>
