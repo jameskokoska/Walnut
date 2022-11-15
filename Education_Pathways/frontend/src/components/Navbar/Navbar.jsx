@@ -1,12 +1,13 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Navbar.scss";
 
 import logo from "../img/logo.png";
 import Button from "../Button/Button";
 import Searchbar from "../Searchbar/Searchbar";
 import Info from "../../components/img/info.svg";
 import Favorites from "../../components/img/heart-fill-blue.svg";
+
+import "./Navbar.scss";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function Navbar() {
       </Link>
       <div className="navbar-right-container">
         <Searchbar
+          style={{ width: "250px" }}
           placeholder={"Search..."}
           onEnterKey={(value) => navigate(`/search?term=${value}`)}
         />

@@ -1,3 +1,4 @@
+""" Utility Functions """
 from nikel_py import Courses
 
 from keywords import KEYWORDS
@@ -63,6 +64,7 @@ def getCategories(tokens):
             term += f"{token} "
 
     else:
+        # Term will be the ones remaining
         for token in tokens_:
             term += f"{token} "
 
@@ -72,10 +74,13 @@ def getCategories(tokens):
 def requestCourses(code, categories, term):
     """Request course based on given query"""
     courses = []
+
+    # Course Code gets priority
     if len(code) != 0:
         for course_code in code:
             query = categories
             query["code"] = course_code
+
             if term:
                 for category in ("name", "description"):
                     default_query = query.copy()
@@ -98,6 +103,7 @@ def requestCourses(code, categories, term):
                 except:
                     print(f"No course found for {query}")
 
+    # No Course Code
     else:
         if term:
             for category in ("name", "description"):

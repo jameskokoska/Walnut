@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import API from "../../api";
-import "./CourseInfoPage.scss";
-import "./comparison.scss";
+
+import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import CourseConnections from "../../components/CourseConnections/CourseConnections";
 import Button from "../../components/Button/Button";
 import Searchbar from "../../components/Searchbar/Searchbar";
@@ -14,8 +13,9 @@ import Compare from "../../components/img/compare.svg";
 import CompareEnabled from "../../components/img/compareEnabled.svg";
 import TimetableSectionContainer from "../../components/TimetableSectionContainer/TimetableSectionContainer";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
-
 import Loading from "../../components/Loading/Loading";
+
+import "./CourseInfoPage.scss";
 
 const emptyCourse = {
   course_code: "",
@@ -193,6 +193,7 @@ export default function CourseInfoPage() {
         </div>
         <div style={{ display: section[3] ? "block" : "none" }}>
           <iframe
+            title={courseCompare.courseCode}
             src={`https://courses.skule.ca/course/${courseCompare.course_code}`}
             style={{ width: "80vw", height: "90vh" }}
           ></iframe>
@@ -203,7 +204,7 @@ export default function CourseInfoPage() {
 
   return (
     <>
-      <div style={{ position: "fixed", top: "100px", left: "20px" }}>
+      <div style={{ position: "fixed", top: "120px", left: "63px" }}>
         <Button
           isSecondary={compare}
           style={{ width: "10px" }}

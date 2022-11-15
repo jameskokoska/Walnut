@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./FavoriteContainer.scss";
 
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
+
+import "./FavoriteContainer.scss";
 
 export default function FavoriteContainer({ courseCode, setCourseCode }) {
   const content = (

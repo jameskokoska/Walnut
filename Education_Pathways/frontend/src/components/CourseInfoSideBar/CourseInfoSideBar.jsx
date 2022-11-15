@@ -1,15 +1,14 @@
 import React from "react";
-import { useState } from "react";
-import CourseInfoTab from "../CourseInfoTab/CourseInfoTab";
-import "./CourseInfoSidebar.scss";
+import { useState, useEffect } from "react";
 
+import CourseInfoTab from "../CourseInfoTab/CourseInfoTab";
 import Info from "../icons/Info";
 import Review from "../icons/Review";
 import Schedule from "../icons/Schedule";
 import Exam from "../icons/Exam";
-import Comparison from "../icons/Comparison";
 import Arrow from "../icons/Arrow";
-import { useEffect } from "react";
+
+import "./CourseInfoSidebar.scss";
 
 export default function CourseInfoSidebar({
   section,
