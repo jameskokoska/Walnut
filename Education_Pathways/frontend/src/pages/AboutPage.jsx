@@ -39,6 +39,7 @@ export default function AboutPage() {
         interactive!<br />
         <br />Fun Fact: The application is called Walnut to fit the theme of “tree nuts” often used by the
         university (Acorn website and Chestnut Residence).<br /><br /><br /></p>
+        
         <img src="https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FQay1zSJfS8ysAs7pMqG6%2F065cec9d7fe456a06cb81cc0a8fe4541?alt=media&token=28abafad-0097-4124-9b26-0b6b17313f85" 
         className="img1"/>
 

@@ -1,3 +1,9 @@
+.about-page {
+    margin-top: 20px;
+    max-height: 90vh;
+    overflow-y: scroll;
+}
+
 .intro {
     width: 750px; 
     font-size: 20px;
@@ -6,13 +12,12 @@
 }
 
 .img1 {
-    position: absolute;
+    float: right;
     width: 655px;
     height: 384px;
     display: flex;
-    left: 838px;
-    top: 150px;
     box-sizing: border-box;
+    margin-top: 80px;
 }
 
 .meettheteam {
@@ -21,6 +26,7 @@
     color: black;
     letter-spacing: 0;
     line-height: 36px;
+    overflow: visible;
 }
 
 .member-name {
