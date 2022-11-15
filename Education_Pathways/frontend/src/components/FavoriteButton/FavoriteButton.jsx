@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HeartEmpty from "../../components/img/heart-regular.svg";
 import HeartFilled from "../../components/img/heart-fill-red.svg";
+
 import "./FavoriteButton.scss";
 
 export default function FavoriteButton({ courseCode }) {

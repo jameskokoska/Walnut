@@ -1,4 +1,5 @@
 import FavoriteContainer from "../../components/FavoriteContainer/FavoriteContainer";
+
 import "./Favorites.scss";
 
 export default function Favorites(props) {

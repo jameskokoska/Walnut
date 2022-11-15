@@ -5,6 +5,7 @@ import Favorites from "../pages/Favorites/Favorites";
 import SearchResults from "../pages/SearchResults/SearchResults";
 import CourseInfoPage from "../pages/CourseInfoPage/CourseInfoPage";
 
+// Collection of Pages and corresponding URLs
 export const pages = {
   404: {
     label: "404",

@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./TimetableSectionContainer.scss";
 
 export default function TimetableSectionContainer({ section }) {

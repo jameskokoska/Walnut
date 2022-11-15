@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
-import "./SearchResults.scss";
 import API from "../../api";
+
+import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
 import Loading from "../../components/Loading/Loading";
+import "./SearchResults.scss";
 
 export default function SearchResults(props) {
   const [searchParams] = useSearchParams();
