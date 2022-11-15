@@ -10,12 +10,14 @@ export default function SearchResults(props) {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState(null);
-  const [term, setTerm] = useState(null);
+  const [term, setTerm] = useState("");
+
   useEffect(() => {
     if (props.searchTerm) {
       setSearchTerm(props.searchTerm);
       API.get(`/searchc?input=${props.searchTerm}`).then((res) => {
         const data = res.data;
+        setTerm(data.term);
         setResults(data);
       });
     } else {
@@ -23,8 +25,8 @@ export default function SearchResults(props) {
       setSearchTerm(searchTerm);
       API.get(`/searchc?input=${searchTerm}`).then((res) => {
         const data = res.data;
+        setTerm(data.term);
         setResults(data);
-        console.log(data);
       });
     }
   }, []);
@@ -77,7 +79,7 @@ export default function SearchResults(props) {
               return (
                 <SearchResultContainer
                   course={result}
-                  searchTerm={searchTerm}
+                  searchTerm={term}
                   numberResults={results?.courses_data?.length}
                   setCourse={props.setCourse}
                 />
