@@ -21,14 +21,13 @@
 
 .courseInfo-sidebar {
   @extend .courseInfo-section;
-  width: 33%;
   padding-left: 70px;
+  padding-right: 50px;
   justify-content: center;
 }
 
 .courseInfo-main {
   @extend .courseInfo-section;
-  width: 66%;
   margin-top: 80px;
   max-height: 90vh;
   overflow-y: scroll;

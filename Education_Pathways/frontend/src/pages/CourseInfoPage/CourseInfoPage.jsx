@@ -10,6 +10,10 @@ import Button from "../../components/Button/Button";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import SearchResults from "../SearchResults/SearchResults";
 import Favorites from "../Favorites/Favorites";
+import Compare from "../../components/img/compare.svg";
+import CompareEnabled from "../../components/img/compareEnabled.svg";
+import TimetableSectionContainer from "../../components/TimetableSectionContainer/TimetableSectionContainer";
+import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 
 
 const emptyCourse = {
@@ -39,6 +43,8 @@ export default function CourseInfoPage() {
   const [clearSearch, setClearSearch] = useState(false);
   const [courseState, setCourseState] = useState(emptyCourse);
   const [courseCompareState, setCourseCompareState] = useState(emptyCourse);
+  const[toggleCollapse, setToggleCollapse] = useState(false);
+
   const navigate = useNavigate();
 
   const onTabClick = (idx) => {
@@ -133,7 +139,9 @@ export default function CourseInfoPage() {
     return <>
       <div style={{ display: section[0] ? "block" : "none" }}>
         <div style={{ height: "120px" }} />
-        <h1 style={{marginBottom:0}}>{courseCompare.course_code}</h1>
+        <div style={{display:"flex", flexDirection:"row"}}>
+          <h1 style={{marginBottom:0}}>{courseCompare.course_code}</h1> <div style={{width:"10px"}}/> <FavoriteButton courseCode={courseCompare.course_code} />
+        </div>
         <h2>{courseCompare.course_name}</h2>
         <h4 style={{fontSize:"20px"}}><b>{`${courseCompare.department}`}</b></h4>
         <h4 style={{fontSize:"20px"}}><b>{`${courseCompare.campus} campus, ${courseCompare.terms}`}</b></h4>
@@ -142,20 +150,33 @@ export default function CourseInfoPage() {
         <CourseConnections course={courseCompare} />
         </div>
       <div style={{ display: section[1] ? "block" : "none" }}>Review</div>
-      <div style={{ display: section[2] ? "block" : "none" }}>Prof</div>
-      <div style={{ display: section[3] ? "block" : "none" }}>Exam</div>
+      <div style={{ display: section[2] ? "block" : "none"}}>
+        <div style={{ height: "120px" }} />
+        <div style={{display:"flex", flexWrap:"wrap"}}>
+          {courseCompare?.meeting_sections !== "" ? courseCompare?.meeting_sections.map((section)=>{
+            return <TimetableSectionContainer section={section}/>
+          }) : <></>}
+        </div>
+      </div>
+      <div style={{ display: section[3] ? "block" : "none" }}>
+        <iframe src={`https://courses.skule.ca/course/${courseCompare.course_code}`} style={{width:"80vw", height:"90vh"}}>
+        </iframe>
+      </div>
     </>
   }
 
-  return (
+  return (<>
     
-    // onClick={() => setCollapse((prev) => !prev)}, onClick={()=>{setCompare(!compare)}}
+    <div style={{position:"fixed", top:"100px", left:"20px"}}>
+      <Button isSecondary={compare} style={{width:"10px"}} icon={!compare ? Compare : CompareEnabled} onClick={()=>{setCompare(!compare); setToggleCollapse(!toggleCollapse); setCourseCompareState(emptyCourse); setClearSearch(true);}} />
+      <p style={{width:"70px", textAlign:"center", fontSize:"13px", marginTop:"5px"}}>Compare Courses</p>
+    </div>
+
     <div className="courseInfo-page">
       <div className="courseInfo-sidebar">
-        <Button isSecondary={compare} style={{width:"10px"}} label={"compare"} onClick={()=>{setCompare(!compare)}} />
-        <CourseInfoSideBar section={section} onClick={onTabClick} />
+        <CourseInfoSideBar section={section} onClick={onTabClick} toggleCollapse={toggleCollapse}/>
       </div>
-      {!compare ? <div className="courseInfo-main">{courseInfo(courseState)}</div> : <>
+      {!compare ? <div className="courseInfo-main" style={{width:"100%"}}>{courseInfo(courseState)}</div> : <>
         <div className="courseInfo-main" style={{width:"50%"}}>{courseInfo(courseState)}</div>
         <div className="courseInfo-main" style={{width:"50%", paddingLeft:"15px", position:"relative"}}>
           <div style={{position:"absolute", width:"100%"}}>
@@ -163,11 +184,12 @@ export default function CourseInfoPage() {
             <Searchbar onEnterKey={(text)=>{setCourseCompare(text)}} onChange={(text)=>{if(text===""){setCourseCompareState(emptyCourse); setClearSearch(true);} else {setClearSearch(false)}}} placeholder={"Search for a course to compare..."} style={{marginRight:"33px"}}/>
           </div>
           {searchCompare && !clearSearch ? <SearchResults searchTerm={searchCompare} setCourse={(data)=>{setCourse(data)}}/> : <></>}
-          {courseCompareState.course_code === "" && clearSearch? <h3 style={{margin:"50px", marginTop:"200px", textAlign:"center" }}>Please search for a course or choose a favorite course.</h3> : <></>}
-          {courseCompareState.course_code === "" && clearSearch? <div style={{testAlign:"center",}}><Favorites setCourseCode={(code)=>{setCourseCompare(code);}}/></div> : <></>}
-          {courseCompareState.course_code !== "" ? courseInfo(courseCompareState) : <></>}
+          {courseCompareState.course_code === "" || clearSearch ? <h3 style={{margin:"50px", marginTop:"200px", textAlign:"center" }}>Please search for a course or choose a favorite course.</h3> : <></>}
+          {courseCompareState.course_code === "" || clearSearch ? <div style={{testAlign:"center",}}><Favorites setCourseCode={(code)=>{setCourseCompare(code); setClearSearch(false);}}/></div> : <></>}
+          {courseCompareState.course_code !== "" && !clearSearch ? courseInfo(courseCompareState) : <></>}
         </div>
       </>}
     </div>
+    </>
   );
 }

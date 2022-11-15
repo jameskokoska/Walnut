@@ -1,0 +1,15 @@
+.timetable-container{
+  padding: 20px;
+  background-color: #eef6ff;
+  border-radius: 20px;
+  // box-shadow: 0px 2px 15px 5px rgba(115, 115, 115, 0.168);
+  margin: 8px 10px;
+  max-width: 300px;
+  min-width: 200px;
+  flex: 1;
+
+  transition: transform 200ms;
+  &:hover{
+    transform: scale(1.05);
+  }
+}

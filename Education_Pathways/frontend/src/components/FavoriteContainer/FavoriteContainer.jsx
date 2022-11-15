@@ -11,7 +11,7 @@ export default function FavoriteContainer({ courseCode, setCourseCode }) {
     <FavoriteButton courseCode={courseCode} />
   </div>
   if(setCourseCode){
-    return <div onClick={setCourseCode(courseCode)}>
+    return <div onClick={()=>setCourseCode(courseCode)}>
       {content}
     </div>
   }
