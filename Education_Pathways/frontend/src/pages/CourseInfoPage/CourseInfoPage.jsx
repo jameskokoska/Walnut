@@ -47,6 +47,9 @@ const emptyCourse = {
 export default function CourseInfoPage() {
   const rateCourse = (value, courseCode, type) => {
     // Submit the rating to backend here
+    API.post("/course/addrating",  { courseCode, value, type }).then(res => {
+      console.log(res);
+    })
     console.log(value, courseCode, type);
   };
 
@@ -61,6 +64,7 @@ export default function CourseInfoPage() {
     };
 
     // Submit the comment to backend here
+    API.post(`/course/addreview?code=${courseCode}`, commentObj).then((res) => {});
     console.log(commentName, commentComment, commentDate);
 
     if (courseState?.course_code === courseCode) {
@@ -115,24 +119,27 @@ export default function CourseInfoPage() {
         exclusions: coursePassed.exclusions,
         meeting_sections: coursePassed.meeting_sections,
         last_updated: coursePassed.last_updated,
-        ratings: {
-          difficulty: { rating: 4.57, amount: 5 },
-          lecture: { rating: 5, amount: 15 },
-          workload: { rating: 4, amount: 3 },
-          tutorials: { rating: 4.2, amount: 1 },
-        },
-        comments: [
-          {
-            name: "Bob",
-            comment: "Hello my name is bob, I like this course!",
-            time: "2012-10-05T14:48:00.000Z",
-          },
-          {
-            name: "Bill",
-            comment: "Hello my name is bill, I like this course more!",
-            time: "2011-10-05T14:48:00.000Z",
-          },
-        ],
+        ratings: 
+        coursePassed.ratings,
+        // {
+        //   difficulty: { rating: 4.57, amount: 5 },
+        //   lecture: { rating: 5, amount: 15 },
+        //   workload: { rating: 4, amount: 3 },
+        //   tutorials: { rating: 4.2, amount: 1 },
+        // },
+        comments: coursePassed.comments,
+        // [
+        //   {
+        //     name: "Bob",
+        //     comment: "Hello my name is bob, I like this course!",
+        //     time: "2012-10-05T14:48:00.000Z",
+        //   },
+        //   {
+        //     name: "Bill",
+        //     comment: "Hello my name is bill, I like this course more!",
+        //     time: "2011-10-05T14:48:00.000Z",
+        //   },
+        // ],
       });
       // we need to get the comments and ratings here if the course was passed
       return;
@@ -158,24 +165,27 @@ export default function CourseInfoPage() {
           meeting_sections: data.meeting_sections,
           last_updated: data.last_updated,
           // we need to get the comments and ratings here
-          ratings: {
-            difficulty: { rating: 4.57, amount: 5 },
-            lecture: { rating: 5, amount: 15 },
-            workload: { rating: 4, amount: 3 },
-            tutorials: { rating: 4.2, amount: 1 },
-          },
-          comments: [
-            {
-              name: "Bob",
-              comment: "Hello my name is bob, I like this course!",
-              time: "2012-10-05T14:48:00.000Z",
-            },
-            {
-              name: "Bill",
-              comment: "Hello my name is bill, I like this course more!",
-              time: "2011-10-05T14:48:00.000Z",
-            },
-          ],
+          ratings: data.ratings
+          // {
+          //   difficulty: { rating: 4.57, amount: 5 },
+          //   lecture: { rating: 5, amount: 15 },
+          //   workload: { rating: 4, amount: 3 },
+          //   tutorials: { rating: 4.2, amount: 1 },
+          // }
+          ,
+          comments: data.comments,
+          // [
+          //   {
+          //     name: "Bob",
+          //     comment: "Hello my name is bob, I like this course!",
+          //     time: "2012-10-05T14:48:00.000Z",
+          //   },
+          //   {
+          //     name: "Bill",
+          //     comment: "Hello my name is bill, I like this course more!",
+          //     time: "2011-10-05T14:48:00.000Z",
+          //   },
+          // ],
         });
       })
       .catch(() => {
@@ -207,24 +217,27 @@ export default function CourseInfoPage() {
           meeting_sections: data.meeting_sections,
           last_updated: data.last_updated,
           // we need to get the comments and ratings here
-          ratings: {
-            difficulty: { rating: 4.57, amount: 5 },
-            lecture: { rating: 5, amount: 15 },
-            workload: { rating: 4, amount: 3 },
-            tutorials: { rating: 4.2, amount: 1 },
-          },
-          comments: [
-            {
-              name: "Bob",
-              comment: "Hello my name is bob, I like this course!",
-              time: "2012-10-05T14:48:00.000Z",
-            },
-            {
-              name: "Bill",
-              comment: "Hello my name is bill, I like this course more!",
-              time: "2011-10-05T14:48:00.000Z",
-            },
-          ],
+          ratings: data.ratings
+          // {
+          //   difficulty: { rating: 4.57, amount: 5 },
+          //   lecture: { rating: 5, amount: 15 },
+          //   workload: { rating: 4, amount: 3 },
+          //   tutorials: { rating: 4.2, amount: 1 },
+          // }
+          ,
+          comments: data.comments,
+          // [
+          //   {
+          //     name: "Bob",
+          //     comment: "Hello my name is bob, I like this course!",
+          //     time: "2012-10-05T14:48:00.000Z",
+          //   },
+          //   {
+          //     name: "Bill",
+          //     comment: "Hello my name is bill, I like this course more!",
+          //     time: "2011-10-05T14:48:00.000Z",
+          //   },
+          // ],
         });
       })
       .catch(() => {
@@ -252,24 +265,27 @@ export default function CourseInfoPage() {
       meeting_sections: data.meeting_sections,
       last_updated: data.last_updated,
       // we need to get the comments and ratings here
-      ratings: {
-        difficulty: { rating: 4.57, amount: 5 },
-        lecture: { rating: 5, amount: 15 },
-        workload: { rating: 4, amount: 3 },
-        tutorials: { rating: 4.2, amount: 1 },
-      },
-      comments: [
-        {
-          name: "Bob",
-          comment: "Hello my name is bob, I like this course!",
-          time: "2012-10-05T14:48:00.000Z",
-        },
-        {
-          name: "Bill",
-          comment: "Hello my name is bill, I like this course more!",
-          time: "2011-10-05T14:48:00.000Z",
-        },
-      ],
+      ratings: data.ratings,
+      // {
+      //   difficulty: { rating: 4.57, amount: 5 },
+      //   lecture: { rating: 5, amount: 15 },
+      //   workload: { rating: 4, amount: 3 },
+      //   tutorials: { rating: 4.2, amount: 1 },
+      // },
+      // fetch data from backend
+      comments: data.comments,
+      // [
+      //   {
+      //     name: "Bob",
+      //     comment: "Hello my name is bob, I like this course!",
+      //     time: "2012-10-05T14:48:00.000Z",
+      //   },
+      //   {
+      //     name: "Bill",
+      //     comment: "Hello my name is bill, I like this course more!",
+      //     time: "2011-10-05T14:48:00.000Z",
+      //   },
+      // ],
     });
   };
 

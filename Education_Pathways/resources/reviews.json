@@ -1,18 +1,1 @@
-{
-    "ece444": [
-        {
-            "rating": 4,
-            "text": "great course"
-        },
-        {
-            "rating": 1,
-            "text": "terrible course"
-        }
-    ],
-    "ECE444H1": [
-        {
-            "rating": 4,
-            "text": "great course"
-        }
-    ]
-}
+{"ECE344H1": {"difficulty": {"rating": 0, "amount": 0}, "lecture": {"rating": 0, "amount": 0}, "workload": {"rating": 0, "amount": 0}, "tutorials": {"rating": 0, "amount": 0}, "lectures": {"rating": "5", "amount": 1}}, "ECE444H1": {"difficulty": {"rating": 0, "amount": 0}, "lecture": {"rating": 0, "amount": 0}, "workload": {"rating": 0, "amount": 0}, "tutorials": {"rating": 0, "amount": 0}, "lectures": {"rating": "3", "amount": 1}}, "ECE361H1": {"difficulty": {"rating": 0, "amount": 0}, "lecture": {"rating": 0, "amount": 0}, "workload": {"rating": 0, "amount": 0}, "tutorials": {"rating": 0, "amount": 0}, "lectures": {"rating": "5", "amount": 1}}, "ECE244H1": {"difficulty": {"rating": 0, "amount": 0}, "lecture": {"rating": 0, "amount": 0}, "workload": {"rating": 0, "amount": 0}, "tutorials": {"rating": 0, "amount": 0}, "lectures": {"rating": "4", "amount": 1}}}
