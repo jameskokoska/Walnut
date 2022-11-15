@@ -7,6 +7,11 @@
   background-color: #dbe8f4;
 }
 
+#compareOne {
+  margin-right: 600px;
+  color: black;
+  font-size: 10px;
+}
 .courseInfo-section {
   display: flex;
   flex-direction: column;
@@ -15,14 +20,13 @@
 
 .courseInfo-sidebar {
   @extend .courseInfo-section;
-  width: 33%;
   padding-left: 70px;
+  padding-right: 50px;
   justify-content: center;
 }
 
 .courseInfo-main {
   @extend .courseInfo-section;
-  width: 66%;
   margin-top: 80px;
   max-height: 90vh;
   padding-inline: 20px;

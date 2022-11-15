@@ -5,6 +5,8 @@
   height: 50px;
   padding-left: 13px;
   margin-top: 10px;
+  transition: transform 200ms;
+  user-select: none;
 
   &:hover {
     transform: scale(1.03);

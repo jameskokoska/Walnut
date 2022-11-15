@@ -7,6 +7,7 @@ export default function SearchResultContainer({
   course,
   searchTerm,
   numberResults,
+  setCourse,
 }) {
   const navigate = useNavigate();
 
@@ -77,23 +78,8 @@ export default function SearchResultContainer({
     }
   }
 
-  return (
-    <div
-      onClick={(e) => {
-        if (!e.target.classList.contains("favorite-button")) {
-          navigate(`/courseinfo/${course["code"]}`, {
-            state: { course: course },
-          });
-        }
-      }}
-      className="search-result-container link"
-      style={{
-        width: manyResults ? "unset" : "100%",
-        maxWidth: manyResults ? "800px" : "unset",
-        minWidth: manyResults ? "400px" : "unset",
-        flex: manyResults ? 1 : "unset",
-      }}
-    >
+  const content = (
+    <>
       <div
         style={{
           display: "flex",
@@ -112,6 +98,44 @@ export default function SearchResultContainer({
 
       <h4>{course["division"]}</h4>
       {showDescription ? <p>{displayDescription}</p> : <></>}
+    </>
+  );
+  if (setCourse) {
+    return (
+      <div
+        className="search-result-container link"
+        style={{
+          width: manyResults ? "unset" : "100%",
+          maxWidth: manyResults ? "800px" : "unset",
+          minWidth: manyResults ? "400px" : "unset",
+          flex: manyResults ? 1 : "unset",
+        }}
+        onClick={() => {
+          setCourse(course);
+        }}
+      >
+        {content}
+      </div>
+    );
+  }
+  return (
+    <div
+      onClick={(e) => {
+        if (!e.target.classList.contains("favorite-button")) {
+          navigate(`/courseinfo/${course["code"]}`, {
+            state: { course: course },
+          });
+        }
+      }}
+      className="search-result-container link"
+      style={{
+        width: manyResults ? "unset" : "100%",
+        maxWidth: manyResults ? "800px" : "unset",
+        minWidth: manyResults ? "400px" : "unset",
+        flex: manyResults ? 1 : "unset",
+      }}
+    >
+      {content}
     </div>
   );
 }

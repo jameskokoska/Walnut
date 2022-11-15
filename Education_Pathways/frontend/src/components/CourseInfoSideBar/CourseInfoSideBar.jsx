@@ -5,12 +5,22 @@ import "./CourseInfoSidebar.scss";
 
 import Info from "../icons/Info";
 import Review from "../icons/Review";
-import Prof from "../icons/Prof";
+import Schedule from "../icons/Schedule";
 import Exam from "../icons/Exam";
+import Comparison from "../icons/Comparison";
 import Arrow from "../icons/Arrow";
+import { useEffect } from "react";
 
-export default function CourseInfoSidebar({ section, onClick }) {
+export default function CourseInfoSidebar({
+  section,
+  onClick,
+  toggleCollapse,
+}) {
   const [collapse, setCollapse] = useState(false);
+
+  useEffect(() => {
+    setCollapse(toggleCollapse);
+  }, [toggleCollapse]);
 
   return (
     <div>
@@ -32,8 +42,8 @@ export default function CourseInfoSidebar({ section, onClick }) {
       />
       <CourseInfoTab
         id={2}
-        icon={<Prof active={section[2]} />}
-        text="Professor's Information"
+        icon={<Schedule active={section[2]} />}
+        text="Timetable"
         active={section[2]}
         onClick={onClick}
         collapse={collapse}
