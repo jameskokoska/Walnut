@@ -29,7 +29,7 @@ export default function SearchResults(props) {
         setResults(data);
       });
     }
-  }, []);
+  }, [props.searchTerm, searchParams]);
 
   // first time loading page there will be no results, display "Searching..."
   if (results == null) {
@@ -52,7 +52,7 @@ export default function SearchResults(props) {
   }
 
   // No course found
-  else if (results.length == 0) {
+  else if (results.length === 0) {
     return (
       <div className="search-results-page">
         <div className="search-results-title">
@@ -78,8 +78,10 @@ export default function SearchResults(props) {
             {results?.courses_data?.map((result) => {
               return (
                 <SearchResultContainer
+                  key={result.code}
                   course={result}
-                  searchTerm={term}
+                  term={term}
+                  searchTerm={searchTerm}
                   numberResults={results?.courses_data?.length}
                   setCourse={props.setCourse}
                 />

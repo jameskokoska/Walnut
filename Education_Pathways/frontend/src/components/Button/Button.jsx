@@ -11,7 +11,11 @@ export default function Button({ label, onClick, isSecondary, style, icon }) {
       }`}
     >
       {label !== undefined ? <>{label}</> : <></>}
-      {icon !== undefined ? <img src={icon} className="button-icon" /> : <></>}
+      {icon !== undefined ? (
+        <img src={icon} className="button-icon" alt="" />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

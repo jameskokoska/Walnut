@@ -11,7 +11,7 @@ export default function FavoriteButton({ courseCode }) {
     if (favorites[courseCode] === true) {
       setFavoriteStatus(true);
     }
-  }, []);
+  }, [courseCode]);
   const getFavorites = () => {
     const favoritesRaw = localStorage.getItem("favorites");
     const favorites = JSON.parse(favoritesRaw === null ? "{}" : favoritesRaw);
@@ -32,6 +32,7 @@ export default function FavoriteButton({ courseCode }) {
         e.preventDefault();
         setLiked(!favoriteStatus);
       }}
+      alt=""
     ></img>
   );
 }

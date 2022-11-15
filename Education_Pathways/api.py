@@ -25,7 +25,7 @@ class SearchCourse(Resource):
                 courses = []
 
             # There is course found and only a few specific ones
-            if len(courses) != 0 and len(courses) < 10:
+            if len(courses) != 0 and len(courses) < 20:
                 term = input
 
             # Fall back to general search

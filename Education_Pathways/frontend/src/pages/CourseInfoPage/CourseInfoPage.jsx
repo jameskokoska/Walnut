@@ -193,6 +193,7 @@ export default function CourseInfoPage() {
         </div>
         <div style={{ display: section[3] ? "block" : "none" }}>
           <iframe
+            title={courseCompare.courseCode}
             src={`https://courses.skule.ca/course/${courseCompare.course_code}`}
             style={{ width: "80vw", height: "90vh" }}
           ></iframe>

@@ -1,11 +1,11 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import "./SearchResultContainer.scss";
 
 export default function SearchResultContainer({
   course,
-  searchTerm,
+  term,
   numberResults,
   setCourse,
 }) {
@@ -22,19 +22,19 @@ export default function SearchResultContainer({
   if (displayName === undefined || displayName === "") {
     showName = false;
   } else {
-    if (searchTerm != "") {
+    if (term !== "") {
       const foundName = course["name"]
         .toUpperCase()
-        .indexOf(searchTerm.toUpperCase().trim());
+        .indexOf(term.toUpperCase().trim());
 
       if (foundName !== -1) {
         displayName = (
           <>
             {displayName.slice(0, foundName)}
             <span className="result-bold-heading">
-              {displayName.slice(foundName, foundName + searchTerm.length)}
+              {displayName.slice(foundName, foundName + term.length)}
             </span>
-            {displayName.slice(foundName + searchTerm.length)}
+            {displayName.slice(foundName + term.length)}
           </>
         );
       }
@@ -44,13 +44,13 @@ export default function SearchResultContainer({
   // Bold in description
   let showDescription = true;
   let displayDescription = course["description"];
-  if (displayDescription == undefined || displayDescription === "") {
+  if (displayDescription === undefined || displayDescription === "") {
     showDescription = false;
   } else {
     // make upper case so the check is not case-sensitive
     const foundDescription = course["description"]
       .toUpperCase()
-      .indexOf(searchTerm.toUpperCase().trim());
+      .indexOf(term.toUpperCase().trim());
 
     if (foundDescription === -1) {
       displayDescription =
@@ -65,11 +65,11 @@ export default function SearchResultContainer({
           <b>
             {displayDescription.slice(
               foundDescription,
-              foundDescription + searchTerm.length
+              foundDescription + term.length
             )}
           </b>
           {displayDescription.slice(
-            foundDescription + searchTerm.length,
+            foundDescription + term.length,
             foundDescription + descriptionLength
           )}
           ...
@@ -118,6 +118,7 @@ export default function SearchResultContainer({
       </div>
     );
   }
+
   return (
     <div
       onClick={(e) => {

@@ -7,7 +7,6 @@ import Info from "../icons/Info";
 import Review from "../icons/Review";
 import Schedule from "../icons/Schedule";
 import Exam from "../icons/Exam";
-import Comparison from "../icons/Comparison";
 import Arrow from "../icons/Arrow";
 import { useEffect } from "react";
 
