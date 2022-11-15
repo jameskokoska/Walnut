@@ -23,18 +23,24 @@
   overflow-y: scroll;
 }
 
-.about-page-text {
+.about-page-inner {
   width: 60%;
   margin: 0 auto;
+}
+
+.about-page-text {
+  @extend .about-page-inner;
   padding-top: 50px;
 }
 
 .about-page-recipe {
-  width: 60%;
-  margin: 0 auto;
+  @extend .about-page-inner;
+  .recipes {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
-.recipes {
-  display: flex;
-  flex-wrap: wrap;
+.about-page-team {
+  @extend .about-page-inner;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 
 import Searchbar from "../../components/Searchbar/Searchbar";
+import Heart from "../../components/img/heart-fill-blue.svg";
 
 import "./About.scss";
 
@@ -108,6 +109,26 @@ export default function AboutPage() {
               />
             </div>
           </div>
+
+          <div style={{ height: "30px" }}></div>
+
+          <p>
+            If you feel like saving a course for later lookup or comparison, you
+            can always add it to your favourites by clicking the heart button to
+            light it up, you can access all saved courses by using the heart
+            button on the top right of the webpage.
+          </p>
+          <p>
+            If you want to compare two courses, simply go into one course's
+            specific information page, then use the top left button and search
+            another course to compare with it
+          </p>
+        </div>
+
+        <div style={{ height: "20px" }}></div>
+
+        <div className="about-page-team">
+          <h2>Our Team</h2>
         </div>
       </div>
     </div>

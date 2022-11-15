@@ -289,6 +289,13 @@ export default function CourseInfoPage() {
           <h4 style={{ fontSize: "20px" }}>
             <b>{`${courseCompare.campus} campus, ${courseCompare.terms}`}</b>
           </h4>
+          {courseCompare.breadth ? (
+            <h4 style={{ fontSize: "20px" }}>
+              A&S Breadth {courseCompare.breadth}
+            </h4>
+          ) : (
+            <></>
+          )}
 
           <p className="course-description">
             {courseCompare.course_description}
