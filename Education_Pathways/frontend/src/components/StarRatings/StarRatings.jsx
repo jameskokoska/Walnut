@@ -1,8 +1,8 @@
 import React from "react";
 import "./StarRatings.scss";
 
-import OutlinedStar from "../../components/img/heart-regular.svg";
-import FilledStar from "../../components/img/heart-fill-blue.svg";
+import OutlinedStar from "../../components/img/star-regular.svg";
+import FilledStar from "../../components/img/star-solid.svg";
 
 export default function StarRatings({ width, height, rating, onClick, label }) {
   return (

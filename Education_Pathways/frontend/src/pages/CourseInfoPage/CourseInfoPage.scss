@@ -36,3 +36,24 @@
     color: #1c3e6e;
   }
 }
+
+.comment-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.comment-container {
+  background-color: #d1e4ff;
+  padding: 20px 35px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.review-and-ratings-container {
+  background-color: white;
+  padding: 20px 35px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
