@@ -3,5 +3,11 @@ import React from "react";
 import "./About.scss";
 
 export default function AboutPage() {
-  return <></>;
+  return (
+    <div className="about-page">
+      <div className="about-page-container">
+        <h2>About Walnut</h2>
+      </div>
+    </div>
+  );
 }
