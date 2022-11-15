@@ -16,6 +16,7 @@ import TimetableSectionContainer from "../../components/TimetableSectionContaine
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 
 import Loading from "../../components/Loading/Loading";
+import StarRatings from "../../components/StarRatings/StarRatings";
 
 const emptyCourse = {
   course_code: "",
@@ -37,6 +38,24 @@ const emptyCourse = {
 };
 
 export default function CourseInfoPage() {
+  const sampleComments = [
+    {
+      name: "Bob",
+      comment: "Hello my name is bob, I like this course!",
+      time: "2012-10-05T14:48:00.000Z",
+    },
+    {
+      name: "Bill",
+      comment: "Hello my name is bill, I like this course more!",
+      time: "2011-10-05T14:48:00.000Z",
+    },
+  ];
+  const sampleRatings = {
+    difficulty: { rating: 4.57, amount: 5 },
+    lecture: { rating: 5, amount: 15 },
+    workload: { rating: 4, amount: 3 },
+    tutorials: { rating: 4.2, amount: 1 },
+  };
   const { code } = useParams();
   const [section, setSection] = useState([true, false, false, false]);
   const [compare, setCompare] = useState(false);
@@ -178,7 +197,101 @@ export default function CourseInfoPage() {
           <p>{courseCompare.course_description}</p>
           <CourseConnections course={courseCompare} />
         </div>
-        <div style={{ display: section[1] ? "block" : "none" }}>Review</div>
+        <div style={{ display: section[1] ? "block" : "none" }}>
+          <div style={{ height: "120px" }} />
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            <div
+              style={{
+                backgroundColor: "white",
+                padding: "20px 35px",
+                borderRadius: "15px",
+                marginTop: "10px",
+              }}
+            >
+              <h2 style={{ margin: 0 }}>Difficulty</h2>
+              <StarRatings
+                rating={sampleRatings["difficulty"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  console.log(value);
+                }}
+                height={75}
+                label={
+                  sampleRatings["difficulty"]["amount"] + " student ratings"
+                }
+              />
+              <h2 style={{ margin: 0 }}>Lectures</h2>
+              <StarRatings
+                rating={sampleRatings["lecture"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  console.log(value);
+                }}
+                height={75}
+                label={sampleRatings["lecture"]["amount"] + " student ratings"}
+              />
+              <h2 style={{ margin: 0 }}>Workload</h2>
+              <StarRatings
+                rating={sampleRatings["workload"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  console.log(value);
+                }}
+                height={75}
+                label={sampleRatings["workload"]["amount"] + " student ratings"}
+              />
+              <h2 style={{ margin: 0 }}>Tutorials</h2>
+              <StarRatings
+                rating={sampleRatings["tutorials"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  console.log(value);
+                }}
+                height={65}
+                label={
+                  sampleRatings["tutorials"]["amount"] + " student ratings"
+                }
+              />
+            </div>
+            <div style={{ width: "15px" }} />
+            <div
+              style={{
+                backgroundColor: "white",
+                padding: "20px 35px",
+                borderRadius: "15px",
+                marginTop: "10px",
+              }}
+            >
+              <h1>Comments</h1>
+              {sampleComments.map((comment) => {
+                const date = new Date(comment?.time);
+                const dateString = date.toISOString().substring(0, 10);
+                return (
+                  <div
+                    style={{
+                      backgroundColor: "#D1E4FF",
+                      padding: "20px 35px",
+                      borderRadius: "15px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <h4 style={{ margin: 0 }}>{comment?.name}</h4>
+                      <h5>{dateString}</h5>
+                    </div>
+                    {comment?.comment}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div style={{ height: "120px" }} />
+        </div>
         <div style={{ display: section[2] ? "block" : "none" }}>
           <div style={{ height: "120px" }} />
           <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -190,6 +303,7 @@ export default function CourseInfoPage() {
               <></>
             )}
           </div>
+          <div style={{ height: "120px" }} />
         </div>
         <div style={{ display: section[3] ? "block" : "none" }}>
           <iframe
