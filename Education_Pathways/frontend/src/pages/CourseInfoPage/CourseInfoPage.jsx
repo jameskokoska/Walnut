@@ -14,6 +14,7 @@ import CompareEnabled from "../../components/img/compareEnabled.svg";
 import TimetableSectionContainer from "../../components/TimetableSectionContainer/TimetableSectionContainer";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 import Loading from "../../components/Loading/Loading";
+import StarRatings from "../../components/StarRatings/StarRatings";
 
 import "./CourseInfoPage.scss";
 
@@ -34,9 +35,47 @@ const emptyCourse = {
   exclusions: "",
   meeting_sections: "",
   last_updated: "",
+  ratings: {
+    difficulty: { rating: 0, amount: 0 },
+    lecture: { rating: 0, amount: 0 },
+    workload: { rating: 0, amount: 0 },
+    tutorials: { rating: 0, amount: 0 },
+  },
+  comments: [],
 };
 
 export default function CourseInfoPage() {
+  const rateCourse = (value, courseCode, type) => {
+    // Submit the rating to backend here
+    console.log(value, courseCode, type);
+  };
+
+  const [commentName, setCommentName] = useState(false);
+  const [commentComment, setCommentComment] = useState(false);
+  const leaveComment = async (courseCode) => {
+    const commentDate = new Date().toISOString();
+    const commentObj = {
+      name: commentName,
+      comment: commentComment,
+      time: commentDate,
+    };
+
+    // Submit the comment to backend here
+    console.log(commentName, commentComment, commentDate);
+
+    if (courseState?.course_code === courseCode) {
+      courseState?.comments.unshift(commentObj);
+      setCourseState(courseState);
+      setSubmitComment(false);
+      setCommentComment("");
+    } else if (courseCompareState?.course_code === courseCode) {
+      courseCompareState?.comments.unshift(commentObj);
+      setCourseCompareState(courseCompareState);
+      setSubmitComment(false);
+      setCommentComment("");
+    }
+  };
+
   const { code } = useParams();
   const [section, setSection] = useState([true, false, false, false]);
   const [compare, setCompare] = useState(false);
@@ -45,6 +84,7 @@ export default function CourseInfoPage() {
   const [courseState, setCourseState] = useState(emptyCourse);
   const [courseCompareState, setCourseCompareState] = useState(emptyCourse);
   const [toggleCollapse, setToggleCollapse] = useState(false);
+  const [submitComment, setSubmitComment] = useState(false);
 
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -75,7 +115,26 @@ export default function CourseInfoPage() {
         exclusions: coursePassed.exclusions,
         meeting_sections: coursePassed.meeting_sections,
         last_updated: coursePassed.last_updated,
+        ratings: {
+          difficulty: { rating: 4.57, amount: 5 },
+          lecture: { rating: 5, amount: 15 },
+          workload: { rating: 4, amount: 3 },
+          tutorials: { rating: 4.2, amount: 1 },
+        },
+        comments: [
+          {
+            name: "Bob",
+            comment: "Hello my name is bob, I like this course!",
+            time: "2012-10-05T14:48:00.000Z",
+          },
+          {
+            name: "Bill",
+            comment: "Hello my name is bill, I like this course more!",
+            time: "2011-10-05T14:48:00.000Z",
+          },
+        ],
       });
+      // we need to get the comments and ratings here if the course was passed
       return;
     }
     API.get(`/course/details?code=${code}`)
@@ -98,6 +157,25 @@ export default function CourseInfoPage() {
           exclusions: data.exclusions,
           meeting_sections: data.meeting_sections,
           last_updated: data.last_updated,
+          // we need to get the comments and ratings here
+          ratings: {
+            difficulty: { rating: 4.57, amount: 5 },
+            lecture: { rating: 5, amount: 15 },
+            workload: { rating: 4, amount: 3 },
+            tutorials: { rating: 4.2, amount: 1 },
+          },
+          comments: [
+            {
+              name: "Bob",
+              comment: "Hello my name is bob, I like this course!",
+              time: "2012-10-05T14:48:00.000Z",
+            },
+            {
+              name: "Bill",
+              comment: "Hello my name is bill, I like this course more!",
+              time: "2011-10-05T14:48:00.000Z",
+            },
+          ],
         });
       })
       .catch(() => {
@@ -128,6 +206,25 @@ export default function CourseInfoPage() {
           exclusions: data.exclusions,
           meeting_sections: data.meeting_sections,
           last_updated: data.last_updated,
+          // we need to get the comments and ratings here
+          ratings: {
+            difficulty: { rating: 4.57, amount: 5 },
+            lecture: { rating: 5, amount: 15 },
+            workload: { rating: 4, amount: 3 },
+            tutorials: { rating: 4.2, amount: 1 },
+          },
+          comments: [
+            {
+              name: "Bob",
+              comment: "Hello my name is bob, I like this course!",
+              time: "2012-10-05T14:48:00.000Z",
+            },
+            {
+              name: "Bill",
+              comment: "Hello my name is bill, I like this course more!",
+              time: "2011-10-05T14:48:00.000Z",
+            },
+          ],
         });
       })
       .catch(() => {
@@ -154,6 +251,25 @@ export default function CourseInfoPage() {
       exclusions: data.exclusions,
       meeting_sections: data.meeting_sections,
       last_updated: data.last_updated,
+      // we need to get the comments and ratings here
+      ratings: {
+        difficulty: { rating: 4.57, amount: 5 },
+        lecture: { rating: 5, amount: 15 },
+        workload: { rating: 4, amount: 3 },
+        tutorials: { rating: 4.2, amount: 1 },
+      },
+      comments: [
+        {
+          name: "Bob",
+          comment: "Hello my name is bob, I like this course!",
+          time: "2012-10-05T14:48:00.000Z",
+        },
+        {
+          name: "Bill",
+          comment: "Hello my name is bill, I like this course more!",
+          time: "2011-10-05T14:48:00.000Z",
+        },
+      ],
     });
   };
 
@@ -178,9 +294,143 @@ export default function CourseInfoPage() {
           <p>{courseCompare.course_description}</p>
           <CourseConnections course={courseCompare} />
         </div>
-        <div style={{ display: section[1] ? "block" : "none" }}>Review</div>
+        <div style={{ display: section[1] ? "block" : "none" }}>
+          <div style={{ height: "120px" }} />
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
+            <div style={{ width: "10px" }} />{" "}
+            <FavoriteButton courseCode={courseCompare.course_code} />
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            <div className="review-and-ratings-container">
+              <p>Click a rating to rate this course!</p>
+              <h2 style={{ margin: 0 }}>Difficulty</h2>
+              <StarRatings
+                rating={courseCompare?.ratings["difficulty"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  rateCourse(value, courseCompare["course_code"], "difficulty");
+                }}
+                height={75}
+                label={
+                  courseCompare?.ratings["difficulty"]["amount"] +
+                  " student ratings"
+                }
+              />
+              <h2 style={{ margin: 0 }}>Lectures</h2>
+              <StarRatings
+                rating={courseCompare?.ratings["lecture"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  rateCourse(value, courseCompare["course_code"], "lectures");
+                }}
+                height={75}
+                label={
+                  courseCompare?.ratings["lecture"]["amount"] +
+                  " student ratings"
+                }
+              />
+              <h2 style={{ margin: 0 }}>Workload</h2>
+              <StarRatings
+                rating={courseCompare?.ratings["workload"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  rateCourse(value, courseCompare["course_code"], "workload");
+                }}
+                height={75}
+                label={
+                  courseCompare?.ratings["workload"]["amount"] +
+                  " student ratings"
+                }
+              />
+              <h2 style={{ margin: 0 }}>Tutorials</h2>
+              <StarRatings
+                rating={courseCompare?.ratings["tutorials"]["rating"]}
+                width={200}
+                onClick={(value) => {
+                  rateCourse(value, courseCompare["course_code"], "tutorials");
+                }}
+                height={65}
+                label={
+                  courseCompare?.ratings["tutorials"]["amount"] +
+                  " student ratings"
+                }
+              />
+            </div>
+            <div style={{ width: "15px" }} />
+            <div className="review-and-ratings-container">
+              <h1>Comments</h1>
+              <div className="comment-form-container">
+                <Searchbar
+                  placeholder={"Name"}
+                  style={{ borderRadius: "5px" }}
+                  onChange={(text) => {
+                    setCommentName(text);
+                  }}
+                />
+                <div style={{ height: "5px" }} />
+                {!submitComment ? (
+                  <Searchbar
+                    placeholder={"Comment"}
+                    style={{ borderRadius: "5px" }}
+                    onChange={(text) => {
+                      setCommentComment(text);
+                    }}
+                    onEnterKey={async (text) => {
+                      setCommentComment(text);
+                      setSubmitComment(true);
+                      await setTimeout(() => {
+                        leaveComment(courseCompare?.course_code);
+                      }, 100);
+                    }}
+                  />
+                ) : (
+                  <Loading />
+                )}
+                <div style={{ height: "14px" }} />
+                <Button
+                  label={"Comment"}
+                  isSecondary
+                  onClick={async () => {
+                    if (commentComment !== "" && commentComment) {
+                      setSubmitComment(true);
+                      await setTimeout(() => {
+                        leaveComment(courseCompare?.course_code);
+                      }, 100);
+                    }
+                  }}
+                />
+              </div>
+              <div style={{ height: "25px" }} />
+              {courseCompare?.comments.map((comment) => {
+                const date = new Date(comment?.time);
+                const dateString = date.toISOString()?.substring(0, 10);
+                return (
+                  <div className="comment-container">
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <h4 style={{ margin: 0 }}>{comment?.name}</h4>
+                      <h5>{dateString}</h5>
+                    </div>
+                    {comment?.comment}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div style={{ height: "120px" }} />
+        </div>
         <div style={{ display: section[2] ? "block" : "none" }}>
           <div style={{ height: "120px" }} />
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
+            <div style={{ width: "10px" }} />{" "}
+            <FavoriteButton courseCode={courseCompare.course_code} />
+          </div>
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             {courseCompare?.meeting_sections !== "" ? (
               courseCompare?.meeting_sections.map((section) => {
@@ -190,6 +440,7 @@ export default function CourseInfoPage() {
               <></>
             )}
           </div>
+          <div style={{ height: "120px" }} />
         </div>
         <div style={{ display: section[3] ? "block" : "none" }}>
           <iframe
