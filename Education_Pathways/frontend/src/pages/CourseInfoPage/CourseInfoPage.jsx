@@ -338,7 +338,7 @@ export default function CourseInfoPage() {
                 rating={courseCompare?.ratings["lecture"]["rating"]}
                 width={200}
                 onClick={(value) => {
-                  rateCourse(value, courseCompare["course_code"], "lectures");
+                  rateCourse(value, courseCompare["course_code"], "lecture");
                 }}
                 height={75}
                 label={

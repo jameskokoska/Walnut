@@ -150,7 +150,6 @@ def getCourseRatings(courseCode):
         }
 
 def addRating(courseCode, rating, type):
-    print("adding rating")
     all_reviews = {}
     # get existing reviews if file exists
     if Path('./resources/reviews.json').is_file():
@@ -159,7 +158,6 @@ def addRating(courseCode, rating, type):
 
     #see if the are any reviews for this course    
     if courseCode not in all_reviews:
-        print("no reviews yet for this course")
         # no reviews yet for this course, create new list for course code
         all_reviews[courseCode] = {
           "difficulty": { "rating": 0, "amount": 0 },
@@ -167,23 +165,17 @@ def addRating(courseCode, rating, type):
           "workload": { "rating": 0, "amount": 0 },
           "tutorials": { "rating": 0, "amount": 0 },
         }
-    print(type)
     if type in all_reviews[courseCode]:
-        print("yes", all_reviews[courseCode][type])
         #update the review
         x = float(all_reviews[courseCode][type]["rating"])
         y = float(all_reviews[courseCode][type]['amount'])
-        print(x, y)
         z=x*y
         
-        print(z + float(rating))
-        total_rating = z + rating
-        print("total rating: " , total_rating)
-        all_reviews[courseCode][type]["amount"] += 1
-        all_reviews[courseCode][type]["rating"] = total_rating / all_reviews[courseCode][type]['amount']
+        total_rating = z + float(rating)
+        all_reviews[courseCode][type]["amount"] = 1 + int(all_reviews[courseCode][type]["amount"] )
+        all_reviews[courseCode][type]["rating"] = total_rating / int(all_reviews[courseCode][type]['amount'])
     else:
         all_reviews[courseCode][type] = {"rating": rating, "amount": 1}
-    print(all_reviews)
     #write to json file
     with open('./resources/reviews.json', 'w') as fw:
         json.dump(all_reviews, fw)
