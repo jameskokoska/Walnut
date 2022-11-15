@@ -18,7 +18,7 @@ export default function CourseConnections({ course }) {
 
   const preColor = "#3E837F";
   const courseColor = "#1C3E6E";
-  const afterColor = "#5C2C7E";
+  const coColor = "#5C2C7E";
   const recColor = "#B7B754";
   const excColor = "#B75454";
   const pointTypeString = {
@@ -65,6 +65,7 @@ export default function CourseConnections({ course }) {
         pos: { x: 200 * 0, y: 85 * currentLevel },
         outputs: [...co, ...exc],
         color: courseColor,
+        type: "current",
       };
       currentLevel++;
       if (co && co.length > 0) {
@@ -72,7 +73,7 @@ export default function CourseConnections({ course }) {
           stateObject[co[i]] = {
             pos: { x: 200 * (i + 1), y: 85 * currentLevel },
             outputs: [],
-            color: afterColor,
+            color: coColor,
             type: "co",
           };
         }
@@ -106,7 +107,7 @@ export default function CourseConnections({ course }) {
         <></>
       ) : (
         <div
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "start" }}
           className="nodrag"
         >
           <Flowspace
@@ -120,21 +121,39 @@ export default function CourseConnections({ course }) {
           >
             {Object.keys(flows).map((key) => {
               const exc = parseCourseCodes(course?.exclusions);
+              const rec = parseCourseCodes(course?.recommeded_prep);
+              const pre = parseCourseCodes(course?.prerequisites);
+              const co = parseCourseCodes(course?.corequisites);
+              const currentCourse = course.course_code;
+
               const point = flows[key];
               const totalOutputs = {};
               for (const output of point.outputs) {
                 totalOutputs[output] = {
                   input: "top",
-                  inputColor: exc.includes(output)
-                    ? "#e01017"
-                    : point.type === "rec"
-                    ? "#ffd53d"
-                    : "",
-                  outputColor: exc.includes(output)
-                    ? "#9A1B1B"
-                    : point.type === "rec"
-                    ? "#f78f2d"
-                    : "",
+                  inputColor: rec.includes(output)
+                    ? recColor
+                    : pre.includes(output)
+                    ? preColor
+                    : exc.includes(output)
+                    ? excColor
+                    : co.includes(output)
+                    ? coColor
+                    : output === currentCourse
+                    ? courseColor
+                    : "white",
+                  outputColor:
+                    point.type === "rec"
+                      ? recColor
+                      : point.type === "pre"
+                      ? preColor
+                      : point.type === "exc"
+                      ? excColor
+                      : point.type === "co"
+                      ? coColor
+                      : point.type === "current"
+                      ? courseColor
+                      : "white",
                 };
               }
               return (
@@ -161,12 +180,18 @@ export default function CourseConnections({ course }) {
                   onTouch={() => {
                     navigate(`/courseinfo/${key}`);
                   }}
+                  onClick={() => {
+                    navigate(`/courseinfo/${key}`);
+                  }}
                   theme="black"
                 >
                   <Link
                     to={`/courseinfo/${key}`}
                     className="link"
-                    style={{ color: "white" }}
+                    style={{
+                      color: "white",
+                      pointerEvents: "none",
+                    }}
                   >
                     {key}
                     <p style={{ margin: 0, fontSize: "10px", color: "white" }}>

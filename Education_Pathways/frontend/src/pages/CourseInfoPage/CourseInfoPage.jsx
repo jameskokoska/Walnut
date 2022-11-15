@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import API from "../../api";
 import "./CourseInfoPage.scss";
@@ -15,6 +15,7 @@ import CompareEnabled from "../../components/img/compareEnabled.svg";
 import TimetableSectionContainer from "../../components/TimetableSectionContainer/TimetableSectionContainer";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 
+import Loading from "../../components/Loading/Loading";
 
 const emptyCourse = {
   course_code: "",
@@ -45,6 +46,7 @@ export default function CourseInfoPage() {
   const [courseCompareState, setCourseCompareState] = useState(emptyCourse);
   const[toggleCollapse, setToggleCollapse] = useState(false);
 
+  const { state } = useLocation();
   const navigate = useNavigate();
 
   const onTabClick = (idx) => {
@@ -54,10 +56,31 @@ export default function CourseInfoPage() {
   };
 
   useEffect(() => {
+    const coursePassed = state?.course;
+    if (coursePassed) {
+      setCourseState({
+        course_code: coursePassed.code,
+        course_name: coursePassed.name,
+        division: coursePassed.division,
+        department: coursePassed.department,
+        course_description: coursePassed.description,
+        prerequisites: coursePassed.prerequisites,
+        course_level: coursePassed.level,
+        campus: coursePassed.campus,
+        terms: coursePassed.term,
+        corequisites: coursePassed.corequisites,
+        recommeded_prep: coursePassed.recommended_preparation,
+        breadth: coursePassed.arts_and_science_breadth,
+        distribution: coursePassed.utm_distribution,
+        exclusions: coursePassed.exclusions,
+        meeting_sections: coursePassed.meeting_sections,
+        last_updated: coursePassed.last_updated,
+      });
+      return;
+    }
     API.get(`/course/details?code=${code}`)
       .then((res) => {
         const data = res.data;
-        console.log(data);
         setCourseState({
           course_code: data.code,
           course_name: data.name,
@@ -176,19 +199,24 @@ export default function CourseInfoPage() {
       <div className="courseInfo-sidebar">
         <CourseInfoSideBar section={section} onClick={onTabClick} toggleCollapse={toggleCollapse}/>
       </div>
-      {!compare ? <div className="courseInfo-main" style={{width:"100%"}}>{courseInfo(courseState)}</div> : <>
-        <div className="courseInfo-main" style={{width:"50%"}}>{courseInfo(courseState)}</div>
-        <div className="courseInfo-main" style={{width:"50%", paddingLeft:"15px", position:"relative"}}>
-          <div style={{position:"absolute", width:"100%"}}>
-            <div style={{height:"10px"}}/>
-            <Searchbar onEnterKey={(text)=>{setCourseCompare(text)}} onChange={(text)=>{if(text===""){setCourseCompareState(emptyCourse); setClearSearch(true);} else {setClearSearch(false)}}} placeholder={"Search for a course to compare..."} style={{marginRight:"33px"}}/>
+      {!compare ? 
+        courseState?.course_code === "" ? <div style={{display:"flex",height:"100%", width:"100%", justifyContent:"center", alignItems:"center", flexDirection:"column"}}><Loading/><p style={{marginTop:"15px"}}>Loading</p></div> :
+        <div className="courseInfo-main" style={{width:"100%"}}>{courseInfo(courseState)}</div> 
+        : 
+        <>
+          <div className="courseInfo-main" style={{width:"50%"}}>{courseInfo(courseState)}</div>
+          <div className="courseInfo-main" style={{width:"50%", paddingLeft:"15px", position:"relative"}}>
+            <div style={{position:"absolute", width:"100%"}}>
+              <div style={{height:"10px"}}/>
+              <Searchbar onEnterKey={(text)=>{setCourseCompare(text)}} onChange={(text)=>{if(text===""){setCourseCompareState(emptyCourse); setClearSearch(true);} else {setClearSearch(false)}}} placeholder={"Search for a course to compare..."} style={{marginRight:"33px"}}/>
+            </div>
+            {searchCompare && !clearSearch ? <SearchResults searchTerm={searchCompare} setCourse={(data)=>{setCourse(data)}}/> : <></>}
+            {courseCompareState.course_code === "" || clearSearch ? <h3 style={{margin:"50px", marginTop:"200px", textAlign:"center" }}>Please search for a course or choose a favorite course.</h3> : <></>}
+            {courseCompareState.course_code === "" || clearSearch ? <div style={{testAlign:"center",}}><Favorites setCourseCode={(code)=>{setCourseCompare(code); setClearSearch(false);}}/></div> : <></>}
+            {courseCompareState.course_code !== "" && !clearSearch ? courseInfo(courseCompareState) : <></>}
           </div>
-          {searchCompare && !clearSearch ? <SearchResults searchTerm={searchCompare} setCourse={(data)=>{setCourse(data)}}/> : <></>}
-          {courseCompareState.course_code === "" || clearSearch ? <h3 style={{margin:"50px", marginTop:"200px", textAlign:"center" }}>Please search for a course or choose a favorite course.</h3> : <></>}
-          {courseCompareState.course_code === "" || clearSearch ? <div style={{testAlign:"center",}}><Favorites setCourseCode={(code)=>{setCourseCompare(code); setClearSearch(false);}}/></div> : <></>}
-          {courseCompareState.course_code !== "" && !clearSearch ? courseInfo(courseCompareState) : <></>}
-        </div>
-      </>}
+        </>
+      }
     </div>
     </>
   );

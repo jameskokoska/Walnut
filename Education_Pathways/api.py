@@ -2,19 +2,41 @@ from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
 
-from util import getCategories, requestCourses
+from util import getCourseCode, getCategories, requestCourses, deduplicate
 
 
 class SearchCourse(Resource):
     def get(self):
         # Get input and tokenize based on spaces
-        # KEYWORDS has lowercase elements, hence input.lower()
         input = request.args.get("input")
-        input = input.lower().split(" ")
+        tokens = input.lower().split(" ")
 
-        # Find matching courses
-        code, categories, default, term = getCategories(input)
-        courses = requestCourses(code, categories, default, term)
+        # Course code gets priority
+        code = getCourseCode(tokens)
+        tokens = [token for token in tokens if token not in code]
+
+        # No code, search for course name first
+        if len(code) == 0:
+            try:
+                courses = Courses.get({"name": input})
+                courses.extend(Courses.get({"description": input}))
+                courses = deduplicate(courses)
+            except:
+                courses = []
+
+            # There is course found and only a few specific ones
+            if len(courses) != 0 and len(courses) < 10:
+                term = input
+
+            # Fall back to general search
+            else:
+                categories, term = getCategories(tokens)
+                courses = requestCourses(code, categories, term)
+
+        # General search
+        else:
+            categories, term = getCategories(tokens)
+            courses = requestCourses(code, categories, term)
 
         # convert from Course objects to json
         courses_data = []
@@ -22,7 +44,8 @@ class SearchCourse(Resource):
             courses_data.append(course.all_data)
 
         try:
-            resp = jsonify(courses_data)
+            resp = {"courses_data": courses_data, "term": term}
+            resp = jsonify(resp)
             resp.status_code = 200
             return resp
         except Exception as e:
