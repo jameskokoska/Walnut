@@ -99,6 +99,7 @@ export default function SearchResultContainer({
       </div>
 
       <h4>{course["division"]}</h4>
+      <h4>{course["term"]}</h4>
       {showDescription ? <p>{displayDescription}</p> : <></>}
     </>
   );
