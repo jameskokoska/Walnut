@@ -79,7 +79,7 @@ export default function SearchResults(props) {
             {results?.courses_data?.map((result) => {
               return (
                 <SearchResultContainer
-                  key={result.code}
+                  key={result.id}
                   course={result}
                   term={term}
                   searchTerm={searchTerm}

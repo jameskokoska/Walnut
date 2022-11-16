@@ -6,13 +6,13 @@ from keywords import SHORTCUT
 
 
 def deduplicate(course_list):
-    """Remove duplicate based on course code"""
+    """Remove duplicates if any"""
     deduplicate = []
-    seen_course_codes = []
+    seen_courses = []
     for course in course_list:
-        if course.code not in seen_course_codes:
+        if course.id not in seen_courses:
             deduplicate.append(course)
-            seen_course_codes.append(course.code)
+            seen_courses.append(course.id)
 
     return deduplicate
 
