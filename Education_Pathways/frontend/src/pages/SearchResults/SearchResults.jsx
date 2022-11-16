@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import API from "../../api";
 
 import SearchResultContainer from "../../components/SearchResultContainer/SearchResultContainer";
@@ -53,12 +53,19 @@ export default function SearchResults(props) {
   }
 
   // No course found
-  else if (results.length === 0) {
+  else if (results.courses_data.length === 0) {
     return (
       <div className="search-results-page">
         <div className="search-results-title">
           <h2>Search Results</h2>
           <h3>{`No results found for "${searchTerm}"`}</h3>
+          <h3>
+            Not sure how to search? Check out our{" "}
+            <Link to="/about" smooth className="link">
+              search recipes
+            </Link>
+            !
+          </h3>
         </div>
       </div>
     );
