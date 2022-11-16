@@ -49,7 +49,15 @@ export default function CourseInfoPage() {
     // Submit the rating to backend here
     API.post("/course/addrating",  { courseCode, value, type }).then(res => {
       console.log(res);
-    })
+    });
+    setTimeout(() => {
+      // Get ratings back
+    API.get(`/course/addrating?code=${courseCode}`).then(res => {
+      console.log(res);
+      setCourseState({...courseState, ratings: res.data.ratings});
+    });
+    }, 100);
+    
     console.log(value, courseCode, type);
   };
 
@@ -102,6 +110,19 @@ export default function CourseInfoPage() {
   useEffect(() => {
     const coursePassed = state?.course;
     if (coursePassed) {
+      let ratings = coursePassed.ratings;
+      let comments = coursePassed.comments;
+      //get ratings
+      API.get(`/course/addrating?code=${coursePassed.code}`)
+        .then((res) => {
+          ratings = res.data.ratings;
+        });
+      //get comments
+      API.get(`/course/addreview?code=${coursePassed.code}`)
+        .then((res) => {
+          comments = res.data.comments;
+        });
+
       setCourseState({
         course_code: coursePassed.code,
         course_name: coursePassed.name,
@@ -119,15 +140,14 @@ export default function CourseInfoPage() {
         exclusions: coursePassed.exclusions,
         meeting_sections: coursePassed.meeting_sections,
         last_updated: coursePassed.last_updated,
-        ratings: 
-        coursePassed.ratings,
+        ratings: ratings,
         // {
         //   difficulty: { rating: 4.57, amount: 5 },
         //   lecture: { rating: 5, amount: 15 },
         //   workload: { rating: 4, amount: 3 },
         //   tutorials: { rating: 4.2, amount: 1 },
         // },
-        comments: coursePassed.comments,
+        comments: comments,
         // [
         //   {
         //     name: "Bob",
