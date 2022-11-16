@@ -47,18 +47,19 @@ const emptyCourse = {
 export default function CourseInfoPage() {
   const rateCourse = (value, courseCode, type) => {
     // Submit the rating to backend here
-    API.post("/course/addrating",  { courseCode, value, type }).then(res => {
-      console.log(res);
-    });
+    API.post("/course/addrating",  { courseCode, value, type }).then(res => {});
     setTimeout(() => {
       // Get ratings back
     API.get(`/course/addrating?code=${courseCode}`).then(res => {
-      console.log(res);
-      setCourseState({...courseState, ratings: res.data.ratings});
+      // see whether to update original or comparing course
+      if (courseCode === courseState.course_code) {
+        setCourseState({...courseState, ratings: res.data.ratings});
+      }
+      else if (courseCode === courseCompareState.course_code) {
+        setCourseCompareState({...courseCompareState, ratings: res.data.ratings})
+      }
     });
     }, 100);
-    
-    console.log(value, courseCode, type);
   };
 
   const [commentName, setCommentName] = useState(false);
@@ -73,7 +74,6 @@ export default function CourseInfoPage() {
 
     // Submit the comment to backend here
     API.post(`/course/addreview?code=${courseCode}`, commentObj).then((res) => {});
-    console.log(commentName, commentComment, commentDate);
 
     if (courseState?.course_code === courseCode) {
       courseState?.comments.unshift(commentObj);
