@@ -1,6 +1,7 @@
 # Walnut - A Web Application for Efficient Course Searching
 
-Walnut is a web application for current and future students at the University of Toronto, to efficiently search and select courses. Walnut has an intuitive user-interface, displaying helpful information and has features such as side-by-side course comparison that would aid the users to make good decisions. The primary benefits of Walnut are to provide adequate and useful information for students to make their decisions, and to improve the efficiency of the course selection process.
+![Walnut Guide (1)](https://user-images.githubusercontent.com/50821962/202098863-27d1bec7-fb32-4d35-8758-09434c7c623b.png)
+
 
 ## Fun Fact
 
