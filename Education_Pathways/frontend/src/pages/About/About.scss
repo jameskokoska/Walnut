@@ -17,30 +17,31 @@
 
 .about-page-container {
   height: 100%;
-  padding-bottom: 80px;
   padding-inline: 10px;
   max-height: 90vh;
   overflow-y: scroll;
 }
 
-.about-page-inner {
-  width: 60%;
-  margin: 0 auto;
-}
-
 .about-page-text {
-  @extend .about-page-inner;
   padding-top: 50px;
 }
 
-.about-page-recipe {
-  @extend .about-page-inner;
-  .recipes {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.recipes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.about-page-team {
-  @extend .about-page-inner;
+.team-profiles1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.team-profiles2 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.about-page-footer {
+  text-align: center;
 }

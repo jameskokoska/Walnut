@@ -34,7 +34,7 @@ export default function Navbar() {
         </div>
       </Link>
       <div className="navbar-right-container">
-        {windowSize > 700 ? (
+        {windowSize > 768 ? (
           <Searchbar
             style={{ width: "250px" }}
             placeholder={"Search..."}
