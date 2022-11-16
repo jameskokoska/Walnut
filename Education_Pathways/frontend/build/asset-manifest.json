@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.97d1abfa.chunk.css",
+    "main.js": "/static/js/main.f09f9def.chunk.js",
+    "main.js.map": "/static/js/main.f09f9def.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.60ef40cc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.60ef40cc.js.map",
+    "static/css/2.383c0125.chunk.css": "/static/css/2.383c0125.chunk.css",
+    "static/js/2.9d844a6a.chunk.js": "/static/js/2.9d844a6a.chunk.js",
+    "static/js/2.9d844a6a.chunk.js.map": "/static/js/2.9d844a6a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.383c0125.chunk.css.map": "/static/css/2.383c0125.chunk.css.map",
+    "static/css/main.97d1abfa.chunk.css.map": "/static/css/main.97d1abfa.chunk.css.map",
+    "static/js/2.9d844a6a.chunk.js.LICENSE.txt": "/static/js/2.9d844a6a.chunk.js.LICENSE.txt",
+    "static/media/404.fa7ac9cb.png": "/static/media/404.fa7ac9cb.png",
+    "static/media/JK.723a97b1.jpeg": "/static/media/JK.723a97b1.jpeg",
+    "static/media/KL.95e90158.jpeg": "/static/media/KL.95e90158.jpeg",
+    "static/media/MA.156f6803.jpeg": "/static/media/MA.156f6803.jpeg",
+    "static/media/MK.37470774.jpeg": "/static/media/MK.37470774.jpeg",
+    "static/media/SP.900f6910.jpeg": "/static/media/SP.900f6910.jpeg",
+    "static/media/HomePage.scss": "/static/media/background.92ca8f8a.png",
+    "static/media/compare.445f7d4a.svg": "/static/media/compare.445f7d4a.svg",
+    "static/media/compareEnabled.c5bce89f.svg": "/static/media/compareEnabled.c5bce89f.svg",
+    "static/media/heart-fill-blue.586b56f9.svg": "/static/media/heart-fill-blue.586b56f9.svg",
+    "static/media/heart-fill-red.662278ab.svg": "/static/media/heart-fill-red.662278ab.svg",
+    "static/media/heart-regular.9a082843.svg": "/static/media/heart-regular.9a082843.svg",
+    "static/media/info.90580652.svg": "/static/media/info.90580652.svg",
+    "static/media/logo.5aff8b5f.png": "/static/media/logo.5aff8b5f.png",
+    "static/media/star-regular.9d6bdbd5.svg": "/static/media/star-regular.9d6bdbd5.svg",
+    "static/media/star-solid.f7607347.svg": "/static/media/star-solid.f7607347.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.60ef40cc.js",
+    "static/css/2.383c0125.chunk.css",
+    "static/js/2.9d844a6a.chunk.js",
+    "static/css/main.97d1abfa.chunk.css",
+    "static/js/main.f09f9def.chunk.js"
+  ]
+}

@@ -499,10 +499,11 @@ export default function CourseInfoPage() {
             <div
               style={{
                 height: "60vh",
-                width: "70vw",
+                width: "100%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                textAlign: "center",
               }}
             >
               <h2>No past exam found for this course...</h2>
