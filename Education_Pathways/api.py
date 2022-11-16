@@ -1,3 +1,4 @@
+""" Backend API """
 from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
@@ -34,7 +35,7 @@ class SearchCourse(Resource):
                 courses = []
 
             # There is course found and only a few specific ones
-            if len(courses) != 0 and len(courses) < 10:
+            if len(courses) != 0 and len(courses) < 20:
                 term = input
 
             # Fall back to general search
@@ -64,49 +65,27 @@ class SearchCourse(Resource):
             resp = jsonify(resp)
             resp.status_code = 200
             return resp
+
+        # Failed to send response
         except Exception as e:
             resp = jsonify({"error": str(e)})
             resp.status_code = 400
             return resp
 
-    def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument("input", required=True)
-        data = parser.parse_args()
-        input = data["input"]
-        categories = getCategories(input.lower())
-        courses = set()
-        for category in categories:
-            # update set with search results
-            try:
-                courses.update(Courses.get({category: input}, limit=100))
-            except:
-                continue
-
-        coursesL = list(courses)
-        if len(coursesL) > 0:
-            try:
-                resp = jsonify(coursesL)
-                resp.status_code = 200
-                return resp
-            except Exception as e:
-                resp = jsonify({"error": "something went wrong"})
-                resp.status_code = 400
-                return resp
-
 
 class ShowCourse(Resource):
     def get(self):
+        # Search only by course code
         code = request.args.get("code")
-        print(code)
         courses = Courses.get({"code": code})
         comments = getComments(code)
         ratings = getCourseRatings(code)
-        print("reviews", comments)
         if len(courses) == 0:
             resp = jsonify({"message": f"Course {code} doesn't exist"})
             resp.status_code = 404
             return resp
+
+        # Send response to the frontend
         try:
             # add list of reviews to course data
             courses[0].all_data["comments"] = comments

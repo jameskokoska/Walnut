@@ -1,3 +1,4 @@
+""" Utility Functions """
 import json
 import os
 from nikel_py import Courses
@@ -8,13 +9,13 @@ from keywords import SHORTCUT
 
 
 def deduplicate(course_list):
-    """Remove duplicate based on course code"""
+    """Remove duplicates if any"""
     deduplicate = []
-    seen_course_codes = []
+    seen_courses = []
     for course in course_list:
-        if course.code not in seen_course_codes:
+        if course.id not in seen_courses:
             deduplicate.append(course)
-            seen_course_codes.append(course.code)
+            seen_courses.append(course.id)
 
     return deduplicate
 
@@ -66,6 +67,7 @@ def getCategories(tokens):
             term += f"{token} "
 
     else:
+        # Term will be the ones remaining
         for token in tokens_:
             term += f"{token} "
 
@@ -75,10 +77,13 @@ def getCategories(tokens):
 def requestCourses(code, categories, term):
     """Request course based on given query"""
     courses = []
+
+    # Course Code gets priority
     if len(code) != 0:
         for course_code in code:
             query = categories
             query["code"] = course_code
+
             if term:
                 for category in ("name", "description"):
                     default_query = query.copy()
@@ -101,6 +106,7 @@ def requestCourses(code, categories, term):
                 except:
                     print(f"No course found for {query}")
 
+    # No Course Code
     else:
         if term:
             for category in ("name", "description"):
@@ -121,65 +127,72 @@ def requestCourses(code, categories, term):
 
     courses = deduplicate(courses)
     # Add comments to courses
-    
+
     return courses
+
 
 def getCourseRatings(courseCode):
     all_ratings = {}
 
     # make sure file exists
-    #if not Path(os.path.join(os.getcwd(), './resources/reviews.json')).is_file():
-    if not os.path.isfile(os.path.join(os.getcwd(), './resources/reviews.json')):
-        print('reviews.json does not exist')
+    # if not Path(os.path.join(os.getcwd(), './resources/reviews.json')).is_file():
+    if not os.path.isfile(os.path.join(os.getcwd(), "./resources/reviews.json")):
+        print("reviews.json does not exist")
         return []
-    print('reviews.json exists')
-    
-    with open(os.path.join(os.getcwd(), './resources/reviews.json'), 'r') as f:
+    print("reviews.json exists")
+
+    with open(os.path.join(os.getcwd(), "./resources/reviews.json"), "r") as f:
         all_ratings = json.load(f)
 
     if courseCode in all_ratings:
         return all_ratings[courseCode]
     else:
         # no reviews yet for course
-        print('no reviews yet for course')
+        print("no reviews yet for course")
         return {
-          "difficulty": { "rating": 0, "amount": 0 },
-          "lecture": { "rating": 0, "amount": 0 },
-          "workload": { "rating": 0, "amount": 0 },
-          "tutorials": { "rating": 0, "amount": 0 },
+            "difficulty": {"rating": 0, "amount": 0},
+            "lecture": {"rating": 0, "amount": 0},
+            "workload": {"rating": 0, "amount": 0},
+            "tutorials": {"rating": 0, "amount": 0},
         }
+
 
 def addRating(courseCode, rating, type):
     all_reviews = {}
     # get existing reviews if file exists
-    if Path('./resources/reviews.json').is_file():
-        with open('./resources/reviews.json', 'r') as f:
+    if Path("./resources/reviews.json").is_file():
+        with open("./resources/reviews.json", "r") as f:
             all_reviews = json.load(f)
 
-    #see if the are any reviews for this course    
+    # see if the are any reviews for this course
     if courseCode not in all_reviews:
         # no reviews yet for this course, create new list for course code
         all_reviews[courseCode] = {
-          "difficulty": { "rating": 0, "amount": 0 },
-          "lecture": { "rating": 0, "amount": 0 },
-          "workload": { "rating": 0, "amount": 0 },
-          "tutorials": { "rating": 0, "amount": 0 },
+            "difficulty": {"rating": 0, "amount": 0},
+            "lecture": {"rating": 0, "amount": 0},
+            "workload": {"rating": 0, "amount": 0},
+            "tutorials": {"rating": 0, "amount": 0},
         }
     if type in all_reviews[courseCode]:
-        #update the review
+        # update the review
         x = float(all_reviews[courseCode][type]["rating"])
-        y = float(all_reviews[courseCode][type]['amount'])
-        z=x*y
-        
+        y = float(all_reviews[courseCode][type]["amount"])
+        z = x * y
+
         total_rating = z + float(rating)
-        all_reviews[courseCode][type]["amount"] = 1 + int(all_reviews[courseCode][type]["amount"] )
-        all_reviews[courseCode][type]["rating"] = total_rating / int(all_reviews[courseCode][type]['amount'])
+        all_reviews[courseCode][type]["amount"] = 1 + int(
+            all_reviews[courseCode][type]["amount"]
+        )
+        all_reviews[courseCode][type]["rating"] = total_rating / int(
+            all_reviews[courseCode][type]["amount"]
+        )
     else:
         all_reviews[courseCode][type] = {"rating": rating, "amount": 1}
-    #write to json file
-    with open('./resources/reviews.json', 'w') as fw:
+    # write to json file
+    with open("./resources/reviews.json", "w") as fw:
         json.dump(all_reviews, fw)
-        
+
+
 def addComment(code, name, comment, time):
     """
     Save a comment in the database
@@ -187,28 +200,27 @@ def addComment(code, name, comment, time):
     keys are course codes
     values are lists of dictionaries of comments
     """
-    with open('./resources/comments.json', 'r') as f:
+    with open("./resources/comments.json", "r") as f:
         comments = json.load(f)
-        
+
     if code in comments:
-        comments[code].append({'name': name, 'comment': comment, 'time': time})
+        comments[code].append({"name": name, "comment": comment, "time": time})
     else:
-        comments[code] = [{'name': name, 'comment': comment, 'time': time}]
-    
-    with open('./resources/comments.json', 'w') as fw:
+        comments[code] = [{"name": name, "comment": comment, "time": time}]
+
+    with open("./resources/comments.json", "w") as fw:
         json.dump(comments, fw)
-        
+
+
 def getComments(code):
     """
     Get all comments for a course
     from fill resources/comments.json
     """
-    with open('./resources/comments.json', 'r') as f:
+    with open("./resources/comments.json", "r") as f:
         comments = json.load(f)
-        
+
     if code in comments:
         return comments[code]
-    
-    return []
-    
 
+    return []

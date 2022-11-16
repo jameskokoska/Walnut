@@ -5,6 +5,7 @@ from flask_restful import Api
 import config
 from api import SearchCourse, ShowCourse, AddReview, AddRating
 
+# App Configuration
 app = Flask(__name__, static_folder="frontend/build")
 app.config["ENV"] = "development"
 app.config["DEBUG"] = True

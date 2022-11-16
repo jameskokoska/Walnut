@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./CourseInfoTab.scss";
 
 export default function CourseInfoTab({

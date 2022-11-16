@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./Button.scss";
 
 export default function Button({ label, onClick, isSecondary, style, icon }) {
@@ -11,7 +12,11 @@ export default function Button({ label, onClick, isSecondary, style, icon }) {
       }`}
     >
       {label !== undefined ? <>{label}</> : <></>}
-      {icon !== undefined ? <img src={icon} className="button-icon" /> : <></>}
+      {icon !== undefined ? (
+        <img src={icon} className="button-icon" alt="" />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

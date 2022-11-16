@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import API from "../../api";
-import "./CourseInfoPage.scss";
-import "./comparison.scss";
+
+import CourseInfoSideBar from "../../components/CourseInfoSideBar/CourseInfoSideBar";
 import CourseConnections from "../../components/CourseConnections/CourseConnections";
 import Button from "../../components/Button/Button";
 import Searchbar from "../../components/Searchbar/Searchbar";
@@ -14,9 +13,10 @@ import Compare from "../../components/img/compare.svg";
 import CompareEnabled from "../../components/img/compareEnabled.svg";
 import TimetableSectionContainer from "../../components/TimetableSectionContainer/TimetableSectionContainer";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
-
 import Loading from "../../components/Loading/Loading";
 import StarRatings from "../../components/StarRatings/StarRatings";
+
+import "./CourseInfoPage.scss";
 
 const emptyCourse = {
   course_code: "",
@@ -309,11 +309,35 @@ export default function CourseInfoPage() {
     });
   };
 
+  function badIframe(src) {
+    return new Promise((resolve) => {
+      // This uses the new Fetch API to see what happens when the src of the iframe is fetched from the webpage.
+      // This approach would also work with XHR. It would not be as nice to write, but may be preferred for compatibility reasons.
+      fetch(src)
+        .then((res) => {
+          // the res object represents the response from the server
+
+          // res.ok is true if the repose has an "okay status" (200-299)
+          if (res.ok) {
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+
+          /* Note: it's probably possible for an iframe source to be given a 300s
+                status which means it'll redirect to a new page, and this may load
+                property. In this case the script does not work. However, following the
+                redirects until an eventual ok status or error is reached would be much
+                more involved than the solution provided here. */
+        })
+        .catch(() => resolve(true));
+    });
+  }
+
   const courseInfo = (courseCompare) => {
     return (
       <>
         <div style={{ display: section[0] ? "block" : "none" }}>
-          <div style={{ height: "120px" }} />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
             <div style={{ width: "10px" }} />{" "}
@@ -326,18 +350,32 @@ export default function CourseInfoPage() {
           <h4 style={{ fontSize: "20px" }}>
             <b>{`${courseCompare.campus} campus, ${courseCompare.terms}`}</b>
           </h4>
+          {courseCompare.breadth ? (
+            <h4 style={{ fontSize: "20px" }}>
+              A&S Breadth {courseCompare.breadth}
+            </h4>
+          ) : (
+            <></>
+          )}
 
-          <p>{courseCompare.course_description}</p>
+          <p className="course-description">
+            {courseCompare.course_description}
+          </p>
           <CourseConnections course={courseCompare} />
         </div>
         <div style={{ display: section[1] ? "block" : "none" }}>
-          <div style={{ height: "120px" }} />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
             <div style={{ width: "10px" }} />{" "}
             <FavoriteButton courseCode={courseCompare.course_code} />
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
             <div className="review-and-ratings-container">
               <p>Click a rating to rate this course!</p>
               <h2 style={{ margin: 0 }}>Difficulty</h2>
@@ -458,16 +496,22 @@ export default function CourseInfoPage() {
               })}
             </div>
           </div>
-          <div style={{ height: "120px" }} />
+          <div style={{ height: "200px" }} />
         </div>
         <div style={{ display: section[2] ? "block" : "none" }}>
-          <div style={{ height: "120px" }} />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
             <div style={{ width: "10px" }} />{" "}
             <FavoriteButton courseCode={courseCompare.course_code} />
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              marginLeft: "-10px",
+              marginTop: "10px",
+            }}
+          >
             {courseCompare?.meeting_sections !== "" ? (
               courseCompare?.meeting_sections.map((section) => {
                 return <TimetableSectionContainer section={section} />;
@@ -476,13 +520,31 @@ export default function CourseInfoPage() {
               <></>
             )}
           </div>
-          <div style={{ height: "120px" }} />
+          <div style={{ height: "200px" }} />
         </div>
         <div style={{ display: section[3] ? "block" : "none" }}>
-          <iframe
-            src={`https://courses.skule.ca/course/${courseCompare.course_code}`}
-            style={{ width: "80vw", height: "90vh" }}
-          ></iframe>
+          {!badIframe(
+            `https://courses.skule.ca/course/${courseCompare.course_code}`
+          ) ? (
+            <iframe
+              title={courseCompare.courseCode}
+              src={`https://courses.skule.ca/course/${courseCompare.course_code}`}
+              style={{ width: "100%", height: "70vh" }}
+            ></iframe>
+          ) : (
+            <div
+              style={{
+                height: "60vh",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <h2>No past exam found for this course...</h2>
+            </div>
+          )}
         </div>
       </>
     );
@@ -490,7 +552,7 @@ export default function CourseInfoPage() {
 
   return (
     <>
-      <div style={{ position: "fixed", top: "100px", left: "20px" }}>
+      <div style={{ position: "fixed", top: "175px", left: "45px" }}>
         <Button
           isSecondary={compare}
           style={{ width: "10px" }}
@@ -544,18 +606,28 @@ export default function CourseInfoPage() {
           )
         ) : (
           <>
-            <div className="courseInfo-main" style={{ width: "50%" }}>
+            <div
+              className="courseInfo-main"
+              style={{ width: "50%", paddingBottom: "100px" }}
+            >
               {courseInfo(courseState)}
             </div>
             <div
               className="courseInfo-main"
               style={{
                 width: "50%",
-                paddingLeft: "15px",
                 position: "relative",
+                paddingBottom: "100px",
               }}
             >
-              <div style={{ position: "absolute", width: "100%" }}>
+              <div
+                style={{
+                  position: "fixed",
+                  top: "95px",
+                  right: "100px",
+                  width: "30%",
+                }}
+              >
                 <div style={{ height: "10px" }} />
                 <Searchbar
                   onEnterKey={(text) => {
@@ -587,7 +659,8 @@ export default function CourseInfoPage() {
                 <h3
                   style={{
                     margin: "50px",
-                    marginTop: "200px",
+                    marginTop: "50px",
+                    marginBottom: "-60px",
                     textAlign: "center",
                   }}
                 >
@@ -597,7 +670,7 @@ export default function CourseInfoPage() {
                 <></>
               )}
               {courseCompareState.course_code === "" || clearSearch ? (
-                <div style={{ testAlign: "center" }}>
+                <div style={{ paddingBottom: "0px" }}>
                   <Favorites
                     setCourseCode={(code) => {
                       setCourseCompare(code);

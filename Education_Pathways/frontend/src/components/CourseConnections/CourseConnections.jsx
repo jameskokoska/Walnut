@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./CourseConnections.scss";
-import { Flowpoint, Flowspace } from "flowpoints";
 import { Link, useNavigate } from "react-router-dom";
+import { Flowpoint, Flowspace } from "flowpoints";
+
+import "./CourseConnections.scss";
 
 function parseCourseCodes(string) {
   if (string) {
@@ -107,7 +108,10 @@ export default function CourseConnections({ course }) {
         <></>
       ) : (
         <div
-          style={{ display: "flex", justifyContent: "start" }}
+          style={{
+            display: "flex",
+            justifyContent: "start",
+          }}
           className="nodrag"
         >
           <Flowspace

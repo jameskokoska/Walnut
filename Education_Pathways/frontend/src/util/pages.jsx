@@ -1,10 +1,11 @@
 import HomePage from "../pages/HomePage/HomePage";
 import Page404 from "../pages/Page404/Page404";
-import AboutPage from "../pages/AboutPage";
+import About from "../pages/About/About";
 import Favorites from "../pages/Favorites/Favorites";
 import SearchResults from "../pages/SearchResults/SearchResults";
 import CourseInfoPage from "../pages/CourseInfoPage/CourseInfoPage";
 
+// Collection of Pages and corresponding URLs
 export const pages = {
   404: {
     label: "404",
@@ -18,7 +19,7 @@ export const pages = {
     },
     {
       label: "About",
-      component: <AboutPage />,
+      component: <About />,
       path: "/about",
     },
     {

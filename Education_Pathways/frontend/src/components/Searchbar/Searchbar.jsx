@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "./Searchbar.scss";
 
 export default function Searchbar({
@@ -15,6 +16,7 @@ export default function Searchbar({
 
   const onKeyPress = (target) => {
     if (target.charCode === 13) {
+      setValue("");
       if (onEnterKey) onEnterKey(value);
     }
   };
