@@ -273,6 +273,31 @@ export default function CourseInfoPage() {
     });
   };
 
+  function badIframe(src) {
+    return new Promise((resolve) => {
+      // This uses the new Fetch API to see what happens when the src of the iframe is fetched from the webpage.
+      // This approach would also work with XHR. It would not be as nice to write, but may be preferred for compatibility reasons.
+      fetch(src)
+        .then((res) => {
+          // the res object represents the response from the server
+
+          // res.ok is true if the repose has an "okay status" (200-299)
+          if (res.ok) {
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+
+          /* Note: it's probably possible for an iframe source to be given a 300s
+                status which means it'll redirect to a new page, and this may load
+                property. In this case the script does not work. However, following the
+                redirects until an eventual ok status or error is reached would be much
+                more involved than the solution provided here. */
+        })
+        .catch(() => resolve(true));
+    });
+  }
+
   const courseInfo = (courseCompare) => {
     return (
       <>
@@ -462,11 +487,27 @@ export default function CourseInfoPage() {
           <div style={{ height: "200px" }} />
         </div>
         <div style={{ display: section[3] ? "block" : "none" }}>
-          <iframe
-            title={courseCompare.courseCode}
-            src={`https://courses.skule.ca/course/${courseCompare.course_code}`}
-            style={{ width: "100%", height: "70vh" }}
-          ></iframe>
+          {!badIframe(
+            `https://courses.skule.ca/course/${courseCompare.course_code}`
+          ) ? (
+            <iframe
+              title={courseCompare.courseCode}
+              src={`https://courses.skule.ca/course/${courseCompare.course_code}`}
+              style={{ width: "100%", height: "70vh" }}
+            ></iframe>
+          ) : (
+            <div
+              style={{
+                height: "60vh",
+                width: "70vw",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h2>No past exam found for this course...</h2>
+            </div>
+          )}
         </div>
       </>
     );
