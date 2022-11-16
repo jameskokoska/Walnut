@@ -1,12 +1,15 @@
-# Walnut
-A Web Application for Efficient Course Searching
+# Walnut - A Web Application for Efficient Course Searching
 
-![Walnut Guide (1)](https://user-images.githubusercontent.com/50821962/202098863-27d1bec7-fb32-4d35-8758-09434c7c623b.png)
-
+Checkout [Walnut](https://walnut-uoft.herokuapp.com/)!
 
 ## Fun Fact
 
 Walnut, a name which fits in the theme of “tree nuts” often used by the University of Toronto (Acorn and Chestnut Residence).
+
+## Walnut Guide
+
+![Walnut Guide](https://user-images.githubusercontent.com/50821962/202098863-27d1bec7-fb32-4d35-8758-09434c7c623b.png)
+
 
 ## Documentations
 
