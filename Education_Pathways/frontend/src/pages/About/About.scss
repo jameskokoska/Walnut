@@ -1,0 +1,47 @@
+.about-page {
+  height: 100vh;
+  width: 100vw;
+  padding-inline: 20px;
+  margin-top: 80px;
+
+  h2 {
+    font-weight: 600;
+    font-size: 40px;
+  }
+
+  p {
+    font-weight: 200;
+    font-size: 18px;
+  }
+}
+
+.about-page-container {
+  height: 100%;
+  padding-inline: 10px;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
+.about-page-text {
+  padding-top: 50px;
+}
+
+.recipes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.team-profiles1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.team-profiles2 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.about-page-footer {
+  text-align: center;
+}

@@ -21,10 +21,10 @@ export default function SearchResultContainer({
   // Bold in names
   let showName = true;
   let displayName = course["name"];
-  if (displayName === undefined || displayName === "") {
+  if (displayName == undefined || displayName == "") {
     showName = false;
   } else {
-    if (term !== "") {
+    if (term != "") {
       const foundName = course["name"]
         .toUpperCase()
         .indexOf(term.toUpperCase().trim());
@@ -46,7 +46,7 @@ export default function SearchResultContainer({
   // Bold in description
   let showDescription = true;
   let displayDescription = course["description"];
-  if (displayDescription === undefined || displayDescription === "") {
+  if (displayDescription == undefined || displayDescription == "") {
     showDescription = false;
   } else {
     // make upper case so the check is not case-sensitive

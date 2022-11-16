@@ -12,8 +12,9 @@ export default function TimetableSectionContainer({ section }) {
         return (
           <div>
             <p style={{ margin: "0" }}>
-              {location ? <b>{time?.location}:</b> : <></>}{" "}
-              {time?.start / 3600 + ":00"}-{time?.end / 3600 + ":00"}
+              <b>{time?.day.slice(0, 3).toUpperCase()}: </b>
+              {location ? time?.location : <></>} {time?.start / 3600 + ":00"}-
+              {time?.end / 3600 + ":00"}
             </p>
             {instructors ? <i>{instructors.join(", ")}</i> : <></>}
           </div>

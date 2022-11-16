@@ -16,6 +16,7 @@ export default function Searchbar({
 
   const onKeyPress = (target) => {
     if (target.charCode === 13) {
+      setValue("");
       if (onEnterKey) onEnterKey(value);
     }
   };

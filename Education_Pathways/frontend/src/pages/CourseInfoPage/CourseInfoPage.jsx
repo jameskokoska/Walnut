@@ -277,7 +277,6 @@ export default function CourseInfoPage() {
     return (
       <>
         <div style={{ display: section[0] ? "block" : "none" }}>
-          <div style={{ height: "120px" }} />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
             <div style={{ width: "10px" }} />{" "}
@@ -290,18 +289,32 @@ export default function CourseInfoPage() {
           <h4 style={{ fontSize: "20px" }}>
             <b>{`${courseCompare.campus} campus, ${courseCompare.terms}`}</b>
           </h4>
+          {courseCompare.breadth ? (
+            <h4 style={{ fontSize: "20px" }}>
+              A&S Breadth {courseCompare.breadth}
+            </h4>
+          ) : (
+            <></>
+          )}
 
-          <p>{courseCompare.course_description}</p>
+          <p className="course-description">
+            {courseCompare.course_description}
+          </p>
           <CourseConnections course={courseCompare} />
         </div>
         <div style={{ display: section[1] ? "block" : "none" }}>
-          <div style={{ height: "120px" }} />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
             <div style={{ width: "10px" }} />{" "}
             <FavoriteButton courseCode={courseCompare.course_code} />
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
             <div className="review-and-ratings-container">
               <p>Click a rating to rate this course!</p>
               <h2 style={{ margin: 0 }}>Difficulty</h2>
@@ -422,16 +435,22 @@ export default function CourseInfoPage() {
               })}
             </div>
           </div>
-          <div style={{ height: "120px" }} />
+          <div style={{ height: "200px" }} />
         </div>
         <div style={{ display: section[2] ? "block" : "none" }}>
-          <div style={{ height: "120px" }} />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h1 style={{ marginBottom: 0 }}>{courseCompare.course_code}</h1>{" "}
             <div style={{ width: "10px" }} />{" "}
             <FavoriteButton courseCode={courseCompare.course_code} />
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              marginLeft: "-10px",
+              marginTop: "10px",
+            }}
+          >
             {courseCompare?.meeting_sections !== "" ? (
               courseCompare?.meeting_sections.map((section) => {
                 return <TimetableSectionContainer section={section} />;
@@ -440,13 +459,13 @@ export default function CourseInfoPage() {
               <></>
             )}
           </div>
-          <div style={{ height: "120px" }} />
+          <div style={{ height: "200px" }} />
         </div>
         <div style={{ display: section[3] ? "block" : "none" }}>
           <iframe
             title={courseCompare.courseCode}
             src={`https://courses.skule.ca/course/${courseCompare.course_code}`}
-            style={{ width: "80vw", height: "90vh" }}
+            style={{ width: "100%", height: "70vh" }}
           ></iframe>
         </div>
       </>
@@ -455,7 +474,7 @@ export default function CourseInfoPage() {
 
   return (
     <>
-      <div style={{ position: "fixed", top: "120px", left: "63px" }}>
+      <div style={{ position: "fixed", top: "175px", left: "45px" }}>
         <Button
           isSecondary={compare}
           style={{ width: "10px" }}
@@ -509,18 +528,28 @@ export default function CourseInfoPage() {
           )
         ) : (
           <>
-            <div className="courseInfo-main" style={{ width: "50%" }}>
+            <div
+              className="courseInfo-main"
+              style={{ width: "50%", paddingBottom: "100px" }}
+            >
               {courseInfo(courseState)}
             </div>
             <div
               className="courseInfo-main"
               style={{
                 width: "50%",
-                paddingLeft: "15px",
                 position: "relative",
+                paddingBottom: "100px",
               }}
             >
-              <div style={{ position: "absolute", width: "100%" }}>
+              <div
+                style={{
+                  position: "fixed",
+                  top: "95px",
+                  right: "100px",
+                  width: "30%",
+                }}
+              >
                 <div style={{ height: "10px" }} />
                 <Searchbar
                   onEnterKey={(text) => {
@@ -552,7 +581,8 @@ export default function CourseInfoPage() {
                 <h3
                   style={{
                     margin: "50px",
-                    marginTop: "200px",
+                    marginTop: "50px",
+                    marginBottom: "-60px",
                     textAlign: "center",
                   }}
                 >
@@ -562,7 +592,7 @@ export default function CourseInfoPage() {
                 <></>
               )}
               {courseCompareState.course_code === "" || clearSearch ? (
-                <div style={{ testAlign: "center" }}>
+                <div style={{ paddingBottom: "0px" }}>
                   <Favorites
                     setCourseCode={(code) => {
                       setCourseCompare(code);
