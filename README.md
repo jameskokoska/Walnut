@@ -1,4 +1,5 @@
-# Walnut - A Web Application for Efficient Course Searching
+# Walnut
+A Web Application for Efficient Course Searching
 
 ![Walnut Guide (1)](https://user-images.githubusercontent.com/50821962/202098863-27d1bec7-fb32-4d35-8758-09434c7c623b.png)
 
