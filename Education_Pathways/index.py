@@ -12,7 +12,6 @@ app.config["DEBUG"] = True
 app.config["TESTING"] = True
 
 config.init_app(app)
-config.init_db(app)
 config.init_cors(app)
 
 # API Endpoints
