@@ -312,7 +312,36 @@ export default function CourseInfoPage() {
                 rating={courseCompare?.ratings["difficulty"]["rating"]}
                 width={200}
                 onClick={(value) => {
-                  rateCourse(value, courseCompare["course_code"], "difficulty");
+                  if (
+                    localStorage.getItem(`${courseCompare?.course_code}`) ==
+                    null
+                  ) {
+                    localStorage.setItem(
+                      `${courseCompare?.course_code}`,
+                      JSON.stringify([true, false, false, false])
+                    );
+                    rateCourse(
+                      value,
+                      courseCompare["course_code"],
+                      "difficulty"
+                    );
+                  } else {
+                    const rated = JSON.parse(
+                      localStorage.getItem(`${courseCompare?.course_code}`)
+                    );
+                    if (!rated[0]) {
+                      rated[0] = true;
+                      localStorage.setItem(
+                        `${courseCompare?.course_code}`,
+                        JSON.stringify(rated)
+                      );
+                      rateCourse(
+                        value,
+                        courseCompare["course_code"],
+                        "difficulty"
+                      );
+                    }
+                  }
                 }}
                 height={75}
                 label={
@@ -325,7 +354,32 @@ export default function CourseInfoPage() {
                 rating={courseCompare?.ratings["lecture"]["rating"]}
                 width={200}
                 onClick={(value) => {
-                  rateCourse(value, courseCompare["course_code"], "lecture");
+                  if (
+                    localStorage.getItem(`${courseCompare?.course_code}`) ==
+                    null
+                  ) {
+                    localStorage.setItem(
+                      `${courseCompare?.course_code}`,
+                      JSON.stringify([false, true, false, false])
+                    );
+                    rateCourse(value, courseCompare["course_code"], "lecture");
+                  } else {
+                    const rated = JSON.parse(
+                      localStorage.getItem(`${courseCompare?.course_code}`)
+                    );
+                    if (!rated[1]) {
+                      rated[1] = true;
+                      localStorage.setItem(
+                        `${courseCompare?.course_code}`,
+                        JSON.stringify(rated)
+                      );
+                      rateCourse(
+                        value,
+                        courseCompare["course_code"],
+                        "lecture"
+                      );
+                    }
+                  }
                 }}
                 height={75}
                 label={
@@ -338,7 +392,32 @@ export default function CourseInfoPage() {
                 rating={courseCompare?.ratings["workload"]["rating"]}
                 width={200}
                 onClick={(value) => {
-                  rateCourse(value, courseCompare["course_code"], "workload");
+                  if (
+                    localStorage.getItem(`${courseCompare?.course_code}`) ==
+                    null
+                  ) {
+                    localStorage.setItem(
+                      `${courseCompare?.course_code}`,
+                      JSON.stringify([false, false, true, false])
+                    );
+                    rateCourse(value, courseCompare["course_code"], "workload");
+                  } else {
+                    const rated = JSON.parse(
+                      localStorage.getItem(`${courseCompare?.course_code}`)
+                    );
+                    if (!rated[2]) {
+                      rated[2] = true;
+                      localStorage.setItem(
+                        `${courseCompare?.course_code}`,
+                        JSON.stringify(rated)
+                      );
+                      rateCourse(
+                        value,
+                        courseCompare["course_code"],
+                        "workload"
+                      );
+                    }
+                  }
                 }}
                 height={75}
                 label={
@@ -351,7 +430,36 @@ export default function CourseInfoPage() {
                 rating={courseCompare?.ratings["tutorials"]["rating"]}
                 width={200}
                 onClick={(value) => {
-                  rateCourse(value, courseCompare["course_code"], "tutorials");
+                  if (
+                    localStorage.getItem(`${courseCompare?.course_code}`) ==
+                    null
+                  ) {
+                    localStorage.setItem(
+                      `${courseCompare?.course_code}`,
+                      JSON.stringify([false, false, false, true])
+                    );
+                    rateCourse(
+                      value,
+                      courseCompare["course_code"],
+                      "tutorials"
+                    );
+                  } else {
+                    const rated = JSON.parse(
+                      localStorage.getItem(`${courseCompare?.course_code}`)
+                    );
+                    if (!rated[3]) {
+                      rated[3] = true;
+                      localStorage.setItem(
+                        `${courseCompare?.course_code}`,
+                        JSON.stringify(rated)
+                      );
+                      rateCourse(
+                        value,
+                        courseCompare["course_code"],
+                        "tutorials"
+                      );
+                    }
+                  }
                 }}
                 height={65}
                 label={
