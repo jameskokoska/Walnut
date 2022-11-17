@@ -137,9 +137,7 @@ def getCourseRatings(courseCode):
     # make sure file exists
     # if not Path(os.path.join(os.getcwd(), './resources/reviews.json')).is_file():
     if not os.path.isfile(os.path.join(os.getcwd(), "./resources/reviews.json")):
-        print("reviews.json does not exist")
         return []
-    print("reviews.json exists")
 
     with open(os.path.join(os.getcwd(), "./resources/reviews.json"), "r") as f:
         all_ratings = json.load(f)
@@ -148,7 +146,6 @@ def getCourseRatings(courseCode):
         return all_ratings[courseCode]
     else:
         # no reviews yet for course
-        print("no reviews yet for course")
         return {
             "difficulty": {"rating": 0, "amount": 0},
             "lecture": {"rating": 0, "amount": 0},
