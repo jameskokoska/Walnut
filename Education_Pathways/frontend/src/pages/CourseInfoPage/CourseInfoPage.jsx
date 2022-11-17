@@ -47,18 +47,22 @@ const emptyCourse = {
 export default function CourseInfoPage() {
   const rateCourse = (value, courseCode, type) => {
     // Submit the rating to backend here
-    API.post("/course/addrating",  { courseCode, value, type }).then(res => {});
+    API.post("/course/addrating", { courseCode, value, type }).then(
+      (res) => {}
+    );
     setTimeout(() => {
       // Get ratings back
-    API.get(`/course/addrating?code=${courseCode}`).then(res => {
-      // see whether to update original or comparing course
-      if (courseCode === courseState.course_code) {
-        setCourseState({...courseState, ratings: res.data.ratings});
-      }
-      else if (courseCode === courseCompareState.course_code) {
-        setCourseCompareState({...courseCompareState, ratings: res.data.ratings})
-      }
-    });
+      API.get(`/course/addrating?code=${courseCode}`).then((res) => {
+        // see whether to update original or comparing course
+        if (courseCode === courseState.course_code) {
+          setCourseState({ ...courseState, ratings: res.data.ratings });
+        } else if (courseCode === courseCompareState.course_code) {
+          setCourseCompareState({
+            ...courseCompareState,
+            ratings: res.data.ratings,
+          });
+        }
+      });
     }, 100);
   };
 
@@ -73,7 +77,9 @@ export default function CourseInfoPage() {
     };
 
     // Submit the comment to backend here
-    API.post(`/course/addreview?code=${courseCode}`, commentObj).then((res) => {});
+    API.post(`/course/addreview?code=${courseCode}`, commentObj).then(
+      (res) => {}
+    );
 
     if (courseState?.course_code === courseCode) {
       courseState?.comments.unshift(commentObj);
@@ -107,21 +113,23 @@ export default function CourseInfoPage() {
     setSection(newSection);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     const coursePassed = state?.course;
     if (coursePassed) {
       let ratings = coursePassed.ratings;
       let comments = coursePassed.comments;
       //get ratings
-      API.get(`/course/addrating?code=${coursePassed.code}`)
-        .then((res) => {
+      await API.get(`/course/addrating?code=${coursePassed.code}`).then(
+        (res) => {
           ratings = res.data.ratings;
-        });
+        }
+      );
       //get comments
-      API.get(`/course/addreview?code=${coursePassed.code}`)
-        .then((res) => {
+      await API.get(`/course/addreview?code=${coursePassed.code}`).then(
+        (res) => {
           comments = res.data.comments;
-        });
+        }
+      );
 
       setCourseState({
         course_code: coursePassed.code,
@@ -141,27 +149,8 @@ export default function CourseInfoPage() {
         meeting_sections: coursePassed.meeting_sections,
         last_updated: coursePassed.last_updated,
         ratings: ratings,
-        // {
-        //   difficulty: { rating: 4.57, amount: 5 },
-        //   lecture: { rating: 5, amount: 15 },
-        //   workload: { rating: 4, amount: 3 },
-        //   tutorials: { rating: 4.2, amount: 1 },
-        // },
-        comments: comments,
-        // [
-        //   {
-        //     name: "Bob",
-        //     comment: "Hello my name is bob, I like this course!",
-        //     time: "2012-10-05T14:48:00.000Z",
-        //   },
-        //   {
-        //     name: "Bill",
-        //     comment: "Hello my name is bill, I like this course more!",
-        //     time: "2011-10-05T14:48:00.000Z",
-        //   },
-        // ],
+        comments: comments?.reverse(),
       });
-      // we need to get the comments and ratings here if the course was passed
       return;
     }
     API.get(`/course/details?code=${code}`)
@@ -185,27 +174,8 @@ export default function CourseInfoPage() {
           meeting_sections: data.meeting_sections,
           last_updated: data.last_updated,
           // we need to get the comments and ratings here
-          ratings: data.ratings
-          // {
-          //   difficulty: { rating: 4.57, amount: 5 },
-          //   lecture: { rating: 5, amount: 15 },
-          //   workload: { rating: 4, amount: 3 },
-          //   tutorials: { rating: 4.2, amount: 1 },
-          // }
-          ,
-          comments: data.comments,
-          // [
-          //   {
-          //     name: "Bob",
-          //     comment: "Hello my name is bob, I like this course!",
-          //     time: "2012-10-05T14:48:00.000Z",
-          //   },
-          //   {
-          //     name: "Bill",
-          //     comment: "Hello my name is bill, I like this course more!",
-          //     time: "2011-10-05T14:48:00.000Z",
-          //   },
-          // ],
+          ratings: data.ratings,
+          comments: data.comments?.reverse(),
         });
       })
       .catch(() => {
@@ -236,28 +206,8 @@ export default function CourseInfoPage() {
           exclusions: data.exclusions,
           meeting_sections: data.meeting_sections,
           last_updated: data.last_updated,
-          // we need to get the comments and ratings here
-          ratings: data.ratings
-          // {
-          //   difficulty: { rating: 4.57, amount: 5 },
-          //   lecture: { rating: 5, amount: 15 },
-          //   workload: { rating: 4, amount: 3 },
-          //   tutorials: { rating: 4.2, amount: 1 },
-          // }
-          ,
-          comments: data.comments,
-          // [
-          //   {
-          //     name: "Bob",
-          //     comment: "Hello my name is bob, I like this course!",
-          //     time: "2012-10-05T14:48:00.000Z",
-          //   },
-          //   {
-          //     name: "Bill",
-          //     comment: "Hello my name is bill, I like this course more!",
-          //     time: "2011-10-05T14:48:00.000Z",
-          //   },
-          // ],
+          ratings: data.ratings,
+          comments: data.comments?.reverse(),
         });
       })
       .catch(() => {
@@ -284,28 +234,8 @@ export default function CourseInfoPage() {
       exclusions: data.exclusions,
       meeting_sections: data.meeting_sections,
       last_updated: data.last_updated,
-      // we need to get the comments and ratings here
       ratings: data.ratings,
-      // {
-      //   difficulty: { rating: 4.57, amount: 5 },
-      //   lecture: { rating: 5, amount: 15 },
-      //   workload: { rating: 4, amount: 3 },
-      //   tutorials: { rating: 4.2, amount: 1 },
-      // },
-      // fetch data from backend
-      comments: data.comments,
-      // [
-      //   {
-      //     name: "Bob",
-      //     comment: "Hello my name is bob, I like this course!",
-      //     time: "2012-10-05T14:48:00.000Z",
-      //   },
-      //   {
-      //     name: "Bill",
-      //     comment: "Hello my name is bill, I like this course more!",
-      //     time: "2011-10-05T14:48:00.000Z",
-      //   },
-      // ],
+      comments: data.comments?.reverse(),
     });
   };
 
@@ -373,7 +303,6 @@ export default function CourseInfoPage() {
             style={{
               display: "flex",
               flexWrap: "wrap",
-              justifyContent: "center",
             }}
           >
             <div className="review-and-ratings-container">
@@ -476,7 +405,7 @@ export default function CourseInfoPage() {
                 />
               </div>
               <div style={{ height: "25px" }} />
-              {courseCompare?.comments.map((comment) => {
+              {courseCompare?.comments?.map((comment) => {
                 const date = new Date(comment?.time);
                 const dateString = date.toISOString()?.substring(0, 10);
                 return (
@@ -487,7 +416,7 @@ export default function CourseInfoPage() {
                         justifyContent: "space-between",
                       }}
                     >
-                      <h4 style={{ margin: 0 }}>{comment?.name}</h4>
+                      <h4 style={{ marginRight: "8px" }}>{comment?.name}</h4>
                       <h5>{dateString}</h5>
                     </div>
                     {comment?.comment}
