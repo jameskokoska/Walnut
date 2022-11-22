@@ -20,3 +20,7 @@ npm start
 ## Sass Specification
 
 The frontend development uses Sass instead of CSS, which has better readability and maintainability. Use VS Code [Live Sass Compiler](https://marketplace.visualstudio.com/items?itemName=glenn2223.live-sass) extension to convert Sass to CSS locally since the browser can only understand CSS, Sass is for developers to read.
+
+## Deploy
+
+Walnut has been deployed to heroku at https://walnut-uoft.herokuapp.com/. If there is further development, and want to be deployed, remember to set `api.js` baseURL to deployed URL instead of localhost, turn off development mode in `index.py`. Run `npm build` in the `frontend` directory. Lastly, use `git push heroku main` to deploy to heroku.

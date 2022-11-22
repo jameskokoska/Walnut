@@ -7,13 +7,15 @@ To setup the backend development environment, it is recommanded to use a virtual
 ```sh
 conda create -n Walnut python=3.10
 conda activate Walnut
+
+# Ensure you are in the root directory
 pip install -r requirements.txt
 ```
 
 To setup the frontend development environment, it is recommanded to use [node.js](https://nodejs.org/en/) and [node package manager](https://www.npmjs.com/)(`npm`). Once you have `npm` installed, use the following command:
 
 ```sh
-# Assume you are in the root directory
+# Ensure you are in the root directory
 cd Education_Pathways/frontend/
 npm install
 ```

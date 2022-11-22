@@ -49,7 +49,7 @@ export default function CourseInfoPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const [commentName, setCommentName] = useState(false);
+  const [commentName, setCommentName] = useState("");
   const [commentComment, setCommentComment] = useState(false);
   const [section, setSection] = useState([true, false, false, false]);
   const [compare, setCompare] = useState(false);

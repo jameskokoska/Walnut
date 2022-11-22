@@ -17,7 +17,6 @@ Walnut, a name which fits in the theme of “tree nuts” often used by the Univ
 - [Development Instructions](/docs/Develop.md)
 - [Contribution Instructions](/docs/Contribution.md)
 - [Docker Instructions](/docs/Docker.md)
-- [Testing Instructions](/docs/Testing.md)
 - [Asset Acknowledgements](/docs/Acknowledgement.md)
 
 ## Team Members
