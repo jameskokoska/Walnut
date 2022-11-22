@@ -45,29 +45,45 @@ const emptyCourse = {
 };
 
 export default function CourseInfoPage() {
-  const rateCourse = (value, courseCode, type) => {
-    // Submit the rating to backend here
-    API.post("/course/addrating", { courseCode, value, type }).then(
-      (res) => {}
-    );
-    setTimeout(() => {
-      // Get ratings back
-      API.get(`/course/addrating?code=${courseCode}`).then((res) => {
-        // see whether to update original or comparing course
-        if (courseCode === courseState.course_code) {
-          setCourseState({ ...courseState, ratings: res.data.ratings });
-        } else if (courseCode === courseCompareState.course_code) {
-          setCourseCompareState({
-            ...courseCompareState,
-            ratings: res.data.ratings,
-          });
-        }
-      });
-    }, 100);
-  };
-
   const [commentName, setCommentName] = useState(false);
   const [commentComment, setCommentComment] = useState(false);
+
+  const { code } = useParams();
+  const [section, setSection] = useState([true, false, false, false]);
+  const [compare, setCompare] = useState(false);
+  const [searchCompare, setSearchCompare] = useState(false);
+  const [clearSearch, setClearSearch] = useState(false);
+  const [courseState, setCourseState] = useState(emptyCourse);
+  const [courseCompareState, setCourseCompareState] = useState(emptyCourse);
+  const [toggleCollapse, setToggleCollapse] = useState(false);
+  const [submitComment, setSubmitComment] = useState(false);
+  const [ratingState, setRatingState] = useState({
+    difficulty: { rating: 0, amount: 0 },
+    lecture: { rating: 0, amount: 0 },
+    workload: { rating: 0, amount: 0 },
+    tutorial: { rating: 0, amount: 0 },
+  });
+
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  const rateCourse = (value, courseCode, type) => {
+    // Immediately render the updated frontend
+    let rating = parseInt(ratingState[type]["rating"]);
+    let amount = parseInt(ratingState[type]["amount"]);
+    let totalRating = rating * amount;
+    let newRating = (totalRating + value) / (amount + 1);
+    let prevState = { ...ratingState };
+    prevState[type]["rating"] = newRating;
+    prevState[type]["amount"] = amount + 1;
+    setRatingState(prevState);
+
+    // Submit the rating to backend here
+    API.post("/course/addrating", { courseCode, value, type }).then((res) => {
+      console.log(res);
+    });
+  };
+
   const leaveComment = async (courseCode) => {
     const commentDate = new Date().toISOString();
     const commentObj = {
@@ -77,9 +93,9 @@ export default function CourseInfoPage() {
     };
 
     // Submit the comment to backend here
-    API.post(`/course/addreview?code=${courseCode}`, commentObj).then(
-      (res) => {}
-    );
+    API.post(`/course/addreview?code=${courseCode}`, commentObj).then((res) => {
+      console.log(res);
+    });
 
     if (courseState?.course_code === courseCode) {
       courseState?.comments.unshift(commentObj);
@@ -94,30 +110,29 @@ export default function CourseInfoPage() {
     }
   };
 
-  const { code } = useParams();
-  const [section, setSection] = useState([true, false, false, false]);
-  const [compare, setCompare] = useState(false);
-  const [searchCompare, setSearchCompare] = useState(false);
-  const [clearSearch, setClearSearch] = useState(false);
-  const [courseState, setCourseState] = useState(emptyCourse);
-  const [courseCompareState, setCourseCompareState] = useState(emptyCourse);
-  const [toggleCollapse, setToggleCollapse] = useState(false);
-  const [submitComment, setSubmitComment] = useState(false);
-
-  const { state } = useLocation();
-  const navigate = useNavigate();
-
   const onTabClick = (idx) => {
     let newSection = [false, false, false, false];
     newSection[idx] = true;
     setSection(newSection);
   };
 
+  const setRatingStateHelper = (ratings) => {
+    let newRatingState = { ...ratingState };
+    newRatingState["difficulty"]["rating"] = parseFloat(ratings["difficulty"]);
+    newRatingState["difficulty"]["amount"] = parseFloat(ratings["amount"][0]);
+    newRatingState["lecture"]["rating"] = parseFloat(ratings["lecture"]);
+    newRatingState["lecture"]["amount"] = parseFloat(ratings["amount"][1]);
+    newRatingState["workload"]["rating"] = parseFloat(ratings["workload"]);
+    newRatingState["workload"]["amount"] = parseFloat(ratings["amount"][2]);
+    newRatingState["tutorial"]["rating"] = parseFloat(ratings["tutorial"]);
+    newRatingState["tutorial"]["amount"] = parseFloat(ratings["amount"][3]);
+    setRatingState(newRatingState);
+  };
+
   useEffect(async () => {
     const coursePassed = state?.course;
     if (coursePassed) {
-      let ratings = coursePassed.ratings;
-      let comments = coursePassed.comments;
+      let ratings, comments;
       //get ratings
       await API.get(`/course/addrating?code=${coursePassed.code}`).then(
         (res) => {
@@ -151,6 +166,8 @@ export default function CourseInfoPage() {
         ratings: ratings,
         comments: comments?.reverse(),
       });
+
+      setRatingStateHelper(ratings);
       return;
     }
     API.get(`/course/details?code=${code}`)
@@ -177,11 +194,12 @@ export default function CourseInfoPage() {
           ratings: data.ratings,
           comments: data.comments?.reverse(),
         });
+
+        setRatingStateHelper(data.ratings);
       })
       .catch(() => {
         navigate("course-not-found");
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setCourseCompare = (compareCode) => {
@@ -209,6 +227,8 @@ export default function CourseInfoPage() {
           ratings: data.ratings,
           comments: data.comments?.reverse(),
         });
+
+        setRatingStateHelper(data.ratings);
       })
       .catch(() => {
         setSearchCompare(compareCode);
@@ -284,7 +304,7 @@ export default function CourseInfoPage() {
               <p>Click a rating to rate this course!</p>
               <h2 style={{ margin: 0 }}>Difficulty</h2>
               <StarRatings
-                rating={courseCompare?.ratings["difficulty"]["rating"]}
+                rating={ratingState["difficulty"]["rating"]}
                 width={200}
                 onClick={(value) => {
                   if (
@@ -319,14 +339,11 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={75}
-                label={
-                  courseCompare?.ratings["difficulty"]["amount"] +
-                  " student ratings"
-                }
+                label={ratingState["difficulty"]["amount"] + " student ratings"}
               />
               <h2 style={{ margin: 0 }}>Lectures</h2>
               <StarRatings
-                rating={courseCompare?.ratings["lecture"]["rating"]}
+                rating={ratingState["lecture"]["rating"]}
                 width={200}
                 onClick={(value) => {
                   if (
@@ -357,14 +374,11 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={75}
-                label={
-                  courseCompare?.ratings["lecture"]["amount"] +
-                  " student ratings"
-                }
+                label={ratingState["lecture"]["amount"] + " student ratings"}
               />
               <h2 style={{ margin: 0 }}>Workload</h2>
               <StarRatings
-                rating={courseCompare?.ratings["workload"]["rating"]}
+                rating={ratingState["workload"]["rating"]}
                 width={200}
                 onClick={(value) => {
                   if (
@@ -395,14 +409,11 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={75}
-                label={
-                  courseCompare?.ratings["workload"]["amount"] +
-                  " student ratings"
-                }
+                label={ratingState["workload"]["amount"] + " student ratings"}
               />
               <h2 style={{ margin: 0 }}>Tutorials</h2>
               <StarRatings
-                rating={courseCompare?.ratings["tutorials"]["rating"]}
+                rating={ratingState["tutorial"]["rating"]}
                 width={200}
                 onClick={(value) => {
                   if (
@@ -413,11 +424,7 @@ export default function CourseInfoPage() {
                       `${courseCompare?.course_code}`,
                       JSON.stringify([false, false, false, true])
                     );
-                    rateCourse(
-                      value,
-                      courseCompare["course_code"],
-                      "tutorial"
-                    );
+                    rateCourse(value, courseCompare["course_code"], "tutorial");
                   } else {
                     const rated = JSON.parse(
                       localStorage.getItem(`${courseCompare?.course_code}`)
@@ -437,10 +444,7 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={65}
-                label={
-                  courseCompare?.ratings["tutorials"]["amount"] +
-                  " student ratings"
-                }
+                label={ratingState["tutorial"]["amount"] + " student ratings"}
               />
             </div>
             <div style={{ width: "15px" }} />

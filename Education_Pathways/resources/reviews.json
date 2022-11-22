@@ -1,9 +1,0 @@
-{
-  "ECE444H1": {
-    "difficulty": { "rating": 5, "amount": 1 },
-    "lecture": { "rating": 5, "amount": 1 },
-    "workload": { "rating": 5, "amount": 1 },
-    "tutorials": { "rating": 5, "amount": 1 },
-    "lectures": { "rating": 5, "amount": 1 }
-  }
-}

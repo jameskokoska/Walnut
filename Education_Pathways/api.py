@@ -1,4 +1,5 @@
 """ Backend API """
+
 from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from nikel_py import Courses
@@ -9,10 +10,9 @@ from util import (
     requestCourses,
     deduplicate,
     getCourseRatings,
-    addRating,
-    addComment,
-    getComments,
+    addCourseRating,
 )
+from model import Comment
 
 
 class SearchCourse(Resource):
@@ -53,13 +53,6 @@ class SearchCourse(Resource):
         for course in list(courses):
             courses_data.append(course.all_data)
 
-        # Add comments for each course in courses_data
-        for index, course in enumerate(courses_data):
-            courses_data[index]["comments"] = getComments(course["code"])
-
-        # Add ratings for each course in courses_data
-        for index, course in enumerate(courses_data):
-            courses_data[index]["ratings"] = getCourseRatings(course["code"])
         try:
             resp = {"courses_data": courses_data, "term": term}
             resp = jsonify(resp)
@@ -78,8 +71,9 @@ class ShowCourse(Resource):
         # Search only by course code
         code = request.args.get("code")
         courses = Courses.get({"code": code})
-        comments = getComments(code)
-        ratings = getCourseRatings(code)
+        comments = Comment.objects(code=code)
+        ratings = getCourseRatings(courseCode=code)
+
         if len(courses) == 0:
             resp = jsonify({"message": f"Course {code} doesn't exist"})
             resp.status_code = 404
@@ -93,56 +87,36 @@ class ShowCourse(Resource):
             resp = jsonify(courses[0].all_data)
             resp.status_code = 200
             return resp
-        except Exception:
-            resp = jsonify({"error": "something went wrong"})
-            resp.status_code = 400
-            return resp
 
-    def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument("code", required=True)
-        data = parser.parse_args()
-        code = data["code"]
-        courses = Courses.get({"code": code})
-        comments = getComments(code)
-        ratings = getCourseRatings(code)
-        if len(courses) == 0:
-            resp = jsonify({"message": f"Course {code} doesn't exist"})
-            resp.status_code = 404
-            return resp
-        try:
-            courses[0]["comments"] = comments
-            courses[0]["ratings"] = ratings
-            resp = jsonify({"course": courses[0]})
-            resp.status_code = 200
-            return resp
         except Exception:
             resp = jsonify({"error": "something went wrong"})
             resp.status_code = 400
             return resp
 
 
-class AddRating(Resource):
+class CourseRating(Resource):
     def get(self):
         """
         Get all ratings for a course
         code in request query params
         """
         code = request.args.get("code")
+
         try:
-            ratings = getCourseRatings(code)
+            ratings = getCourseRatings(courseCode=code)
             resp = jsonify({"ratings": ratings})
             resp.status_code = 200
             return resp
+
         except Exception:
             resp = jsonify({"error": "something went wrong"})
             resp.status_code = 400
             return resp
 
     def post(self):
-        """Add course rating
-
-        FEtch courseCode, value, type from request body
+        """
+        Add course rating
+        Fetch courseCode, value, type from request body
         """
 
         parser = reqparse.RequestParser()
@@ -151,23 +125,23 @@ class AddRating(Resource):
         parser.add_argument("type", required=True)
 
         data = parser.parse_args()
-
         courseCode = data["courseCode"]
         value = data["value"]
-        type = data["type"]
+        _type = data["type"]
 
         try:
-            addRating(courseCode, value, type)
+            addCourseRating(courseCode, value, _type)
             resp = jsonify({"messege": "Rating Added!"})
             resp.status_code = 200
             return resp
+
         except Exception:
             resp = jsonify({"error": "something went wrong"})
             resp.status_code = 400
             return resp
 
 
-class AddReview(Resource):
+class CourseComment(Resource):
     def get(self):
         """
         Get all comments for a course
@@ -175,7 +149,7 @@ class AddReview(Resource):
         """
         code = request.args.get("code")
         try:
-            comments = getComments(code)
+            comments = Comment.objects(code=code)
             resp = jsonify({"comments": comments})
             resp.status_code = 200
             return resp
@@ -193,20 +167,19 @@ class AddReview(Resource):
         parser.add_argument("name", required=True)
         parser.add_argument("comment", required=True)
         parser.add_argument("time", required=True)
-        data = parser.parse_args()
 
-        # rating = request.form['rating']
-        # text = request.form['text']
+        data = parser.parse_args()
         name = data["name"]
         comment = data["comment"]
         time = data["time"]
 
         try:
-            # addReview(courseCode, rating, text)
-            addComment(code, name, comment, time)
+            comment = Comment(code=code, name=name, comment=comment, time=time)
+            comment.save()
             resp = jsonify({"messege": "Comment Added!"})
             resp.status_code = 200
             return resp
+
         except Exception:
             resp = jsonify({"error": "something went wrong"})
             resp.status_code = 400

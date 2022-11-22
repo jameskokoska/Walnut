@@ -3,7 +3,6 @@ from flask import Flask, send_from_directory
 from flask_restful import Api
 
 import config
-from api import SearchCourse, ShowCourse, AddReview, AddRating
 
 # App Configuration
 app = Flask(__name__, static_folder="frontend/build")
@@ -19,11 +18,13 @@ config.init_db(app)
 config.init_cors(app)
 
 # API Endpoints
+from api import SearchCourse, ShowCourse, CourseRating, CourseComment
+
 rest_api = Api(app)
 rest_api.add_resource(SearchCourse, "/searchc")
 rest_api.add_resource(ShowCourse, "/course/details")
-rest_api.add_resource(AddReview, "/course/addreview")
-rest_api.add_resource(AddRating, "/course/addrating")
+rest_api.add_resource(CourseComment, "/course/addreview")
+rest_api.add_resource(CourseRating, "/course/addrating")
 
 
 @app.route("/", defaults={"path": ""})

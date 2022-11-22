@@ -1,11 +1,10 @@
 """ Utility Functions """
-import json
-import os
+
 from nikel_py import Courses
-from pathlib import Path
 
 from keywords import KEYWORDS
 from keywords import SHORTCUT
+from model import Rating
 
 
 def deduplicate(course_list):
@@ -125,99 +124,73 @@ def requestCourses(code, categories, term):
             except:
                 print(f"No course found for {categories}")
 
-    courses = deduplicate(courses)
-    # Add comments to courses
-
-    return courses
+    return deduplicate(courses)
 
 
 def getCourseRatings(courseCode):
-    all_ratings = {}
+    rating_obj = Rating.objects(code=courseCode)
+    ratings = {
+        "difficulty": 0,
+        "lecture": 0,
+        "workload": 0,
+        "tutorial": 0,
+        "amount": ([0, 0, 0, 0] if len(rating_obj) == 0 else rating_obj[0].amount),
+    }
 
-    # make sure file exists
-    # if not Path(os.path.join(os.getcwd(), './resources/reviews.json')).is_file():
-    if not os.path.isfile(os.path.join(os.getcwd(), "./resources/reviews.json")):
-        return []
-
-    with open(os.path.join(os.getcwd(), "./resources/reviews.json"), "r") as f:
-        all_ratings = json.load(f)
-
-    if courseCode in all_ratings:
-        return all_ratings[courseCode]
-    else:
-        # no reviews yet for course
-        return {
-            "difficulty": {"rating": 0, "amount": 0},
-            "lecture": {"rating": 0, "amount": 0},
-            "workload": {"rating": 0, "amount": 0},
-            "tutorials": {"rating": 0, "amount": 0},
-        }
-
-
-def addRating(courseCode, rating, type):
-    all_reviews = {}
-    # get existing reviews if file exists
-    if Path("./resources/reviews.json").is_file():
-        with open("./resources/reviews.json", "r") as f:
-            all_reviews = json.load(f)
-
-    # see if the are any reviews for this course
-    if courseCode not in all_reviews:
-        # no reviews yet for this course, create new list for course code
-        all_reviews[courseCode] = {
-            "difficulty": {"rating": 0, "amount": 0},
-            "lecture": {"rating": 0, "amount": 0},
-            "workload": {"rating": 0, "amount": 0},
-            "tutorials": {"rating": 0, "amount": 0},
-        }
-    if type in all_reviews[courseCode]:
-        # update the review
-        x = float(all_reviews[courseCode][type]["rating"])
-        y = float(all_reviews[courseCode][type]["amount"])
-        z = x * y
-
-        total_rating = z + float(rating)
-        all_reviews[courseCode][type]["amount"] = 1 + int(
-            all_reviews[courseCode][type]["amount"]
+    for rating in rating_obj:
+        ratings["difficulty"] = (
+            float(rating.difficulty) / rating.amount[0]
+            if rating.amount[0] != 0
+            else rating.difficulty
         )
-        all_reviews[courseCode][type]["rating"] = total_rating / int(
-            all_reviews[courseCode][type]["amount"]
+        ratings["lecture"] = (
+            float(rating.lecture) / rating.amount[1]
+            if rating.amount[1] != 0
+            else rating.lecture
+        )
+        ratings["workload"] = (
+            float(rating.workload) / rating.amount[2]
+            if rating.amount[2] != 0
+            else rating.workload
+        )
+        ratings["tutorial"] = (
+            float(rating.tutorial) / rating.amount[3]
+            if rating.amount[3] != 0
+            else rating.tutorial
+        )
+
+    print(ratings)
+    return ratings
+
+
+def addCourseRating(courseCode, _rating, _type):
+    rating = Rating.objects(code=courseCode)
+
+    # No available data, create a new instance
+    if len(rating) == 0:
+        rating = Rating(
+            code=courseCode,
+            difficulty=0,
+            lecture=0,
+            workload=0,
+            tutorial=0,
+            amount=[0, 0, 0, 0],
         )
     else:
-        all_reviews[courseCode][type] = {"rating": rating, "amount": 1}
-    # write to json file
-    with open("./resources/reviews.json", "w") as fw:
-        json.dump(all_reviews, fw)
+        rating = rating[0]
 
+    match _type:
+        case "difficulty":
+            rating.difficulty += int(_rating)
+            rating.amount[0] += 1
+        case "lecture":
+            rating.lecture += int(_rating)
+            rating.amount[1] += 1
+        case "workload":
+            rating.workload += int(_rating)
+            rating.amount[2] += 1
+        case "tutorial":
+            rating.tutorial += int(_rating)
+            rating.amount[3] += 1
 
-def addComment(code, name, comment, time):
-    """
-    Save a comment in the database
-    resources/comments.json
-    keys are course codes
-    values are lists of dictionaries of comments
-    """
-    with open("./resources/comments.json", "r") as f:
-        comments = json.load(f)
-
-    if code in comments:
-        comments[code].append({"name": name, "comment": comment, "time": time})
-    else:
-        comments[code] = [{"name": name, "comment": comment, "time": time}]
-
-    with open("./resources/comments.json", "w") as fw:
-        json.dump(comments, fw)
-
-
-def getComments(code):
-    """
-    Get all comments for a course
-    from fill resources/comments.json
-    """
-    with open("./resources/comments.json", "r") as f:
-        comments = json.load(f)
-
-    if code in comments:
-        return comments[code]
-
-    return []
+    rating.save()
