@@ -66,7 +66,7 @@ export default function CourseInfoPage() {
     }, 100);
   };
 
-  const [commentName, setCommentName] = useState(false);
+  const [commentName, setCommentName] = useState("");
   const [commentComment, setCommentComment] = useState(false);
   const leaveComment = async (courseCode) => {
     const commentDate = new Date().toISOString();
@@ -444,7 +444,10 @@ export default function CourseInfoPage() {
               />
             </div>
             <div style={{ width: "15px" }} />
-            <div className="review-and-ratings-container">
+            <div
+              className="review-and-ratings-container"
+              style={{ width: "40%" }}
+            >
               <h1>Comments</h1>
               <div className="comment-form-container">
                 <Searchbar
@@ -461,13 +464,6 @@ export default function CourseInfoPage() {
                     style={{ borderRadius: "5px" }}
                     onChange={(text) => {
                       setCommentComment(text);
-                    }}
-                    onEnterKey={async (text) => {
-                      setCommentComment(text);
-                      setSubmitComment(true);
-                      await setTimeout(() => {
-                        leaveComment(courseCompare?.course_code);
-                      }, 100);
                     }}
                   />
                 ) : (
@@ -499,7 +495,9 @@ export default function CourseInfoPage() {
                         justifyContent: "space-between",
                       }}
                     >
-                      <h4 style={{ marginRight: "8px" }}>{comment?.name}</h4>
+                      <h4 style={{ marginRight: "8px" }}>
+                        {comment?.name == "" ? "Anon." : comment?.name}
+                      </h4>
                       <h5>{dateString}</h5>
                     </div>
                     {comment?.comment}
