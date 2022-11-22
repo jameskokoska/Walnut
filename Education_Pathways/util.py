@@ -159,7 +159,6 @@ def getCourseRatings(courseCode):
             else rating.tutorial
         )
 
-    print(ratings)
     return ratings
 
 

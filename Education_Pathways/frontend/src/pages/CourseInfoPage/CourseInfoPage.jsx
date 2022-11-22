@@ -45,10 +45,12 @@ const emptyCourse = {
 };
 
 export default function CourseInfoPage() {
+  const { code } = useParams();
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
   const [commentName, setCommentName] = useState(false);
   const [commentComment, setCommentComment] = useState(false);
-
-  const { code } = useParams();
   const [section, setSection] = useState([true, false, false, false]);
   const [compare, setCompare] = useState(false);
   const [searchCompare, setSearchCompare] = useState(false);
@@ -57,15 +59,7 @@ export default function CourseInfoPage() {
   const [courseCompareState, setCourseCompareState] = useState(emptyCourse);
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [submitComment, setSubmitComment] = useState(false);
-  const [ratingState, setRatingState] = useState({
-    difficulty: { rating: 0, amount: 0 },
-    lecture: { rating: 0, amount: 0 },
-    workload: { rating: 0, amount: 0 },
-    tutorial: { rating: 0, amount: 0 },
-  });
-
-  const { state } = useLocation();
-  const navigate = useNavigate();
+  const [ratingState, setRatingState] = useState({});
 
   const onTabClick = (idx) => {
     let newSection = [false, false, false, false];
@@ -75,13 +69,13 @@ export default function CourseInfoPage() {
 
   const rateCourse = (value, courseCode, type) => {
     // Immediately render the updated frontend
-    let rating = parseInt(ratingState[type]["rating"]);
-    let amount = parseInt(ratingState[type]["amount"]);
+    let rating = parseInt(ratingState[courseCode][type]["rating"]);
+    let amount = parseInt(ratingState[courseCode][type]["amount"]);
     let totalRating = rating * amount;
     let newRating = (totalRating + value) / (amount + 1);
     let prevState = { ...ratingState };
-    prevState[type]["rating"] = newRating;
-    prevState[type]["amount"] = amount + 1;
+    prevState[courseCode][type]["rating"] = newRating;
+    prevState[courseCode][type]["amount"] = amount + 1;
     setRatingState(prevState);
 
     // Submit the rating to backend here
@@ -116,16 +110,43 @@ export default function CourseInfoPage() {
     }
   };
 
-  const setRatingStateHelper = (ratings) => {
+  const setRatingStateHelper = (code, ratings) => {
     let newRatingState = { ...ratingState };
-    newRatingState["difficulty"]["rating"] = parseFloat(ratings["difficulty"]);
-    newRatingState["difficulty"]["amount"] = parseFloat(ratings["amount"][0]);
-    newRatingState["lecture"]["rating"] = parseFloat(ratings["lecture"]);
-    newRatingState["lecture"]["amount"] = parseFloat(ratings["amount"][1]);
-    newRatingState["workload"]["rating"] = parseFloat(ratings["workload"]);
-    newRatingState["workload"]["amount"] = parseFloat(ratings["amount"][2]);
-    newRatingState["tutorial"]["rating"] = parseFloat(ratings["tutorial"]);
-    newRatingState["tutorial"]["amount"] = parseFloat(ratings["amount"][3]);
+    if (!(code in newRatingState)) {
+      newRatingState[code] = {
+        difficulty: { rating: 0, amount: 0 },
+        lecture: { rating: 0, amount: 0 },
+        workload: { rating: 0, amount: 0 },
+        tutorial: { rating: 0, amount: 0 },
+      };
+    }
+
+    newRatingState[code]["difficulty"]["rating"] = parseFloat(
+      ratings["difficulty"]
+    );
+    newRatingState[code]["difficulty"]["amount"] = parseFloat(
+      ratings["amount"][0]
+    );
+
+    newRatingState[code]["lecture"]["rating"] = parseFloat(ratings["lecture"]);
+    newRatingState[code]["lecture"]["amount"] = parseFloat(
+      ratings["amount"][1]
+    );
+
+    newRatingState[code]["workload"]["rating"] = parseFloat(
+      ratings["workload"]
+    );
+    newRatingState[code]["workload"]["amount"] = parseFloat(
+      ratings["amount"][2]
+    );
+
+    newRatingState[code]["tutorial"]["rating"] = parseFloat(
+      ratings["tutorial"]
+    );
+    newRatingState[code]["tutorial"]["amount"] = parseFloat(
+      ratings["amount"][3]
+    );
+
     setRatingState(newRatingState);
   };
 
@@ -133,12 +154,15 @@ export default function CourseInfoPage() {
     const coursePassed = state?.course;
     if (coursePassed) {
       let ratings, comments;
+
       //get ratings
       await API.get(`/course/addrating?code=${coursePassed.code}`).then(
         (res) => {
           ratings = res.data.ratings;
+          setRatingStateHelper(coursePassed.code, ratings);
         }
       );
+
       //get comments
       await API.get(`/course/addreview?code=${coursePassed.code}`).then(
         (res) => {
@@ -166,8 +190,6 @@ export default function CourseInfoPage() {
         ratings: ratings,
         comments: comments?.reverse(),
       });
-
-      setRatingStateHelper(ratings);
       return;
     }
     API.get(`/course/details?code=${code}`)
@@ -195,18 +217,19 @@ export default function CourseInfoPage() {
           comments: data.comments?.reverse(),
         });
 
-        setRatingStateHelper(data.ratings);
+        setRatingStateHelper(data.code, data.ratings);
       })
       .catch(() => {
         navigate("course-not-found");
       });
   }, []);
 
-  const setCourseCompare = (compareCode) => {
+  const setCourseCompare = async (compareCode) => {
     setSearchCompare(false);
-    API.get(`/course/details?code=${compareCode}`)
+    await API.get(`/course/details?code=${compareCode}`)
       .then((res) => {
         const data = res.data;
+        setRatingStateHelper(data.code, data.ratings);
         setCourseCompareState({
           course_code: data.code,
           course_name: data.name,
@@ -227,8 +250,6 @@ export default function CourseInfoPage() {
           ratings: data.ratings,
           comments: data.comments?.reverse(),
         });
-
-        setRatingStateHelper(data.ratings);
       })
       .catch(() => {
         setSearchCompare(compareCode);
@@ -304,7 +325,9 @@ export default function CourseInfoPage() {
               <p>Click a rating to rate this course!</p>
               <h2 style={{ margin: 0 }}>Difficulty</h2>
               <StarRatings
-                rating={ratingState["difficulty"]["rating"]}
+                rating={
+                  ratingState[courseCompare.course_code]["difficulty"]["rating"]
+                }
                 width={200}
                 onClick={(value) => {
                   if (
@@ -339,11 +362,17 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={75}
-                label={ratingState["difficulty"]["amount"] + " student ratings"}
+                label={
+                  ratingState[courseCompare.course_code]["difficulty"][
+                    "amount"
+                  ] + " student ratings"
+                }
               />
               <h2 style={{ margin: 0 }}>Lectures</h2>
               <StarRatings
-                rating={ratingState["lecture"]["rating"]}
+                rating={
+                  ratingState[courseCompare.course_code]["lecture"]["rating"]
+                }
                 width={200}
                 onClick={(value) => {
                   if (
@@ -374,11 +403,16 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={75}
-                label={ratingState["lecture"]["amount"] + " student ratings"}
+                label={
+                  ratingState[courseCompare.course_code]["lecture"]["amount"] +
+                  " student ratings"
+                }
               />
               <h2 style={{ margin: 0 }}>Workload</h2>
               <StarRatings
-                rating={ratingState["workload"]["rating"]}
+                rating={
+                  ratingState[courseCompare.course_code]["workload"]["rating"]
+                }
                 width={200}
                 onClick={(value) => {
                   if (
@@ -409,11 +443,16 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={75}
-                label={ratingState["workload"]["amount"] + " student ratings"}
+                label={
+                  ratingState[courseCompare.course_code]["workload"]["amount"] +
+                  " student ratings"
+                }
               />
               <h2 style={{ margin: 0 }}>Tutorials</h2>
               <StarRatings
-                rating={ratingState["tutorial"]["rating"]}
+                rating={
+                  ratingState[courseCompare.course_code]["tutorial"]["rating"]
+                }
                 width={200}
                 onClick={(value) => {
                   if (
@@ -444,7 +483,10 @@ export default function CourseInfoPage() {
                   }
                 }}
                 height={65}
-                label={ratingState["tutorial"]["amount"] + " student ratings"}
+                label={
+                  ratingState[courseCompare.course_code]["tutorial"]["amount"] +
+                  " student ratings"
+                }
               />
             </div>
             <div style={{ width: "15px" }} />
