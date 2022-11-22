@@ -6,9 +6,9 @@ import config
 
 # App Configuration
 app = Flask(__name__, static_folder="frontend/build")
-app.config["ENV"] = "development"
-app.config["DEBUG"] = True
-app.config["TESTING"] = True
+# app.config["ENV"] = "development"
+# app.config["DEBUG"] = True
+# app.config["TESTING"] = True
 app.config[
     "MONGODB_HOST"
 ] = "mongodb+srv://kevinlitian:Il2Ab85qh5ySydtz@walnut.wmyelbz.mongodb.net/?retryWrites=true&w=majority"
