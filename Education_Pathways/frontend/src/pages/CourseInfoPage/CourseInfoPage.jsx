@@ -280,7 +280,10 @@ export default function CourseInfoPage() {
               flexWrap: "wrap",
             }}
           >
-            <div className="review-and-ratings-container">
+            <div
+              className="review-and-ratings-container"
+              style={{ width: "30%", minWidth: "300px" }}
+            >
               <p>Click a rating to rate this course!</p>
               <h2 style={{ margin: 0 }}>Difficulty</h2>
               <StarRatings
@@ -446,7 +449,7 @@ export default function CourseInfoPage() {
             <div style={{ width: "15px" }} />
             <div
               className="review-and-ratings-container"
-              style={{ width: "40%" }}
+              style={{ width: "40%", minWidth: "400px" }}
             >
               <h1>Comments</h1>
               <div className="comment-form-container">
