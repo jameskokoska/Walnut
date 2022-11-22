@@ -67,6 +67,12 @@ export default function CourseInfoPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
+  const onTabClick = (idx) => {
+    let newSection = [false, false, false, false];
+    newSection[idx] = true;
+    setSection(newSection);
+  };
+
   const rateCourse = (value, courseCode, type) => {
     // Immediately render the updated frontend
     let rating = parseInt(ratingState[type]["rating"]);
@@ -108,12 +114,6 @@ export default function CourseInfoPage() {
       setSubmitComment(false);
       setCommentComment("");
     }
-  };
-
-  const onTabClick = (idx) => {
-    let newSection = [false, false, false, false];
-    newSection[idx] = true;
-    setSection(newSection);
   };
 
   const setRatingStateHelper = (ratings) => {
@@ -300,7 +300,7 @@ export default function CourseInfoPage() {
               flexWrap: "wrap",
             }}
           >
-            <div className="review-and-ratings-container">
+            <div className="rating-section-container">
               <p>Click a rating to rate this course!</p>
               <h2 style={{ margin: 0 }}>Difficulty</h2>
               <StarRatings
@@ -448,7 +448,7 @@ export default function CourseInfoPage() {
               />
             </div>
             <div style={{ width: "15px" }} />
-            <div className="review-and-ratings-container">
+            <div className="comment-section-container">
               <h1>Comments</h1>
               <div className="comment-form-container">
                 <Searchbar
@@ -503,7 +503,9 @@ export default function CourseInfoPage() {
                         justifyContent: "space-between",
                       }}
                     >
-                      <h4 style={{ marginRight: "8px" }}>{comment?.name}</h4>
+                      <h4 style={{ marginRight: "8px" }}>
+                        {comment?.name == "" ? "Anon." : comment?.name}
+                      </h4>
                       <h5>{dateString}</h5>
                     </div>
                     {comment?.comment}

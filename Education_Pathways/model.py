@@ -11,7 +11,7 @@ class Rating(db.Document):
 
 
 class Comment(db.Document):
-    code = db.StringField(required=True, unique=True)
+    code = db.StringField(required=True)
     name = db.StringField(required=True)
     comment = db.StringField(required=True)
     time = db.StringField(required=True)

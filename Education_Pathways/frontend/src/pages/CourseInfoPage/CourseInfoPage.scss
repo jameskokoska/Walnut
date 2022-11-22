@@ -37,6 +37,27 @@
   margin-bottom: -50px;
 }
 
+.review-and-ratings-container {
+  background-color: white;
+  padding: 20px 35px;
+  border-radius: 15px;
+  margin-top: 10px;
+  word-wrap: break-word;
+}
+
+.comment-section-container {
+  @extend .review-and-ratings-container;
+  width: 40%;
+  min-width: 400px;
+}
+
+.rating-section-container {
+  @extend .review-and-ratings-container;
+  width: 30%;
+  min-width: 300px;
+  height: fit-content;
+}
+
 .comment-form-container {
   display: flex;
   justify-content: center;
@@ -49,11 +70,4 @@
   padding: 20px 35px;
   border-radius: 15px;
   margin-bottom: 10px;
-}
-
-.review-and-ratings-container {
-  background-color: white;
-  padding: 20px 35px;
-  border-radius: 15px;
-  margin-top: 10px;
 }
