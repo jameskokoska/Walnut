@@ -4,7 +4,7 @@ FROM node:16-alpine
 WORKDIR /app
 COPY . /app
 
-RUN npm install
+RUN npm install --force
 RUN npm run build
 
 EXPOSE 3000
