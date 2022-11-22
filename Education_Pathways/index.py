@@ -10,8 +10,12 @@ app = Flask(__name__, static_folder="frontend/build")
 app.config["ENV"] = "development"
 app.config["DEBUG"] = True
 app.config["TESTING"] = True
+app.config[
+    "MONGODB_HOST"
+] = "mongodb+srv://kevinlitian:Il2Ab85qh5ySydtz@walnut.wmyelbz.mongodb.net/?retryWrites=true&w=majority"
 
 config.init_app(app)
+config.init_db(app)
 config.init_cors(app)
 
 # API Endpoints

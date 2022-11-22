@@ -416,7 +416,7 @@ export default function CourseInfoPage() {
                     rateCourse(
                       value,
                       courseCompare["course_code"],
-                      "tutorials"
+                      "tutorial"
                     );
                   } else {
                     const rated = JSON.parse(
@@ -431,7 +431,7 @@ export default function CourseInfoPage() {
                       rateCourse(
                         value,
                         courseCompare["course_code"],
-                        "tutorials"
+                        "tutorial"
                       );
                     }
                   }
