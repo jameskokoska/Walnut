@@ -13,6 +13,7 @@ Walnut, a name which fits in the theme of “tree nuts” often used by the Univ
 
 ## Documentations
 
+- [Project Structure](/docs/Structure.md)
 - [Environment Setup](/docs/Environment.md)
 - [Development Instructions](/docs/Develop.md)
 - [Contribution Instructions](/docs/Contribution.md)

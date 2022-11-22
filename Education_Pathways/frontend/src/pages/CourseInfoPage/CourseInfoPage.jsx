@@ -507,13 +507,6 @@ export default function CourseInfoPage() {
                     onChange={(text) => {
                       setCommentComment(text);
                     }}
-                    onEnterKey={async (text) => {
-                      setCommentComment(text);
-                      setSubmitComment(true);
-                      await setTimeout(() => {
-                        leaveComment(courseCompare?.course_code);
-                      }, 100);
-                    }}
                   />
                 ) : (
                   <Loading />
@@ -523,7 +516,7 @@ export default function CourseInfoPage() {
                   label={"Comment"}
                   isSecondary
                   onClick={async () => {
-                    if (commentComment !== "" && commentComment) {
+                    if (commentComment && commentComment.trim() !== "") {
                       setSubmitComment(true);
                       await setTimeout(() => {
                         leaveComment(courseCompare?.course_code);
