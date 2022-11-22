@@ -10,9 +10,9 @@ Walnut, a name which fits in the theme of “tree nuts” often used by the Univ
 
 ![Walnut Guide](https://user-images.githubusercontent.com/50821962/202098863-27d1bec7-fb32-4d35-8758-09434c7c623b.png)
 
-
 ## Documentations
 
+- [Project Structure](/docs/Structure.md)
 - [Environment Setup](/docs/Environment.md)
 - [Development Instructions](/docs/Develop.md)
 - [Contribution Instructions](/docs/Contribution.md)
