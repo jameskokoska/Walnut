@@ -195,6 +195,7 @@ export default function CourseInfoPage() {
     API.get(`/course/details?code=${code}`)
       .then((res) => {
         const data = res.data;
+        setRatingStateHelper(data.code, data.ratings);
         setCourseState({
           course_code: data.code,
           course_name: data.name,
@@ -216,8 +217,6 @@ export default function CourseInfoPage() {
           ratings: data.ratings,
           comments: data.comments?.reverse(),
         });
-
-        setRatingStateHelper(data.code, data.ratings);
       })
       .catch(() => {
         navigate("course-not-found");
