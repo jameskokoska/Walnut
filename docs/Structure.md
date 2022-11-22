@@ -2,6 +2,8 @@
 
 Walnut is a monolithic structured application with three components, the frontend, the backend, and the database.
 
+![1_NZBgV7OPjv_sy7GJ1B7gNg](https://user-images.githubusercontent.com/99038613/203431043-1ca4f267-c530-4773-96ee-3221ff305abc.png)
+
 ## Frontend
 
 The frontend of Walnut is built with ReactJS utilizing React Router. The frontend resides in the [frontend](/Education_Pathways/frontend/) directory. The driver is in [`index.js`](/Education_Pathways/frontend/src/index.js), the main app lives in [`App.js`](/Education_Pathways/frontend/src/App.js) where the entire app is wrapped by browser router in order to create a multi-page application.
@@ -40,7 +42,7 @@ Walnut uses MongoDB as its database. There are two collections or two type of do
 
 ### Rating
 
-```JSON
+```
 {
     code: string,
     difficulty: number,
@@ -53,7 +55,7 @@ Walnut uses MongoDB as its database. There are two collections or two type of do
 
 ### Comment
 
-```JSON
+```
 {
     code: string,
     name: string,
